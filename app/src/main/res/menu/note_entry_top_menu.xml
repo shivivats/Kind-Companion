@@ -12,12 +12,14 @@
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/test_action_settings"
         android:title="Settings_Test"
-        app:showAsAction="ifRoom|collapseActionView"
+        app:showAsAction="never|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
     <!-- share -->
+    <!--
     <item android:id="@+id/test_action_share"
         android:title="Share_Test"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />
+     -->
 </menu>
