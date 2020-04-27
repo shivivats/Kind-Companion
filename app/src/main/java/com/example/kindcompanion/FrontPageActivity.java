@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class FrontPageActivity extends AppCompatActivity {
@@ -15,6 +16,8 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickNewNote(View view) {
-        //Intent intent
+        Intent newNoteIntent = new Intent(this, NoteActivity.class);
+        Log.d("FrontPageActivity", "New Note Button Intent");
+        startActivity(newNoteIntent);
     }
 }

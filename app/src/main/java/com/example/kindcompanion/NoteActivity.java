@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// Shivi's Notes:
+//  I might need a ViewModel for this, but I'm not implementing one right now since the activity is pretty simple.
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -17,15 +19,18 @@ public class NoteActivity extends AppCompatActivity {
 
         // FOR FUTURE CONSIDERATION
         // or i can implement the onRestoreInstanceState method
+        /*
         if (savedInstanceState != null) {
             // Restore value of members from saved state
         } else {
             // Probably initialize members with default values for a new instance
         }
+        */
+
         setContentView(R.layout.note_activity);
 
         // we basically just set the toolbar as the support action bar so we can get it using a function anywhere in the activity now
-        Toolbar noteEntryHeaderBar = (Toolbar) findViewById(R.id.noteEntryHeaderBar);
+        Toolbar noteEntryHeaderBar = findViewById(R.id.noteEntryHeaderBar);
         setSupportActionBar(noteEntryHeaderBar);
 
         // Get a support ActionBar corresponding to this toolbar
