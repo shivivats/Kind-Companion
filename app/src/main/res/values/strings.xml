@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Kind Companion</string>
+    <string name="note_entry_header">Note Entry</string>
+    <string name="reminder_button">Add as Reminder</string>
+    <string name="vault_buttton">Store in Vault</string>
+    <string name="void_button">Send into the Void</string>
+    <string name="note_entry_hint">Enter your note...</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="note_entry_title_hint">Title</string>
+    <string name="new_note">New Note</string>
+</resources>
