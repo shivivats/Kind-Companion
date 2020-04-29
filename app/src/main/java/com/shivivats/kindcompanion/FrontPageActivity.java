@@ -1,13 +1,11 @@
-package com.example.kindcompanion;
+package com.shivivats.kindcompanion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 public class FrontPageActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.kindcompanion;
+package com.shivivats.kindcompanion;
 
 import org.junit.Test;
 

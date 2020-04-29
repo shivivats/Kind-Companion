@@ -1,4 +1,4 @@
-package com.example.kindcompanion;
+package com.shivivats.kindcompanion;
 
 public class GlobalAppVariables {
     private static float textScale;
