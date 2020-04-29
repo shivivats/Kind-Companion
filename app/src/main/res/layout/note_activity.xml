@@ -26,7 +26,7 @@
 -->
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/noteEntryHeaderBar"
+        android:id="@+id/noteEntryTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/noteEntryTextField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteEntryHeaderBar" />
+        app:layout_constraintTop_toBottomOf="@+id/noteEntryTopBar" />
 
     <EditText
         android:id="@+id/noteEntryTextField"
@@ -87,7 +87,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/vault_buttton"
+        android:text="@string/vault_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/voidButton"
         app:layout_constraintStart_toEndOf="@+id/reminderButton"

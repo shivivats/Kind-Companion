@@ -1,12 +1,25 @@
 <resources>
     <string name="app_name">Kind Companion</string>
     <string name="note_entry_header">Note Entry</string>
-    <string name="reminder_button">Add as Reminder</string>
-    <string name="vault_buttton">Store in Vault</string>
-    <string name="void_button">Send into the Void</string>
-    <string name="note_entry_hint">Enter your note...</string>
+    <string name="reminder_button">Store as \n Reminder</string>
+    <string name="vault_button">Store in \n Vault</string>
+    <string name="void_button">Send into \n the void</string>
+    <string name="note_entry_hint">Enter your note…</string>
     <!-- Strings used for fragments for navigation -->
 
     <string name="note_entry_title_hint">Title</string>
     <string name="new_note">New Note</string>
+    <string name="firstMainButton">Get it off \n my chest</string>
+    <string name="secondMainButton">Spend time \n with myself</string>
+    <string name="thirdMainButton">Mood change</string>
+    <string name="frontPageWelcomeMessage">Welcome to Kind Companion!</string>
+    <string name="fourthMainButton">Deal with \n anxiety</string>
+    <string name="fifthMainButton">Vault</string>
+    <string name="sixthMainButton">Useful \n Resources</string>
+    <string name="store_note">Store as Note</string>
+    <string name="store_vault">Store in Vault</string>
+    <string name="send_void">Send into the void</string>
+    <string name="burn_thoughts">Burn your thoughts away</string>
+    <string name="text_size_small">Text Size Small</string>
+    <string name="text_size_large">Text Size Large</string>
 </resources>
