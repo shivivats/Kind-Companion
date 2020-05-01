@@ -20,26 +20,26 @@
 
     <item
         android:id="@+id/action_store_note"
+        android:icon="@drawable/ic_favorite_black"
         android:title="@string/store_note"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_favorite_black" /> <!-- change icon later -->
+        app:showAsAction="ifRoom" /> <!-- change icon later -->
 
     <item
         android:id="@+id/action_store_vault"
+        android:icon="@drawable/ic_favorite_black"
         android:title="@string/store_vault"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_favorite_black" /> <!-- change icon later -->
+        app:showAsAction="ifRoom" /> <!-- change icon later -->
 
     <item
         android:id="@+id/action_send_void"
+        android:icon="@drawable/ic_favorite_black"
         android:title="@string/send_void"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_favorite_black"  /> <!-- change icon later -->
+        app:showAsAction="ifRoom" /> <!-- change icon later -->
 
     <item
         android:id="@+id/action_burn_thoughts"
+        android:icon="@drawable/ic_favorite_black"
         android:title="@string/burn_thoughts"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_favorite_black"  /> <!-- change icon later -->
+        app:showAsAction="ifRoom" /> <!-- change icon later -->
 
 </menu>

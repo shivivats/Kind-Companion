@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class NoteEntity {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="note_id")
+    @ColumnInfo(name = "note_id")
     public int noteId;
 
     /*
@@ -24,7 +24,7 @@ public class NoteEntity {
 
     So we will store the int value we initially get, however we will convert the value back to enum whenever we need to process it.
      */
-    @ColumnInfo(name="note_type")
+    @ColumnInfo(name = "note_type")
     public int noteType;
 
     @ColumnInfo(name = "note_title", defaultValue = "")

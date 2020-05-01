@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class NoteReminderListAdapter extends RecyclerView.Adapter<NoteReminderListAdapter.NoteViewHolder> {
+public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteListAdapter.NoteViewHolder> {
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,22 +31,24 @@ public class NoteReminderListAdapter extends RecyclerView.Adapter<NoteReminderLi
     private final LayoutInflater inflater;
     private List<NoteTuple> reminderNotesList; // cached copy of words
 
-    NoteReminderListAdapter(Context context) { inflater = LayoutInflater.from(context);}
+    ReminderNoteListAdapter(Context context) {
+        inflater = LayoutInflater.from(context);
+    }
 
     @NonNull
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View noteView = inflater.inflate(R.layout.note_recyclerview_item, parent, false);
+        View noteView = inflater.inflate(R.layout.item_note_recyclerview, parent, false);
         return new NoteViewHolder(noteView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        if(reminderNotesList!=null) {
+        if (reminderNotesList != null) {
             NoteTuple current = reminderNotesList.get(position);
             holder.noteTitleView.setText(current.noteTitle);
             holder.noteBodyView.setText(current.noteBody);
-        }else {
+        } else {
             // covers the case of data not being ready yet
             holder.noteTitleView.setText("No Title");
             holder.noteBodyView.setText("No Body");
@@ -62,7 +64,7 @@ public class NoteReminderListAdapter extends RecyclerView.Adapter<NoteReminderLi
     // reminderNotesList has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (reminderNotesList!=null)
+        if (reminderNotesList != null)
             return reminderNotesList.size();
         else
             return 0;

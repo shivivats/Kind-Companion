@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,9 +20,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class NoteReminderList extends AppCompatActivity {
+public class ReminderNoteListActivity extends AppCompatActivity {
 
-    private NoteReminderViewModel noteReminderViewModel;
+    private ReminderNoteViewModel reminderNoteViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +30,13 @@ public class NoteReminderList extends AppCompatActivity {
         setContentView(R.layout.activity_reminder_note_list);
 
         RecyclerView recyclerView = findViewById(R.id.noteReminderRecyclerView);
-        final NoteReminderListAdapter adapter = new NoteReminderListAdapter(this);
+        final ReminderNoteListAdapter adapter = new ReminderNoteListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        noteReminderViewModel = new ViewModelProvider(this).get(NoteReminderViewModel.class);
+        reminderNoteViewModel = new ViewModelProvider(this).get(ReminderNoteViewModel.class);
 
-        noteReminderViewModel.getReminderNotes().observe(this, new Observer<List<NoteTuple>>() {
+        reminderNoteViewModel.getReminderNotes().observe(this, new Observer<List<NoteTuple>>() {
             @Override
             public void onChanged(@Nullable final List<NoteTuple> notes) {
                 // update the cached copy of the words in the adapter
@@ -55,7 +54,6 @@ public class NoteReminderList extends AppCompatActivity {
     }
 
 
-
     // KEEP THIS IN MIND WHILE IMPLEMENTING THIS STUFF
     // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
     //                ActivityResultCallback<O> callback)
@@ -65,13 +63,13 @@ public class NoteReminderList extends AppCompatActivity {
         @Override
         public void onActivityResult(ActivityResult result) {
             // Here we handle the returned data
-            if(result.getResultCode()==RESULT_OK) {
-                NoteEntity noteEntity= new NoteEntity();
-                noteEntity.noteType=result.getData().getIntExtra("noteType", NoteType.NOTE_REMINDER.getValue());
-                noteEntity.noteTitle=result.getData().getStringExtra("noteTitle");
-                noteEntity.noteBody=result.getData().getStringExtra("noteBody");
-                noteReminderViewModel.insert(noteEntity);
-            }else {
+            if (result.getResultCode() == RESULT_OK) {
+                NoteEntity noteEntity = new NoteEntity();
+                noteEntity.noteType = result.getData().getIntExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+                noteEntity.noteTitle = result.getData().getStringExtra("noteTitle");
+                noteEntity.noteBody = result.getData().getStringExtra("noteBody");
+                reminderNoteViewModel.insert(noteEntity);
+            } else {
                 Toast.makeText(
                         getApplicationContext(),
                         R.string.not_saved,
@@ -81,7 +79,7 @@ public class NoteReminderList extends AppCompatActivity {
     });
 
     public void OnAddFabClick() {
-        Intent intent = new Intent(NoteReminderList.this, ReminderNoteEntryActivity.class);
+        Intent intent = new Intent(ReminderNoteListActivity.this, ReminderNoteEntryActivity.class);
 
         startActivityForResult.launch(intent);
     }

@@ -7,19 +7,23 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class NoteReminderViewModel extends AndroidViewModel {
+public class ReminderNoteViewModel extends AndroidViewModel {
 
     private NoteRepository noteRepository;
 
     private LiveData<List<NoteTuple>> reminderNotes;
 
-    public NoteReminderViewModel(Application application) {
+    public ReminderNoteViewModel(Application application) {
         super(application);
         noteRepository = new NoteRepository(application);
         reminderNotes = noteRepository.getReminderNotes();
     }
 
-    LiveData<List<NoteTuple>> getReminderNotes() {return reminderNotes;}
+    LiveData<List<NoteTuple>> getReminderNotes() {
+        return reminderNotes;
+    }
 
-    public void insert(NoteEntity noteEntity) { noteRepository.insertNote(noteEntity);}
+    public void insert(NoteEntity noteEntity) {
+        noteRepository.insertNote(noteEntity);
+    }
 }

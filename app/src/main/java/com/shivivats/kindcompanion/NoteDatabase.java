@@ -47,15 +47,15 @@ public abstract class NoteDatabase extends RoomDatabase {
 
                 // we just create a sample note here that says idk welcome to the app or sth
                 NoteEntity sampleReminderNote = new NoteEntity();
-                sampleReminderNote.noteTitle="Reminders Preview";
-                sampleReminderNote.noteBody="This is a sample note displaying how a note is going to look like placed as a Reminder. \n Know that you are beautiful and you are loved <3";
-                sampleReminderNote.noteType=NoteType.NOTE_REMINDER.getValue();
+                sampleReminderNote.noteTitle = "Reminders Preview";
+                sampleReminderNote.noteBody = "This is a sample note displaying how a note is going to look like placed as a Reminder. \n Know that you are beautiful and you are loved <3";
+                sampleReminderNote.noteType = NoteType.NOTE_REMINDER.getValue();
                 dao.insertNotes(sampleReminderNote);
 
                 NoteEntity sampleVaultNote = new NoteEntity();
-                sampleVaultNote.noteTitle="Vault Preview";
-                sampleVaultNote.noteBody="This is a sample note displaying how a note is going to look like placed in the Vault. \n The vault is a safe place that can even be password protected.";
-                sampleVaultNote.noteType=NoteType.NOTE_VAULT.getValue();
+                sampleVaultNote.noteTitle = "Vault Preview";
+                sampleVaultNote.noteBody = "This is a sample note displaying how a note is going to look like placed in the Vault. \n The vault is a safe place that can even be password protected.";
+                sampleVaultNote.noteType = NoteType.NOTE_VAULT.getValue();
                 dao.insertNotes(sampleVaultNote);
             });
         }

@@ -12,11 +12,10 @@ import android.widget.EditText;
 // Shivi's Notes:
 //  I might need a ViewModel for this, but I'm not implementing one right now since the activity is pretty simple.
 
-public class NoteActivity extends AppCompatActivity {
+public class NoteEntryActivity extends AppCompatActivity {
 
     EditText noteTitle;
     EditText noteBody;
-
 
 
     @Override
@@ -33,7 +32,7 @@ public class NoteActivity extends AppCompatActivity {
         }
         */
 
-        setContentView(R.layout.note_activity);
+        setContentView(R.layout.activity_note_entry);
 
         // we basically just set the toolbar as the support action bar so we can get it using a function anywhere in the activity now
         Toolbar noteEntryHeaderBar = findViewById(R.id.noteEntryTopBar);
@@ -57,7 +56,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.note_entry_topbar_menu, menu);
+        getMenuInflater().inflate(R.menu.topbar_note_entry, menu);
         return true;
     }
 

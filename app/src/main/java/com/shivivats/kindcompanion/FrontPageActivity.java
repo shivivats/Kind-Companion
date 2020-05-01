@@ -21,7 +21,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickNewNote(View view) {
-        Intent newNoteIntent = new Intent(this, NoteActivity.class);
+        Intent newNoteIntent = new Intent(this, NoteEntryActivity.class);
         //Log.d("FrontPageActivity", "New Note Button Intent");
         startActivity(newNoteIntent);
     }
@@ -55,7 +55,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickReminders(View view) {
-        Intent reminderIntent = new Intent(this, NoteReminderList.class);
+        Intent reminderIntent = new Intent(this, ReminderNoteListActivity.class);
         startActivity(reminderIntent);
     }
 }

@@ -30,7 +30,7 @@ public class NoteRepository {
     }
 
     void insertNote(NoteEntity noteEntity) {
-        NoteDatabase.databaseWriteExecutor.execute( () -> {
+        NoteDatabase.databaseWriteExecutor.execute(() -> {
             noteEntityDao.insertNotes(noteEntity);
         });
     }

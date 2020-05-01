@@ -7,6 +7,5 @@
     <item
         android:id="@+id/action_save_reminder_note"
         android:title="@string/save"
-        app:showAsAction="always"
-        /> <!-- add icon later -->
+        app:showAsAction="always" /> <!-- add icon later -->
 </menu>

@@ -8,6 +8,6 @@ public class GlobalAppVariables {
     }
 
     public static void setTextScale(float scale) {
-        textScale=scale;
+        textScale = scale;
     }
 }

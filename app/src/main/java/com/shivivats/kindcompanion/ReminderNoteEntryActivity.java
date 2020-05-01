@@ -43,7 +43,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.reminder_note_entry_topbar, menu);
+        getMenuInflater().inflate(R.menu.topbar_reminder_note_entry, menu);
         return true;
     }
 
