@@ -12,12 +12,25 @@ public class NoteEntity {
     @ColumnInfo(name="note_id")
     public int noteId;
 
+    /*
+    WHEREVER WE USE NOTE_TYPE WE NEED TO USE IT LIKE THIS:
+
+    To Assign:
+    NoteType var = NoteType.NOTE_REMINDER;
+    int valueOfNoteType = var.getValue();
+
+    To Get Value From Int:
+    NoteType noteType = NoteType.fromInt(0)
+
+    So we will store the int value we initially get, however we will convert the value back to enum whenever we need to process it.
+     */
     @ColumnInfo(name="note_type")
-    public NoteType noteType;
+    public int noteType;
 
     @ColumnInfo(name = "note_title", defaultValue = "")
     public String noteTitle;
 
     @ColumnInfo(name = "note_body", defaultValue = "")
     public String noteBody;
+
 }

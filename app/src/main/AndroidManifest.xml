@@ -9,18 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.shivivats.kindcompanion.ReminderNoteList"></activity>
-        <!-- Main Home Activity. Its the front page of the app for now -->
-        <activity android:name="com.shivivats.kindcompanion.FrontPageActivity">
+
+        <activity
+            android:name=".ReminderNoteEntryActivity"
+            android:parentActivityName=".NoteReminderList"/>
+
+        <activity android:name=".NoteReminderList" />
+
+        <activity android:name=".FrontPageActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- The note taking activity -->
+        </activity>
+
         <activity
-            android:name="com.shivivats.kindcompanion.NoteActivity"
-            android:parentActivityName="com.shivivats.kindcompanion.FrontPageActivity"></activity>
+            android:name=".NoteActivity"
+            android:parentActivityName=".FrontPageActivity" />
+
     </application>
 
 </manifest>

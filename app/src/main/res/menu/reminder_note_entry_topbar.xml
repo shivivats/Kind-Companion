@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- this is the reminder note entry so we'll just have an option called "SAVE" on the topbar -->
+
+    <item
+        android:id="@+id/action_save_reminder_note"
+        android:title="@string/save"
+        app:showAsAction="always"
+        /> <!-- add icon later -->
+</menu>

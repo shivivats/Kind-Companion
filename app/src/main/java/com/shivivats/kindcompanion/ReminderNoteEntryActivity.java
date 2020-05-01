@@ -4,41 +4,27 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-// Shivi's Notes:
-//  I might need a ViewModel for this, but I'm not implementing one right now since the activity is pretty simple.
+public class ReminderNoteEntryActivity extends AppCompatActivity {
 
-public class NoteActivity extends AppCompatActivity {
+    public static final String EXTRA_REPLY = "com.shivivats.kindcompanion.";
 
     EditText noteTitle;
     EditText noteBody;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // FOR FUTURE CONSIDERATION
-        // or i can implement the onRestoreInstanceState method
-        /*
-        if (savedInstanceState != null) {
-            // Restore value of members from saved state
-        } else {
-            // Probably initialize members with default values for a new instance
-        }
-        */
-
-        setContentView(R.layout.note_activity);
+        setContentView(R.layout.activity_reminder_note_entry);
 
         // we basically just set the toolbar as the support action bar so we can get it using a function anywhere in the activity now
-        Toolbar noteEntryHeaderBar = findViewById(R.id.noteEntryTopBar);
-        setSupportActionBar(noteEntryHeaderBar);
-
+        Toolbar reminderEntryHeaderBar = findViewById(R.id.reminderNoteEntryTopBar);
+        setSupportActionBar(reminderEntryHeaderBar);
 
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -50,34 +36,22 @@ public class NoteActivity extends AppCompatActivity {
         ab.setDisplayShowTitleEnabled(false);
 
         // set the views
-        noteTitle = findViewById(R.id.noteEntryTitleField);
-        noteBody = findViewById(R.id.noteEntryTextField);
+        noteTitle = findViewById(R.id.reminderNoteEntryTitleField);
+        noteBody = findViewById(R.id.reminderNoteEntryTextField);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.note_entry_topbar_menu, menu);
+        getMenuInflater().inflate(R.menu.reminder_note_entry_topbar, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_store_note:
+            case R.id.action_save_reminder_note:
                 StoreReminder();
-                return true;
-
-            case R.id.action_store_vault:
-                StoreVault();
-                return true;
-
-            case R.id.action_send_void:
-                SendVoid();
-                return true;
-
-            case R.id.action_burn_thoughts:
-                BurnThoughts();
                 return true;
 
             default:
@@ -89,21 +63,18 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void StoreReminder() {
-        // we store the note here, should learn about storage now
-        // we should probably use a service for managing storage
-
-        // so either we make 2 separate note activities
-    }
-
-    private void StoreVault() {
-
-    }
-
-    private void SendVoid() {
-
-    }
-
-    private void BurnThoughts() {
-
+        // here we do the intent stuff
+        Intent replyIntent = new Intent();
+        String nt = noteTitle.getText().toString();
+        String nb = noteBody.getText().toString();
+        //NoteEntity noteEntity= new NoteEntity();
+        //noteEntity.noteType=NoteType.NOTE_REMINDER.getValue();
+        //noteEntity.noteTitle=nt;
+        //noteEntity.noteBody=nb;
+        replyIntent.putExtra("noteTitle", nt);
+        replyIntent.putExtra("noteBody", nb);
+        replyIntent.putExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+        setResult(RESULT_OK, replyIntent);
+        finish();
     }
 }

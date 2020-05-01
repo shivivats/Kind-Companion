@@ -1,8 +1,10 @@
 package com.shivivats.kindcompanion;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -11,24 +13,24 @@ import java.util.List;
 @Dao
 public interface NoteEntityDao {
 
-    // WILL NEED TO ADD IMAGES IN THE FUTURE
+    // WILL NEED TO ADD IMAGES AND AUDIO RECORDING IN THE FUTURE
 
     // simply get all notes
     @Query("SELECT note_title, note_body FROM Notes")
-    List<NoteEntity> getAll();
+    List<NoteTuple> getAll();
 
     // load notes using the type
     @Query("SELECT note_title, note_body FROM Notes WHERE note_type = :noteType")
-    List<NoteEntity> loadNotesByType(NoteType noteType);
+    LiveData<List<NoteTuple>> loadNotesByType(int noteType);
 
     // we're not gonna do a query for search bc that'd be too resource consuming
     // but just in case
     @Query("SELECT note_title, note_body FROM Notes WHERE note_title LIKE :searchTerm OR " +
-            "note_body LIKE :searchTerm LIMIT 1")
-    NoteEntity searchNotes(String searchTerm);
+            "note_body LIKE :searchTerm")
+    List<NoteTuple> searchNotes(String searchTerm);
 
     // Add one or more notes to the database
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertNotes(NoteEntity... notes);
 
     // Delete one or more notes from the database
