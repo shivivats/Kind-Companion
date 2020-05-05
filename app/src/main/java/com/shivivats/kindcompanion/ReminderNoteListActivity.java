@@ -54,7 +54,7 @@ public class ReminderNoteListActivity extends AppCompatActivity {
     }
 
 
-    // KEEP THIS IN MIND WHILE IMPLEMENTING THIS STUFF
+    // KEEP THIS IN MIND WHILE USING THIS STUFF
     // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
     //                ActivityResultCallback<O> callback)
     // LOOK AT THE Is AND Os

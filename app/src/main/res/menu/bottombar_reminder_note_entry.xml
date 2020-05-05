@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- options: add image from gallery, take image from camera, draw image, record audio -->
+
+    <item
+        android:id="@+id/action_take_photo"
+        android:title="Take Photo"
+        app:showAsAction="never" /> <!-- add icon later -->
+    <item
+        android:id="@+id/action_choose_image"
+        android:title="Choose Image"
+        app:showAsAction="never" /> <!-- add icon later -->
+    <item
+        android:id="@+id/action_draw_image"
+        android:title="Draw Image"
+        app:showAsAction="never" /> <!-- add icon later -->
+    <item
+        android:id="@+id/action_record_audio"
+        android:title="Record Audio"
+        app:showAsAction="never" /> <!-- add icon later -->
+</menu>

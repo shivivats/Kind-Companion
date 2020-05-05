@@ -1,5 +1,10 @@
 package com.shivivats.kindcompanion;
 
+/*
+    TODO: Add image and audio functionality
+    TODO: Make recyclerview look better
+*/
+
 public class GlobalAppVariables {
     private static float textScale;
 

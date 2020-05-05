@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_stroke_small"
+        android:title="Stroke Small"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_stroke_medium"
+        android:title="Stroke Medium"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_stroke_big"
+        android:title="Stroke Big"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_red"
+        android:title="Red"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_blue"
+        android:title="Blue"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_yellow"
+        android:title="Yellow"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_purple"
+        android:title="Purple"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_lightblue"
+        android:title="Light Blue"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_green"
+        android:title="Green"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_lightgreen"
+        android:title="Light Green"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_grey"
+        android:title="Grey"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_color_orange"
+        android:title="Orange"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_eraser"
+        android:title="Eraser"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

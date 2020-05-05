@@ -9,13 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
+        <activity android:name=".PaintActivity"></activity>
         <activity
             android:name=".ReminderNoteEntryActivity"
             android:parentActivityName=".ReminderNoteListActivity" />
-
         <activity android:name=".ReminderNoteListActivity" />
-
         <activity android:name=".FrontPageActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +21,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".NoteEntryActivity"
             android:parentActivityName=".FrontPageActivity" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.shivivats.kindcompanion.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
 </manifest>
