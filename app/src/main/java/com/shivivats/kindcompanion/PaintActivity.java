@@ -47,23 +47,23 @@ public class PaintActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_color_grey:
-                //paintView.SetColor();
+                paintView.SetColor(Color.rgb(178,190,181));
                 return true;
 
             case R.id.action_color_lightblue:
-                //paintView.SetColor();
+                paintView.SetColor(Color.rgb(172,229,238));
                 return true;
 
             case R.id.action_color_lightgreen:
-                //paintView.SetColor();
+                paintView.SetColor(Color.rgb(74,255,0));
                 return true;
 
             case R.id.action_color_orange:
-                //paintView.SetColor();
+                paintView.SetColor(Color.rgb(255,103,0));
                 return true;
 
             case R.id.action_color_purple:
-                //paintView.SetColor();
+                paintView.SetColor(Color.rgb(148,87,235));
                 return true;
 
             case R.id.action_color_yellow:
@@ -84,6 +84,10 @@ public class PaintActivity extends AppCompatActivity {
 
             case R.id.action_eraser:
                 paintView.SetColor(Color.WHITE);
+                return true;
+
+            case R.id.action_save_paint:
+                // save the drawing here i guess idk
                 return true;
 
             default:

@@ -14,22 +14,35 @@ import java.util.List;
 
 public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteListAdapter.NoteViewHolder> {
 
-    class NoteViewHolder extends RecyclerView.ViewHolder {
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private final CardView noteCardView;
         private final TextView noteTitleView;
         private final TextView noteBodyView;
 
-        private NoteViewHolder(View noteView) {
+        public long currentNoteId;
+
+        private NoteViewHolder(View noteView, long noteId) {
             super(noteView);
             noteCardView = noteView.findViewById(R.id.noteCardView);
             noteTitleView = noteView.findViewById(R.id.noteTitleView);
             noteBodyView = noteView.findViewById(R.id.noteBodyView);
+            currentNoteId=noteId;
+        }
+
+        public void setData(NoteEntity note) {
+
+        }
+
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 
     private final LayoutInflater inflater;
-    private List<NoteTuple> reminderNotesList; // cached copy of words
+    private List<NoteEntity> reminderNotesList; // cached copy of words
 
     ReminderNoteListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -39,23 +52,25 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View noteView = inflater.inflate(R.layout.item_note_recyclerview, parent, false);
-        return new NoteViewHolder(noteView);
+        return new NoteViewHolder(noteView,-1);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         if (reminderNotesList != null) {
-            NoteTuple current = reminderNotesList.get(position);
+            NoteEntity current = reminderNotesList.get(position);
             holder.noteTitleView.setText(current.noteTitle);
             holder.noteBodyView.setText(current.noteBody);
+            holder.currentNoteId = current.noteId;
         } else {
             // covers the case of data not being ready yet
             holder.noteTitleView.setText("No Title");
             holder.noteBodyView.setText("No Body");
+            holder.currentNoteId = -1;
         }
     }
 
-    void setNotes(List<NoteTuple> notes) {
+    void setNotes(List<NoteEntity> notes) {
         reminderNotesList = notes;
         notifyDataSetChanged();
     }
@@ -69,4 +84,5 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
         else
             return 0;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -7,6 +8,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +20,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -24,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ReminderNoteEntryActivity extends AppCompatActivity {
 
@@ -35,13 +42,35 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     Toolbar reminderEntryHeaderBar;
     Toolbar reminderEntryBottomBar;
 
+    private long currentNoteId;
+
+    private NoteEntryViewModel noteEntryViewModel;
+
     //static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    // WE ARE INSERTING THE NOTE INTO THE DATABASE RIGHT FUCKIN NOW AS SOON AS ITS CREATED
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_note_entry);
 
+        Intent intent = getIntent();
+        currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
+        if(currentNoteId==-1) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+
+        noteEntryViewModel = new NoteEntryViewModel(getApplication(), currentNoteId);
+
+        // now we have the currentnoteid in the variable and we can use it for various insert operations
+        SetToolbars();
+
+        InitRecyclerView();
+    }
+
+    private void SetToolbars() {
         // we basically just set the toolbar as the support action bar so we can get it using a function anywhere in the activity now
         reminderEntryHeaderBar = findViewById(R.id.reminderNoteEntryTopBar);
         setSupportActionBar(reminderEntryHeaderBar);
@@ -63,6 +92,27 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         reminderEntryBottomBar = findViewById(R.id.reminderNoteEntryBottomBar);
     }
 
+    private void InitRecyclerView() {
+        // add the recyler view
+        RecyclerView imageRecyclerView = findViewById(R.id.noteEntryRecyclerImageView);
+        final NoteImagesAdapter adapter = new NoteImagesAdapter(this);
+        imageRecyclerView.setAdapter(adapter);
+        GridLayoutManager manager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
+        imageRecyclerView.setLayoutManager(manager);
+
+        // associate the viewmodel with provider
+        noteEntryViewModel = new ViewModelProvider(this, new NoteEntryViewModelFactory(this.getApplication(), currentNoteId)).get(NoteEntryViewModel.class);
+
+        // add an observer for the livedata
+        noteEntryViewModel.getCurrentNoteImages().observe(this, new Observer<List<ImageEntity>>() {
+            @Override
+            public void onChanged(List<ImageEntity> imageEntities) {
+                // update the cached copy of image entities in the adapter
+                adapter.setImages(imageEntities);
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,7 +121,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         Menu bottomMenu = reminderEntryBottomBar.getMenu();
         getMenuInflater().inflate(R.menu.bottombar_reminder_note_entry, bottomMenu);
 
-        for (int i=0;i<bottomMenu.size();i++) {
+        for (int i = 0; i < bottomMenu.size(); i++) {
             bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
@@ -106,6 +156,10 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
                 RecordAudio();
                 return true;
 
+            case R.id.action_discard_reminder_note:
+                DiscardNote();
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -115,6 +169,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     }
 
     private void StoreReminder() {
+
         // here we do the intent stuff
         Intent replyIntent = new Intent();
         String nt = noteTitle.getText().toString();
@@ -126,45 +181,73 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         replyIntent.putExtra("noteTitle", nt);
         replyIntent.putExtra("noteBody", nb);
         replyIntent.putExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+        replyIntent.putExtra("noteId", currentNoteId);
         setResult(RESULT_OK, replyIntent);
         finish();
     }
 
-    ActivityResultLauncher<String> getContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
+    ActivityResultLauncher<String> chooseImage = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri uri) {
-                    // Handle the returned Uri
-                    // can do imageView.setImageURI(uri)
-
+                    if(uri!=null) {
+                        // Handle the returned Uri
+                        // add the image to a database
+                        ImageEntity newImage = new ImageEntity();
+                        newImage.imageUri = uri;
+                        newImage.isDrawing = false;
+                        newImage.imageNoteId = currentNoteId;
+                        noteEntryViewModel.insert(newImage);
+                        // this should automatically add the image to the recyclerview as well
+                    }else {
+                        // the user chose to not choose an image
+                        Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG);
+                    }
                 }
             });
 
     private void ChooseImage() {
-        getContent.launch("image/*");
+        chooseImage.launch("image/*");
     }
 
     private void DrawImage() {
-
+        Intent drawImageIntent = new Intent(this, PaintActivity.class);
+        startActivity(drawImageIntent);
     }
 
     // KEEP THIS IN MIND WHILE USING THIS STUFF
-    // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
+    // public abstract ActivityResultLauncher<I> = registerForActivityResult (ActivityResultContract<I, O> contract,
     //                ActivityResultCallback<O> callback)
     // LOOK AT THE Is AND Os
-    ActivityResultLauncher<Uri> takeImageLauncher = registerForActivityResult(new ActivityResultContracts.TakePicture(), new ActivityResultCallback<Bitmap>() {
+    ActivityResultLauncher<Uri> takePicLauncher = registerForActivityResult(new ActivityResultContracts.TakePicture(), new ActivityResultCallback<Boolean>() {
         @Override
-        public void onActivityResult(Bitmap result) {
+        public void onActivityResult(Boolean result) {
             // do something with the result here
-            // we probably add the image as a thumbnail at the bottom of the note
-            // make a new image view and then add the image to the view like:
-            // imageView.setImageBitmap(result);
-
+            // add the taken image to the database
+            if(result==true) {
+                Log.d("randomtag","non null camera activity result");
+                if (currentPhotoURI != null) {
+                    ImageEntity newImage = new ImageEntity();
+                    newImage.imageUri = currentPhotoURI;
+                    newImage.isDrawing = false;
+                    newImage.imageNoteId = currentNoteId;
+                    noteEntryViewModel.insert(newImage);
+                    // this should automatically add the image to the recyclerview as well
+                } else {
+                    // for some reason the uri was null, i.e., storage couldnt be accessed
+                    Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG);
+                }
+            }else {
+                Log.d("randomtag","null camera activity result");
+                // the user chose to not click a picture
+                Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG);
+            }
         }
     });
 
+    Uri currentPhotoURI=null;
+
     private void TakePhoto() {
-        if(getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+        if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             // Device has a camera
 
             /*
@@ -175,8 +258,11 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
             */
             // Create the File where the photo should go
             File photoFile = null;
+            currentPhotoURI=null;
+            //Log.d("note-entry-camera-stuff","file is null");
             try {
                 photoFile = CreateImageFile();
+                //Log.d("note-entry-camera-stuff","file is created");
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 ex.printStackTrace();
@@ -184,11 +270,14 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                    "com.shivivats.kindcompanion.fileprovider",
-                    photoFile);
-                takeImageLauncher.launch(photoURI);
+                        "com.shivivats.kindcompanion.fileprovider",
+                        photoFile);
+                currentPhotoURI = photoURI;
+                Log.d("randomtag", photoURI.toString());
+                takePicLauncher.launch(photoURI);
+                //Log.d("note-entry-camera-stuff","launched the take image launcher");
             }
-        }else {
+        } else {
             // Device doesnt have a camera, show a toast or something
             Toast.makeText(this, "Camera not found on device.", Toast.LENGTH_LONG);
         }
@@ -196,6 +285,11 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
 
     private void RecordAudio() {
 
+    }
+
+    private void DiscardNote() {
+        setResult(-2);
+        finish();
     }
 
     private File CreateImageFile() throws IOException {

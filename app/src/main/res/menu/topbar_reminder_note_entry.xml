@@ -8,4 +8,9 @@
         android:id="@+id/action_save_reminder_note"
         android:title="@string/save"
         app:showAsAction="always" /> <!-- add icon later -->
+
+    <item
+        android:id="@+id/action_discard_reminder_note"
+        android:title="DISCARD"
+        app:showAsAction="always" /> <!-- add icon later -->
 </menu>

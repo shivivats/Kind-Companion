@@ -6,15 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {NoteEntity.class}, version = 1, exportSchema = true)
+@Database(entities = {NoteEntity.class, ImageEntity.class}, version = 2, exportSchema = true)
+@TypeConverters(Converters.class)
 public abstract class NoteDatabase extends RoomDatabase {
 
     public abstract NoteEntityDao noteEntityDao();
+    public abstract ImageEntityDao imageEntityDao();
 
     private static volatile NoteDatabase INSTANCE;
 
@@ -30,6 +33,7 @@ public abstract class NoteDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             NoteDatabase.class, "Notes_DB")
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -43,20 +47,23 @@ public abstract class NoteDatabase extends RoomDatabase {
             super.onCreate(db);
 
             databaseWriteExecutor.execute(() -> {
-                NoteEntityDao dao = INSTANCE.noteEntityDao();
+                NoteEntityDao noteEntityDao = INSTANCE.noteEntityDao();
+                ImageEntityDao imageEntityDao = INSTANCE.imageEntityDao();
 
                 // we just create a sample note here that says idk welcome to the app or sth
                 NoteEntity sampleReminderNote = new NoteEntity();
                 sampleReminderNote.noteTitle = "Reminders Preview";
                 sampleReminderNote.noteBody = "This is a sample note displaying how a note is going to look like placed as a Reminder. \n Know that you are beautiful and you are loved <3";
                 sampleReminderNote.noteType = NoteType.NOTE_REMINDER.getValue();
-                dao.insertNotes(sampleReminderNote);
+                noteEntityDao.insertNotes(sampleReminderNote);
 
                 NoteEntity sampleVaultNote = new NoteEntity();
                 sampleVaultNote.noteTitle = "Vault Preview";
                 sampleVaultNote.noteBody = "This is a sample note displaying how a note is going to look like placed in the Vault. \n The vault is a safe place that can even be password protected.";
                 sampleVaultNote.noteType = NoteType.NOTE_VAULT.getValue();
-                dao.insertNotes(sampleVaultNote);
+                noteEntityDao.insertNotes(sampleVaultNote);
+
+
             });
         }
     };

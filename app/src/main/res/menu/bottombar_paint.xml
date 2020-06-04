@@ -80,4 +80,10 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@+id/action_save_paint"
+        android:title="Save Drawing"
+        android:icon="@drawable/ic_save_black_24dp"
+        app:showAsAction="always" />
+
 </menu>

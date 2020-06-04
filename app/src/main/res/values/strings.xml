@@ -23,5 +23,5 @@
     <string name="text_size_small">Text Size Small</string>
     <string name="text_size_large">Text Size Large</string>
     <string name="save">SAVE</string>
-    <string name="not_saved">The note couldn\'t be saved.</string>
+    <string name="couldnt_be_saved">The note couldn\'t be saved.</string>
 </resources>

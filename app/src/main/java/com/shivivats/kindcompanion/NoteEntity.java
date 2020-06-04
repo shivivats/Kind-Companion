@@ -10,7 +10,7 @@ public class NoteEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
-    public int noteId;
+    public long noteId;
 
     /*
     WHEREVER WE USE NOTE_TYPE WE NEED TO USE IT LIKE THIS:

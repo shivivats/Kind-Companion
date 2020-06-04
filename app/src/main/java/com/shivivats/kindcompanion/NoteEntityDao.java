@@ -16,22 +16,26 @@ public interface NoteEntityDao {
     // WILL NEED TO ADD IMAGES AND AUDIO RECORDING IN THE FUTURE
 
     // simply get all notes
-    @Query("SELECT note_title, note_body FROM Notes")
-    List<NoteTuple> getAll();
+    @Query("SELECT * FROM Notes")
+    List<NoteEntity> getAll();
 
     // load notes using the type
-    @Query("SELECT note_title, note_body FROM Notes WHERE note_type = :noteType")
-    LiveData<List<NoteTuple>> loadNotesByType(int noteType);
+    @Query("SELECT * FROM Notes WHERE note_type = :noteType")
+    LiveData<List<NoteEntity>> loadNotesByType(int noteType);
 
     // we're not gonna do a query for search bc that'd be too resource consuming
     // but just in case
-    @Query("SELECT note_title, note_body FROM Notes WHERE note_title LIKE :searchTerm OR " +
+    @Query("SELECT * FROM Notes WHERE note_title LIKE :searchTerm OR " +
             "note_body LIKE :searchTerm")
-    List<NoteTuple> searchNotes(String searchTerm);
+    List<NoteEntity> searchNotes(String searchTerm);
 
     // Add one or more notes to the database
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertNotes(NoteEntity... notes);
+
+    // add an empty note to the database
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    long insertBlankNote(NoteEntity note);
 
     // Delete one or more notes from the database
     @Delete
