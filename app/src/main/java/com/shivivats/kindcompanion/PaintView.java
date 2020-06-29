@@ -141,4 +141,8 @@ public class PaintView extends View {
     public void SetStrokeWidth(int strokeWidth) {
         this.strokeWidth=strokeWidth;
     }
+
+    public Bitmap getmBitmap() {
+        return mBitmap;
+    }
 }

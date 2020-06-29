@@ -81,9 +81,10 @@
         />
 
     <item
-        android:id="@+id/action_save_paint"
-        android:title="Save Drawing"
-        android:icon="@drawable/ic_save_black_24dp"
-        app:showAsAction="always" />
+        android:id="@+id/action_clear"
+        android:title="Clear"
+        app:showAsAction="ifRoom"
+        />
+
 
 </menu>

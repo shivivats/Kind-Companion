@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteListAdapter.NoteViewHolder> {
 
-    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final CardView noteCardView;
         private final TextView noteTitleView;
@@ -22,30 +22,36 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
 
         public long currentNoteId;
 
-        private NoteViewHolder(View noteView, long noteId) {
+        public NoteViewHolder(View noteView, long noteId) {
             super(noteView);
             noteCardView = noteView.findViewById(R.id.noteCardView);
             noteTitleView = noteView.findViewById(R.id.noteTitleView);
             noteBodyView = noteView.findViewById(R.id.noteBodyView);
             currentNoteId=noteId;
+
+            noteView.setOnClickListener(this);
         }
-
-        public void setData(NoteEntity note) {
-
-        }
-
 
         @Override
         public void onClick(View view) {
-
+            if(noteListClickListener!=null) {
+                noteListClickListener.onNoteListItemClicked(view, getAdapterPosition());
+                //NoteEntity noteEntity = reminderNotesList.get(getAdapterPosition());
+            }
         }
     }
 
     private final LayoutInflater inflater;
     private List<NoteEntity> reminderNotesList; // cached copy of words
 
+    private NoteListClickListener noteListClickListener;
+
     ReminderNoteListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
+    }
+
+    public void setNoteListClickListener(NoteListClickListener listener) {
+        noteListClickListener=listener;
     }
 
     @NonNull
@@ -83,6 +89,10 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
             return reminderNotesList.size();
         else
             return 0;
+    }
+
+    public List<NoteEntity> getReminderNotesList() {
+        return reminderNotesList;
     }
 
 }

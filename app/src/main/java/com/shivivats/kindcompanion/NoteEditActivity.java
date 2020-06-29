@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,18 +12,20 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,19 +35,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class ReminderNoteEntryActivity extends AppCompatActivity {
+public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener{
 
     public static final String EXTRA_REPLY = "com.shivivats.kindcompanion.";
 
     EditText noteTitle;
     EditText noteBody;
 
-    Toolbar reminderEntryHeaderBar;
-    Toolbar reminderEntryBottomBar;
+    Toolbar noteEditHeaderBar;
+    Toolbar noteEditBottomBar;
 
     private long currentNoteId;
 
-    private NoteEntryViewModel noteEntryViewModel;
+    private NoteEditViewModel noteEditViewModel;
+
+    private int currentNoteType;
+
+    private NoteEditImagesAdapter adapter;
+
+
 
     //static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -53,7 +62,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder_note_entry);
+        setContentView(R.layout.activity_note_edit);
 
         Intent intent = getIntent();
         currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
@@ -62,7 +71,14 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
             finish();
         }
 
-        noteEntryViewModel = new NoteEntryViewModel(getApplication(), currentNoteId);
+        noteEditViewModel = new NoteEditViewModel(getApplication(), currentNoteId);
+
+        // set the views
+        noteTitle = findViewById(R.id.noteEditTitleField);
+        noteBody = findViewById(R.id.noteEditBodyField);
+
+        noteTitle.setText(intent.getStringExtra("CURRENT_NOTE_TITLE"));
+        noteBody.setText(intent.getStringExtra("CURRENT_NOTE_BODY"));
 
         // now we have the currentnoteid in the variable and we can use it for various insert operations
         SetToolbars();
@@ -72,8 +88,8 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
 
     private void SetToolbars() {
         // we basically just set the toolbar as the support action bar so we can get it using a function anywhere in the activity now
-        reminderEntryHeaderBar = findViewById(R.id.reminderNoteEntryTopBar);
-        setSupportActionBar(reminderEntryHeaderBar);
+        noteEditHeaderBar = findViewById(R.id.noteEditTopBar);
+        setSupportActionBar(noteEditHeaderBar);
 
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -84,42 +100,88 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         // hide the title from the topbar
         ab.setDisplayShowTitleEnabled(false);
 
-        // set the views
-        noteTitle = findViewById(R.id.reminderNoteEntryTitleField);
-        noteBody = findViewById(R.id.reminderNoteEntryTextField);
-
         // set the bottom bar
-        reminderEntryBottomBar = findViewById(R.id.reminderNoteEntryBottomBar);
+        noteEditBottomBar = findViewById(R.id.noteEditBottomBar);
     }
 
     private void InitRecyclerView() {
-        // add the recyler view
-        RecyclerView imageRecyclerView = findViewById(R.id.noteEntryRecyclerImageView);
-        final NoteImagesAdapter adapter = new NoteImagesAdapter(this);
+        // add the recyler view for the image
+        RecyclerView imageRecyclerView = findViewById(R.id.noteEditRecyclerImageView);
+
+        GridLayoutManager imageViewManager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
+        imageRecyclerView.setLayoutManager(imageViewManager);
+
+        adapter = new NoteEditImagesAdapter(this);
+        adapter.setNoteEditImagesClickListener(this);
+
         imageRecyclerView.setAdapter(adapter);
-        GridLayoutManager manager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
-        imageRecyclerView.setLayoutManager(manager);
 
         // associate the viewmodel with provider
-        noteEntryViewModel = new ViewModelProvider(this, new NoteEntryViewModelFactory(this.getApplication(), currentNoteId)).get(NoteEntryViewModel.class);
+        noteEditViewModel = new ViewModelProvider(this, new NoteEditViewModelFactory(this.getApplication(), currentNoteId)).get(NoteEditViewModel.class);
 
         // add an observer for the livedata
-        noteEntryViewModel.getCurrentNoteImages().observe(this, new Observer<List<ImageEntity>>() {
+        noteEditViewModel.getCurrentNoteImages().observe(this, new Observer<List<ImageEntity>>() {
             @Override
             public void onChanged(List<ImageEntity> imageEntities) {
                 // update the cached copy of image entities in the adapter
                 adapter.setImages(imageEntities);
             }
         });
+
+        // so we prolly wanna load all the images sent to us. wait no we dont? - IDK WHY THIS COMMENT EXISTS BUT IM TOO AFRAID TO DELETE IT
+
+        // add recycler view for the audios
+        //RecyclerView audioRecyclerView = findViewById(R.id.noteEditRecyclerAudioView);
+
+        //GridLayoutManager audioViewManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
+        //audioRecyclerView.setLayoutManager(audioViewManager);
+    }
+
+    ActivityResultLauncher<Intent> openImageActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == RESULT_OK) {
+                // get the image id from the image here
+                long currentImageID=result.getData().getLongExtra("IMAGE_ID",-1);
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.imageId=currentImageID;
+                noteEditViewModel.deleteImages(imageEntity);
+                Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
+            } else if(result.getResultCode()==-2) {
+                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            }
+            else  {
+                // something unpredicted happened so i guess not delete image, so just leave it as is?
+                // this is also used for back button i guess now
+                // in other words, do nothing
+
+            }
+        }
+    });
+
+    @Override
+    public void onNoteEditImagesClicked(View view, int position) {
+        ImageEntity imageEntity = adapter.getImagesList().get(position);
+
+        // here we need to open whatever we wanna do with the image.
+        // make a new activity to display the image and such?
+
+
+
+        Intent intent  = new Intent(NoteEditActivity.this, NoteImageView.class);
+        // add intent extras here
+        intent.putExtra("IMAGE_ID", imageEntity.imageId);
+        intent.putExtra("IMAGE_URI", imageEntity.imageUri.toString());
+        openImageActivity.launch(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.topbar_reminder_note_entry, menu);
+        getMenuInflater().inflate(R.menu.topbar_note_edit, menu);
 
-        Menu bottomMenu = reminderEntryBottomBar.getMenu();
-        getMenuInflater().inflate(R.menu.bottombar_reminder_note_entry, bottomMenu);
+        Menu bottomMenu = noteEditBottomBar.getMenu();
+        getMenuInflater().inflate(R.menu.bottombar_note_edit, bottomMenu);
 
         for (int i = 0; i < bottomMenu.size(); i++) {
             bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -136,7 +198,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_save_reminder_note:
+            case R.id.action_save_edit_note:
                 StoreReminder();
                 return true;
 
@@ -156,8 +218,8 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
                 RecordAudio();
                 return true;
 
-            case R.id.action_discard_reminder_note:
-                DiscardNote();
+            case R.id.action_delete_edit_note:
+                DeleteNote();
                 return true;
 
             default:
@@ -174,6 +236,16 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         Intent replyIntent = new Intent();
         String nt = noteTitle.getText().toString();
         String nb = noteBody.getText().toString();
+
+        // we need to do the same with audio clips at some point
+        if(TextUtils.isEmpty(noteTitle.getText()) && TextUtils.isEmpty(noteBody.getText()) && noteEditViewModel.getNumberOfNoteImages() == 0) {
+            setResult(-3);
+            finish();
+        }
+
+        Log.d("randomtagEntryActivity", "note title in entry activity: " + nt);
+        Log.d("randomtagEntryActivity", "note body in entry activity: " + nb);
+
         //NoteEntity noteEntity= new NoteEntity();
         //noteEntity.noteType=NoteType.NOTE_REMINDER.getValue();
         //noteEntity.noteTitle=nt;
@@ -186,7 +258,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         finish();
     }
 
-    ActivityResultLauncher<String> chooseImage = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+    ActivityResultLauncher<String[]> chooseImage = registerForActivityResult(new ActivityResultContracts.OpenDocument(), new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri uri) {
                     if(uri!=null) {
@@ -196,7 +268,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
                         newImage.imageUri = uri;
                         newImage.isDrawing = false;
                         newImage.imageNoteId = currentNoteId;
-                        noteEntryViewModel.insert(newImage);
+                        noteEditViewModel.insertImages(newImage);
                         // this should automatically add the image to the recyclerview as well
                     }else {
                         // the user chose to not choose an image
@@ -206,12 +278,34 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
             });
 
     private void ChooseImage() {
-        chooseImage.launch("image/*");
+        String[] documentTypes  = new String[1];
+        documentTypes[0]="image/*";
+        chooseImage.launch(documentTypes);
     }
+
+    ActivityResultLauncher<Intent> drawingActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode()==RESULT_OK) {
+                // the uri will be an extra
+                Uri uri = Uri.parse(result.getData().getStringExtra("DRAWING_URI"));
+
+                // add the image to a database
+                ImageEntity newImage = new ImageEntity();
+                newImage.imageUri = uri;
+                newImage.isDrawing = true;
+                newImage.imageNoteId = currentNoteId;
+                noteEditViewModel.insertImages(newImage);
+            }else {
+                Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
 
     private void DrawImage() {
         Intent drawImageIntent = new Intent(this, PaintActivity.class);
-        startActivity(drawImageIntent);
+        drawingActivity.launch(drawImageIntent);
+
     }
 
     // KEEP THIS IN MIND WHILE USING THIS STUFF
@@ -230,7 +324,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
                     newImage.imageUri = currentPhotoURI;
                     newImage.isDrawing = false;
                     newImage.imageNoteId = currentNoteId;
-                    noteEntryViewModel.insert(newImage);
+                    noteEditViewModel.insertImages(newImage);
                     // this should automatically add the image to the recyclerview as well
                 } else {
                     // for some reason the uri was null, i.e., storage couldnt be accessed
@@ -249,20 +343,11 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     private void TakePhoto() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             // Device has a camera
-
-            /*
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if(takePictureIntent.resolveActivity(getPackageManager())!=null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-            */
             // Create the File where the photo should go
             File photoFile = null;
             currentPhotoURI=null;
-            //Log.d("note-entry-camera-stuff","file is null");
             try {
                 photoFile = CreateImageFile();
-                //Log.d("note-entry-camera-stuff","file is created");
             } catch (IOException ex) {
                 // Error occurred while creating the File
                 ex.printStackTrace();
@@ -273,9 +358,7 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
                         "com.shivivats.kindcompanion.fileprovider",
                         photoFile);
                 currentPhotoURI = photoURI;
-                Log.d("randomtag", photoURI.toString());
                 takePicLauncher.launch(photoURI);
-                //Log.d("note-entry-camera-stuff","launched the take image launcher");
             }
         } else {
             // Device doesnt have a camera, show a toast or something
@@ -284,10 +367,43 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
     }
 
     private void RecordAudio() {
-
+        // ITS OUR TIME TO SHINE
+        MediaRecorder mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_2_TS);
+        try {
+            mediaRecorder.setOutputFile(CreateAudioFile().getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        try {
+            mediaRecorder.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void DiscardNote() {
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+
+    // Requesting permission to RECORD_AUDIO
+    private boolean permissionToRecordAccepted = false;
+    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if(!permissionToRecordAccepted) {
+            finish();
+        }
+    }
+
+    private void DeleteNote() {
         setResult(-2);
         finish();
     }
@@ -307,4 +423,22 @@ public class ReminderNoteEntryActivity extends AppCompatActivity {
         String currentPhotoPath = image.getAbsolutePath();
         return image;
     }
+
+    private File CreateAudioFile() throws IOException {
+        // Create an audio file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String audioFileName = "AUDIO_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PODCASTS);
+        File audio = File.createTempFile(
+                audioFileName,  /* prefix */
+                ".3gp",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file path for use with ACTION_VIEW intents
+        String currentAudioPath = audio.getAbsolutePath();
+        return audio;
+    }
+
+
 }

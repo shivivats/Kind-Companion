@@ -12,12 +12,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {NoteEntity.class, ImageEntity.class}, version = 2, exportSchema = true)
+@Database(entities = {NoteEntity.class, ImageEntity.class, AudioEntity.class}, version = 3, exportSchema = true)
 @TypeConverters(Converters.class)
 public abstract class NoteDatabase extends RoomDatabase {
 
     public abstract NoteEntityDao noteEntityDao();
     public abstract ImageEntityDao imageEntityDao();
+    public abstract AudioEntityDao audioEntityDao();
 
     private static volatile NoteDatabase INSTANCE;
 
@@ -49,6 +50,7 @@ public abstract class NoteDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 NoteEntityDao noteEntityDao = INSTANCE.noteEntityDao();
                 ImageEntityDao imageEntityDao = INSTANCE.imageEntityDao();
+                AudioEntityDao audioEntityDao = INSTANCE.audioEntityDao();
 
                 // we just create a sample note here that says idk welcome to the app or sth
                 NoteEntity sampleReminderNote = new NoteEntity();

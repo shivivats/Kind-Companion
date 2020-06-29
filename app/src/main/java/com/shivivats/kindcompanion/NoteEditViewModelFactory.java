@@ -7,13 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-// we need this class bc our regular noteentryviewmodel has a "long" parameter on top of the default "application" parameter
+// we need this class bc our regular noteentryviewmodel has a "long" parameter on top of the default "application" parameter in the constructor
 
-public class NoteEntryViewModelFactory implements ViewModelProvider.Factory {
+public class NoteEditViewModelFactory implements ViewModelProvider.Factory {
     private Application mApplication;
     private long mCurrentNoteId;
 
-    public NoteEntryViewModelFactory(Application application, long currentNoteId) {
+    public NoteEditViewModelFactory(Application application, long currentNoteId) {
         mApplication=application;
         mCurrentNoteId=currentNoteId;
     }
@@ -21,6 +21,6 @@ public class NoteEntryViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new NoteEntryViewModel(mApplication,mCurrentNoteId);
+        return (T) new NoteEditViewModel(mApplication,mCurrentNoteId);
     }
 }

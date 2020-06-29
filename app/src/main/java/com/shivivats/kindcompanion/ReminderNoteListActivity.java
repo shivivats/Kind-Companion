@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,43 +22,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ReminderNoteListActivity extends AppCompatActivity {
+public class ReminderNoteListActivity extends AppCompatActivity implements NoteListClickListener{
 
     private ReminderNoteViewModel reminderNoteViewModel;
     private long currentNoteId;
-    // KEEP THIS IN MIND WHILE USING THIS STUFF
-    // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
-    //                ActivityResultCallback<O> callback)
-    // LOOK AT THE Is AND Os
-    ActivityResultLauncher<Intent> startActivityForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            // Here we handle the returned data
-
-            if (result.getResultCode() == RESULT_OK) {
-                NoteEntity noteEntity = new NoteEntity();
-                noteEntity.noteType = result.getData().getIntExtra("noteType", NoteType.NOTE_REMINDER.getValue());
-                noteEntity.noteTitle = result.getData().getStringExtra("noteTitle");
-                noteEntity.noteBody = result.getData().getStringExtra("noteBody");
-                noteEntity.noteId = result.getData().getLongExtra("noteId", -1);
-
-                if (noteEntity.noteId == -1) {
-                    DiscardNoteIfExists("The note couldn't be saved.");
-                } else if(noteEntity.noteTitle==" " && noteEntity.noteBody==" ") {
-                    DiscardNoteIfExists("Empty note discarded.");
-                } else {
-                    Log.d("randomtag", "note title "+ noteEntity.noteTitle);
-                    Log.d("randomtag", "note body "+ noteEntity.noteBody);
-                    Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
-                    reminderNoteViewModel.update(noteEntity);
-                }
-            } else if (result.getResultCode()==-2) {
-                DiscardNoteIfExists("Note discarded.");
-            }else {
-                DiscardNoteIfExists("The note couldn't be saved.");
-            }
-        }
-    });
+    private ReminderNoteListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +34,16 @@ public class ReminderNoteListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reminder_note_list);
 
         RecyclerView recyclerView = findViewById(R.id.noteReminderRecyclerView);
-        final ReminderNoteListAdapter adapter = new ReminderNoteListAdapter(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new ReminderNoteListAdapter(this);
+        adapter.setNoteListClickListener(this);
+
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
+        recyclerView.addItemDecoration(decoration);
 
         reminderNoteViewModel = new ViewModelProvider(this).get(ReminderNoteViewModel.class);
 
@@ -88,14 +64,19 @@ public class ReminderNoteListActivity extends AppCompatActivity {
         });
     }
 
-    private void DiscardNoteIfExists(String toastText) {
-        NoteEntity noteEntity = new NoteEntity();
-        noteEntity.noteId = currentNoteId;
-        reminderNoteViewModel.delete(noteEntity);
-        Toast.makeText(
-                getApplicationContext(),
-                toastText,
-                Toast.LENGTH_LONG).show();
+    @Override
+    public void onNoteListItemClicked(View view, int position) {
+        NoteEntity noteEntity = adapter.getReminderNotesList().get(position);
+
+        currentNoteId=noteEntity.noteId;
+
+        // now we send the intent
+        Intent intent = new Intent(ReminderNoteListActivity.this, NoteEditActivity.class);
+        intent.putExtra("CURRENT_NOTE_BODY", noteEntity.noteBody);
+        intent.putExtra("CURRENT_NOTE_TITLE", noteEntity.noteTitle);
+        intent.putExtra("CURRENT_NOTE_ID", noteEntity.noteId);
+        intent.putExtra("CURRENT_NOTE_TYPE", noteEntity.noteType);
+        startActivityForResult.launch(intent);
     }
 
     public void OnAddFabClick() {
@@ -104,7 +85,8 @@ public class ReminderNoteListActivity extends AppCompatActivity {
         InsertBlankNote();
 
         // now we send the intent
-        Intent intent = new Intent(ReminderNoteListActivity.this, ReminderNoteEntryActivity.class);
+        Intent intent = new Intent(ReminderNoteListActivity.this, NoteEditActivity.class);
+        intent.putExtra("CURRENT_NOTE_TYPE", NoteType.NOTE_REMINDER.getValue());
         intent.putExtra("CURRENT_NOTE_ID", currentNoteId);
         startActivityForResult.launch(intent);
     }
@@ -119,5 +101,49 @@ public class ReminderNoteListActivity extends AppCompatActivity {
         long noteId = reminderNoteViewModel.insertBlank(blankNote);
         currentNoteId = noteId;
         // now we have the id and we can pass it with the intent
+    }
+
+    // KEEP THIS IN MIND WHILE USING THIS STUFF
+    // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
+    //                ActivityResultCallback<O> callback)
+    // LOOK AT THE Is AND Os
+    ActivityResultLauncher<Intent> startActivityForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            // Here we handle the returned data
+
+            if (result.getResultCode() == RESULT_OK) {
+                NoteEntity noteEntity = new NoteEntity();
+                noteEntity.noteType = result.getData().getIntExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+                noteEntity.noteTitle = result.getData().getStringExtra("noteTitle");
+                noteEntity.noteBody = result.getData().getStringExtra("noteBody");
+                noteEntity.noteId = result.getData().getLongExtra("noteId", -1);
+
+                if (noteEntity.noteId == -1) {
+                    DiscardNoteIfExists("The note couldn't be saved.");
+                } else {
+                    Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);
+                    Log.d("randomtagListActivity", "note body in list activity: "+ noteEntity.noteBody);
+                    Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
+                    reminderNoteViewModel.update(noteEntity);
+                }
+            } else if (result.getResultCode()==-2) {
+                DiscardNoteIfExists("Note deleted.");
+            } else if (result.getResultCode()==-3) {
+                DiscardNoteIfExists("Empty note discarded.");
+            } else {
+                DiscardNoteIfExists("The note couldn't be saved.");
+            }
+        }
+    });
+
+    private void DiscardNoteIfExists(String toastText) {
+        NoteEntity noteEntity = new NoteEntity();
+        noteEntity.noteId = currentNoteId;
+        reminderNoteViewModel.delete(noteEntity);
+        Toast.makeText(
+                getApplicationContext(),
+                toastText,
+                Toast.LENGTH_LONG).show();
     }
 }

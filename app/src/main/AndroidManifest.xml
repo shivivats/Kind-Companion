@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".PaintActivity"></activity>
+        <activity android:name=".NoteImageView"
+            android:parentActivityName=".NoteEditActivity"></activity>
+        <activity android:name=".PaintActivity" />
         <activity
-            android:name=".ReminderNoteEntryActivity"
+            android:name=".NoteEditActivity"
             android:parentActivityName=".ReminderNoteListActivity" />
         <activity android:name=".ReminderNoteListActivity" />
         <activity android:name=".FrontPageActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
@@ -21,9 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NoteEntryActivity"
-            android:parentActivityName=".FrontPageActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -39,10 +38,11 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 </manifest>

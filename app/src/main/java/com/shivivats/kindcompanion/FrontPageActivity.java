@@ -21,9 +21,9 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickNewNote(View view) {
-        Intent newNoteIntent = new Intent(this, NoteEntryActivity.class);
+        //Intent newNoteIntent = new Intent(this, NoteEditActivity.class);
         //Log.d("FrontPageActivity", "New Note Button Intent");
-        startActivity(newNoteIntent);
+        //startActivity(newNoteIntent);
     }
 
     private void SeekBarSetup() {
