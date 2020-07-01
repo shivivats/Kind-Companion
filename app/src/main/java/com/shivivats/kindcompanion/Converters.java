@@ -7,18 +7,18 @@ import androidx.room.TypeConverter;
 public class Converters {
     @TypeConverter
     public static String fromUri(Uri uri) {
-        if(uri==null) {
+        if (uri == null) {
             return null;
-        }else {
+        } else {
             return uri.toString();
         }
     }
 
     @TypeConverter
     public static Uri stringToUri(String string) {
-        if(string==null) {
+        if (string == null) {
             return null;
-        }else {
+        } else {
             return Uri.parse(string);
         }
     }

@@ -1,10 +1,5 @@
 package com.shivivats.kindcompanion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -19,6 +14,11 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.IOException;
 
@@ -39,6 +39,12 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
     private int lastProgress = 0;
     private Handler mHandler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            seekUpdation();
+        }
+    };
     private boolean isPlaying = false;
 
     @Override
@@ -77,6 +83,15 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         if (v == playPauseImage) {
             if (!isPlaying) {
@@ -88,7 +103,6 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
 
     private void startPlaying() {
         player = new MediaPlayer();
@@ -149,23 +163,6 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         });
     }
 
-
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            seekUpdation();
-        }
-    };
-
-    private void seekUpdation() {
-        if (player != null) {
-            int mCurrentPosition = player.getCurrentPosition();
-            seekBar.setProgress(mCurrentPosition);
-            lastProgress = mCurrentPosition;
-        }
-        mHandler.postDelayed(runnable, 100);
-    }
-
     private void stopPlaying() {
         if (player != null) {
             player.release();
@@ -202,6 +199,15 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    private void seekUpdation() {
+        if (player != null) {
+            int mCurrentPosition = player.getCurrentPosition();
+            seekBar.setProgress(mCurrentPosition);
+            lastProgress = mCurrentPosition;
+        }
+        mHandler.postDelayed(runnable, 100);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -226,14 +232,5 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         intent.putExtra("AUDIO_ID", currentAudioId);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (player != null) {
-            player.release();
-            player = null;
-        }
     }
 }

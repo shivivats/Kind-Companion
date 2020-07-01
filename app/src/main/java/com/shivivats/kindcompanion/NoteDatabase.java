@@ -16,32 +16,10 @@ import java.util.concurrent.Executors;
 @TypeConverters(Converters.class)
 public abstract class NoteDatabase extends RoomDatabase {
 
-    public abstract NoteEntityDao noteEntityDao();
-    public abstract ImageEntityDao imageEntityDao();
-    public abstract AudioEntityDao audioEntityDao();
-
-    private static volatile NoteDatabase INSTANCE;
-
     private static final int NUMBER_OF_THREADS = 4;
-
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
-    static NoteDatabase getDatabase(final Context context) {
-        if (INSTANCE == null) {
-            synchronized (NoteDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            NoteDatabase.class, "Notes_DB")
-                            .addCallback(sRoomDatabaseCallback)
-                            .fallbackToDestructiveMigration()
-                            .build();
-                }
-            }
-        }
-        return INSTANCE;
-    }
-
+    private static volatile NoteDatabase INSTANCE;
     private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -69,4 +47,25 @@ public abstract class NoteDatabase extends RoomDatabase {
             });
         }
     };
+
+    static NoteDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (NoteDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            NoteDatabase.class, "Notes_DB")
+                            .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+    public abstract NoteEntityDao noteEntityDao();
+
+    public abstract ImageEntityDao imageEntityDao();
+
+    public abstract AudioEntityDao audioEntityDao();
 }

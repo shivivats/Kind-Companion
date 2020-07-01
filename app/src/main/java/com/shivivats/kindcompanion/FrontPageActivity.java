@@ -1,12 +1,12 @@
 package com.shivivats.kindcompanion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class FrontPageActivity extends AppCompatActivity {
 
@@ -18,12 +18,6 @@ public class FrontPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_front_page);
 
         SeekBarSetup();
-    }
-
-    public void OnClickNewNote(View view) {
-        //Intent newNoteIntent = new Intent(this, NoteEditActivity.class);
-        //Log.d("FrontPageActivity", "New Note Button Intent");
-        //startActivity(newNoteIntent);
     }
 
     private void SeekBarSetup() {
@@ -52,6 +46,12 @@ public class FrontPageActivity extends AppCompatActivity {
                 // probably not
             }
         });
+    }
+
+    public void OnClickNewNote(View view) {
+        //Intent newNoteIntent = new Intent(this, NoteEditActivity.class);
+        //Log.d("FrontPageActivity", "New Note Button Intent");
+        //startActivity(newNoteIntent);
     }
 
     public void OnClickReminders(View view) {

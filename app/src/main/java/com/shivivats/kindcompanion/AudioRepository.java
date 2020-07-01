@@ -18,7 +18,7 @@ public class AudioRepository {
     }
 
     LiveData<List<AudioEntity>> getCurrentNoteAudio() {
-        return  currentNoteAudio;
+        return currentNoteAudio;
     }
 
     void insert(AudioEntity audioEntity) {

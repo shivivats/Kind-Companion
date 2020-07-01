@@ -21,10 +21,10 @@ public class NoteListItemDecoration extends RecyclerView.ItemDecoration {
         super.onDraw(c, parent, state);
 
         int dividerLeft = 32;
-        int dividerRight = parent.getWidth()-32;
+        int dividerRight = parent.getWidth() - 32;
 
-        for(int i=0;i<parent.getChildCount();i++) {
-            if(i!=parent.getChildCount()-1) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            if (i != parent.getChildCount() - 1) {
                 View child = parent.getChildAt(i);
 
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -32,26 +32,26 @@ public class NoteListItemDecoration extends RecyclerView.ItemDecoration {
                 int dividerTop = child.getBottom() + params.bottomMargin;
                 int divierBottom = dividerTop + divider.getIntrinsicHeight();
 
-                divider.setBounds(dividerLeft,dividerTop,dividerRight,divierBottom);
+                divider.setBounds(dividerLeft, dividerTop, dividerRight, divierBottom);
                 divider.draw(c);
             }
         }
-    }
-
-    @Override
-    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-        super.getItemOffsets(outRect, view, parent, state);
-
-        if(parent.getChildAdapterPosition(view)==0) {
-            return;
-        }
-
-        outRect.top = divider.getIntrinsicHeight();
     }
 
     // onDrawOver is for drawing the decorations after drawing the views
     @Override
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
+
+        if (parent.getChildAdapterPosition(view) == 0) {
+            return;
+        }
+
+        outRect.top = divider.getIntrinsicHeight();
     }
 }

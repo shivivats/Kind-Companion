@@ -4,7 +4,7 @@ import android.view.View;
 
 public interface NoteListClickListener {
 
-public void onNoteListItemClicked(View view, int position);
+    void onNoteListItemClicked(View view, int position);
 
 }
 

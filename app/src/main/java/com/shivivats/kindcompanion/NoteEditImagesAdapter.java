@@ -5,41 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-
 public class NoteEditImagesAdapter extends RecyclerView.Adapter<NoteEditImagesAdapter.NoteImagesViewHolder> {
-
-    class NoteImagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        private final CardView cardView;
-        private final ImageView imageView;
-
-        private NoteImagesViewHolder(View itemView) {
-            super(itemView);
-            cardView = itemView.findViewById(R.id.imageCardView);
-            imageView = itemView.findViewById(R.id.imageViewItem);
-
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if(noteEditImagesClickListener!=null) {
-                noteEditImagesClickListener.onNoteEditImagesClicked(view, getAdapterPosition());
-            }
-        }
-    }
 
     private final LayoutInflater inflater;
     private List<ImageEntity> images; // cached copy of images
-
     private NoteEditImagesClickListener noteEditImagesClickListener;
 
     NoteEditImagesAdapter(Context context) {
@@ -58,18 +33,13 @@ public class NoteEditImagesAdapter extends RecyclerView.Adapter<NoteEditImagesAd
 
     @Override
     public void onBindViewHolder(NoteImagesViewHolder holder, int position) {
-        if(images!=null) {
+        if (images != null) {
             ImageEntity current = images.get(position);
             holder.imageView.setImageURI(current.imageUri);
 
-        }else {
+        } else {
             holder.imageView.setImageBitmap(null);
         }
-    }
-
-    void setImages(List<ImageEntity> imagesList) {
-        images=imagesList;
-        notifyDataSetChanged();
     }
 
     // getItemCount() is called many times, and when it is first called,
@@ -81,7 +51,33 @@ public class NoteEditImagesAdapter extends RecyclerView.Adapter<NoteEditImagesAd
         else return 0;
     }
 
+    void setImages(List<ImageEntity> imagesList) {
+        images = imagesList;
+        notifyDataSetChanged();
+    }
+
     public List<ImageEntity> getImagesList() {
         return images;
+    }
+
+    class NoteImagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final CardView cardView;
+        private final ImageView imageView;
+
+        private NoteImagesViewHolder(View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.imageCardView);
+            imageView = itemView.findViewById(R.id.imageViewItem);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (noteEditImagesClickListener != null) {
+                noteEditImagesClickListener.onNoteEditImagesClicked(view, getAdapterPosition());
+            }
+        }
     }
 }

@@ -1,16 +1,16 @@
 package com.shivivats.kindcompanion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class NoteImageView extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class NoteImageView extends AppCompatActivity {
 
         imageView = findViewById(R.id.noteImageImageView);
 
-        noteImageViewTopBar=findViewById(R.id.noteImageTopBar);
+        noteImageViewTopBar = findViewById(R.id.noteImageTopBar);
 
         setSupportActionBar(noteImageViewTopBar);
 
@@ -45,7 +45,7 @@ public class NoteImageView extends AppCompatActivity {
         Intent intent = getIntent();
         currentImageId = intent.getLongExtra("IMAGE_ID", -1);
 
-        if(currentImageId==-1) {
+        if (currentImageId == -1) {
             setResult(-2);
             finish();
         }
@@ -65,7 +65,7 @@ public class NoteImageView extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_delete_note_image:
                 DeleteCurrentImage();
                 return true;

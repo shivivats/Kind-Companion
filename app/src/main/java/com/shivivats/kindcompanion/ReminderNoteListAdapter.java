@@ -14,36 +14,8 @@ import java.util.List;
 
 public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteListAdapter.NoteViewHolder> {
 
-    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private final CardView noteCardView;
-        private final TextView noteTitleView;
-        private final TextView noteBodyView;
-
-        public long currentNoteId;
-
-        public NoteViewHolder(View noteView, long noteId) {
-            super(noteView);
-            noteCardView = noteView.findViewById(R.id.noteCardView);
-            noteTitleView = noteView.findViewById(R.id.noteTitleView);
-            noteBodyView = noteView.findViewById(R.id.noteBodyView);
-            currentNoteId=noteId;
-
-            noteView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if(noteListClickListener!=null) {
-                noteListClickListener.onNoteListItemClicked(view, getAdapterPosition());
-                //NoteEntity noteEntity = reminderNotesList.get(getAdapterPosition());
-            }
-        }
-    }
-
     private final LayoutInflater inflater;
     private List<NoteEntity> reminderNotesList; // cached copy of words
-
     private NoteListClickListener noteListClickListener;
 
     ReminderNoteListAdapter(Context context) {
@@ -51,14 +23,14 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
     }
 
     public void setNoteListClickListener(NoteListClickListener listener) {
-        noteListClickListener=listener;
+        noteListClickListener = listener;
     }
 
     @NonNull
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View noteView = inflater.inflate(R.layout.item_note_recyclerview, parent, false);
-        return new NoteViewHolder(noteView,-1);
+        return new NoteViewHolder(noteView, -1);
     }
 
     @Override
@@ -76,11 +48,6 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
         }
     }
 
-    void setNotes(List<NoteEntity> notes) {
-        reminderNotesList = notes;
-        notifyDataSetChanged();
-    }
-
     // getItemCount() is called many times, and when it is first called,
     // reminderNotesList has not been updated (means initially, it's null, and we can't return null).
     @Override
@@ -91,8 +58,40 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
             return 0;
     }
 
+    void setNotes(List<NoteEntity> notes) {
+        reminderNotesList = notes;
+        notifyDataSetChanged();
+    }
+
     public List<NoteEntity> getReminderNotesList() {
         return reminderNotesList;
+    }
+
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final CardView noteCardView;
+        private final TextView noteTitleView;
+        private final TextView noteBodyView;
+
+        public long currentNoteId;
+
+        public NoteViewHolder(View noteView, long noteId) {
+            super(noteView);
+            noteCardView = noteView.findViewById(R.id.noteCardView);
+            noteTitleView = noteView.findViewById(R.id.noteTitleView);
+            noteBodyView = noteView.findViewById(R.id.noteBodyView);
+            currentNoteId = noteId;
+
+            noteView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (noteListClickListener != null) {
+                noteListClickListener.onNoteListItemClicked(view, getAdapterPosition());
+                //NoteEntity noteEntity = reminderNotesList.get(getAdapterPosition());
+            }
+        }
     }
 
 }

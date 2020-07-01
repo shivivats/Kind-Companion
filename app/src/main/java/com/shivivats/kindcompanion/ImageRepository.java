@@ -18,7 +18,7 @@ public class ImageRepository {
     }
 
     LiveData<List<ImageEntity>> getCurrentNoteImages() {
-        return  currentNoteImages;
+        return currentNoteImages;
     }
 
     void insert(ImageEntity imageEntity) {

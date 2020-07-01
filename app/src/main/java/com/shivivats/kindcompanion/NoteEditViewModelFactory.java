@@ -14,13 +14,13 @@ public class NoteEditViewModelFactory implements ViewModelProvider.Factory {
     private long mCurrentNoteId;
 
     public NoteEditViewModelFactory(Application application, long currentNoteId) {
-        mApplication=application;
-        mCurrentNoteId=currentNoteId;
+        mApplication = application;
+        mCurrentNoteId = currentNoteId;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new NoteEditViewModel(mApplication,mCurrentNoteId);
+        return (T) new NoteEditViewModel(mApplication, mCurrentNoteId);
     }
 }

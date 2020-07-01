@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -39,7 +38,7 @@ public class NoteRepository {
     }
 
     long insertBlankNote(NoteEntity blank) {
-        long noteId=-1;
+        long noteId = -1;
 
         Future<Long> insertBlankNoteFuture = NoteDatabase.databaseWriteExecutor.submit(() -> {
             long currId = noteEntityDao.insertBlankNote(blank);

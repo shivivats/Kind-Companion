@@ -10,15 +10,15 @@ public enum NoteType {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public static NoteType fromInt(int i) {
         for (NoteType b : NoteType.values()) {
             if (b.getValue() == i)
                 return b;
         }
         return null;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

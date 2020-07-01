@@ -11,9 +11,9 @@ public class FingerPath {
     public Path path;
 
     public FingerPath(int color, int strokeWidth, Path path) {
-        this.color=color;
-        this.strokeWidth=strokeWidth;
-        this.path=path;
+        this.color = color;
+        this.strokeWidth = strokeWidth;
+        this.path = path;
     }
 
 }

@@ -12,7 +12,7 @@ public class NoteEditViewModel extends AndroidViewModel {
     private AudioRepository audioRepository;
 
     private LiveData<List<ImageEntity>> currentNoteImages;
-    private  LiveData<List<AudioEntity>> currentNoteAudio;
+    private LiveData<List<AudioEntity>> currentNoteAudio;
 
     private long currentNoteId;
 
@@ -24,13 +24,12 @@ public class NoteEditViewModel extends AndroidViewModel {
         currentNoteImages = imageRepository.getCurrentNoteImages();
         currentNoteAudio = audioRepository.getCurrentNoteAudio();
 
-        currentNoteId=noteId;
+        currentNoteId = noteId;
     }
 
     public void setNoteId(int id) {
-        currentNoteId=id;
+        currentNoteId = id;
     }
-
 
 
     LiveData<List<ImageEntity>> getCurrentNoteImages() {
@@ -45,20 +44,33 @@ public class NoteEditViewModel extends AndroidViewModel {
         imageRepository.insert(image);
     }
 
-    public void updateImages(ImageEntity image) {imageRepository.update(image);}
+    public void updateImages(ImageEntity image) {
+        imageRepository.update(image);
+    }
 
-    public void deleteImages(ImageEntity image) {imageRepository.delete(image);}
+    public void deleteImages(ImageEntity image) {
+        imageRepository.delete(image);
+    }
 
 
+    LiveData<List<AudioEntity>> getCurrentNoteAudio() {
+        return currentNoteAudio;
+    }
 
-    LiveData<List<AudioEntity>> getCurrentNoteAudio() {return  currentNoteAudio;}
+    public int getNumberOfNoteAudio() {
+        return currentNoteAudio.getValue().size();
+    }
 
-    public int getNumberOfNoteAudio() {return  currentNoteAudio.getValue().size();}
+    public void insertAudio(AudioEntity audioEntity) {
+        audioRepository.insert(audioEntity);
+    }
 
-    public void insertAudio(AudioEntity audioEntity) {audioRepository.insert(audioEntity);}
+    public void updateAudio(AudioEntity audioEntity) {
+        audioRepository.update(audioEntity);
+    }
 
-    public void updateAudio(AudioEntity audioEntity) {audioRepository.update(audioEntity);}
-
-    public void deleteAudio(AudioEntity audioEntity) {audioRepository.delete(audioEntity);}
+    public void deleteAudio(AudioEntity audioEntity) {
+        audioRepository.delete(audioEntity);
+    }
 
 }

@@ -17,11 +17,10 @@ import java.util.ArrayList;
 
 public class PaintView extends View {
 
-    public static int BRUSH_SIZE = 20;
     public static final int DEFAULT_COLOR = Color.BLACK;
-    public static final int DEFAULT_BG_COLOR=Color.WHITE;
-    public static final float TOUCH_TOLERANCE=4;
-
+    public static final int DEFAULT_BG_COLOR = Color.WHITE;
+    public static final float TOUCH_TOLERANCE = 4;
+    public static int BRUSH_SIZE = 20;
     private float mX, mY;
     private Path mPath;
     private Paint mPaint;
@@ -68,59 +67,17 @@ public class PaintView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.save();
-        mCanvas.drawColor(backgroundColor);
-
-        for(FingerPath fp: paths) {
-            mPaint.setColor(fp.color);
-            mPaint.setStrokeWidth(fp.strokeWidth);
-
-            mCanvas.drawPath(fp.path, mPaint);
-        }
-
-        canvas.drawBitmap(mBitmap, 0,0, mBitmapPaint);
-        canvas.restore();
-    }
-
-    private void touchStart(float x, float y) {
-        mPath = new Path();
-        FingerPath fp = new FingerPath(currentColor, strokeWidth, mPath);
-        paths.add(fp);
-
-        mPath.reset();
-        mPath.moveTo(x,y);
-        mX  = x;
-        mY = y;
-    }
-
-    private void touchMove(float x, float y) {
-        float dx = Math.abs(x-mX);
-        float dy = Math.abs(y-mY);
-
-        if(dx>=TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            mPath.quadTo(mX, mY, (x+mX)/2, (y+mY)/2);
-            mX=x;
-            mY=y;
-        }
-    }
-
-    private void touchUp() {
-        mPath.lineTo(mX, mY);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
 
-        switch(event.getAction()) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                touchStart(x,y);
+                touchStart(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                touchMove(x,y);
+                touchMove(x, y);
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
@@ -134,12 +91,54 @@ public class PaintView extends View {
         return true;
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.save();
+        mCanvas.drawColor(backgroundColor);
+
+        for (FingerPath fp : paths) {
+            mPaint.setColor(fp.color);
+            mPaint.setStrokeWidth(fp.strokeWidth);
+
+            mCanvas.drawPath(fp.path, mPaint);
+        }
+
+        canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
+        canvas.restore();
+    }
+
+    private void touchStart(float x, float y) {
+        mPath = new Path();
+        FingerPath fp = new FingerPath(currentColor, strokeWidth, mPath);
+        paths.add(fp);
+
+        mPath.reset();
+        mPath.moveTo(x, y);
+        mX = x;
+        mY = y;
+    }
+
+    private void touchMove(float x, float y) {
+        float dx = Math.abs(x - mX);
+        float dy = Math.abs(y - mY);
+
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+            mX = x;
+            mY = y;
+        }
+    }
+
+    private void touchUp() {
+        mPath.lineTo(mX, mY);
+    }
+
     public void SetColor(int color) {
-        currentColor=color;
+        currentColor = color;
     }
 
     public void SetStrokeWidth(int strokeWidth) {
-        this.strokeWidth=strokeWidth;
+        this.strokeWidth = strokeWidth;
     }
 
     public Bitmap getmBitmap() {

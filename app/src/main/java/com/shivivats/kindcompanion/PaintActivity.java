@@ -1,11 +1,5 @@
 package com.shivivats.kindcompanion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -14,9 +8,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,7 +95,7 @@ public class PaintActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_color_green:
-                paintView.SetColor(Color.rgb(0,82,33));
+                paintView.SetColor(Color.rgb(0, 82, 33));
                 return true;
 
             case R.id.action_color_grey:
