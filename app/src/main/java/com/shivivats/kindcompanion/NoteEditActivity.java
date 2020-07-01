@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,12 +11,11 @@ import androidx.core.content.FileProvider;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener{
+public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener {
 
     public static final String EXTRA_REPLY = "com.shivivats.kindcompanion.";
 
@@ -51,8 +49,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
     private int currentNoteType;
 
-    private NoteEditImagesAdapter adapter;
-
+    private NoteEditImagesAdapter noteEditImagesAdapter;
+    private NoteEditAudioAdapter noteEditAudioAdapter;
 
 
     //static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -66,7 +64,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         Intent intent = getIntent();
         currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
-        if(currentNoteId==-1) {
+        if (currentNoteId == -1) {
             setResult(RESULT_CANCELED);
             finish();
         }
@@ -111,10 +109,24 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         GridLayoutManager imageViewManager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
         imageRecyclerView.setLayoutManager(imageViewManager);
 
-        adapter = new NoteEditImagesAdapter(this);
-        adapter.setNoteEditImagesClickListener(this);
+        noteEditImagesAdapter = new NoteEditImagesAdapter(this);
+        noteEditImagesAdapter.setNoteEditImagesClickListener(this);
 
-        imageRecyclerView.setAdapter(adapter);
+        imageRecyclerView.setAdapter(noteEditImagesAdapter);
+
+        // so we prolly wanna load all the images sent to us. wait no we dont? - IDK WHY THIS COMMENT EXISTS BUT IM TOO AFRAID TO DELETE IT
+
+        // add recycler view for the audios
+        RecyclerView audioRecyclerView = findViewById(R.id.noteEditRecyclerAudioView);
+
+        LinearLayoutManager audioViewManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        audioRecyclerView.setLayoutManager(audioViewManager);
+
+        noteEditAudioAdapter = new NoteEditAudioAdapter(this);
+        noteEditAudioAdapter.setNoteEditAudioClickListener(this);
+
+        audioRecyclerView.setAdapter(noteEditAudioAdapter);
+
 
         // associate the viewmodel with provider
         noteEditViewModel = new ViewModelProvider(this, new NoteEditViewModelFactory(this.getApplication(), currentNoteId)).get(NoteEditViewModel.class);
@@ -124,17 +136,17 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             @Override
             public void onChanged(List<ImageEntity> imageEntities) {
                 // update the cached copy of image entities in the adapter
-                adapter.setImages(imageEntities);
+                noteEditImagesAdapter.setImages(imageEntities);
             }
         });
 
-        // so we prolly wanna load all the images sent to us. wait no we dont? - IDK WHY THIS COMMENT EXISTS BUT IM TOO AFRAID TO DELETE IT
-
-        // add recycler view for the audios
-        //RecyclerView audioRecyclerView = findViewById(R.id.noteEditRecyclerAudioView);
-
-        //GridLayoutManager audioViewManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
-        //audioRecyclerView.setLayoutManager(audioViewManager);
+        noteEditViewModel.getCurrentNoteAudio().observe(this, new Observer<List<AudioEntity>>() {
+            @Override
+            public void onChanged(List<AudioEntity> audioEntities) {
+                // update the cached copy of audio entities in the adapter
+                noteEditAudioAdapter.setAudios(audioEntities);
+            }
+        });
     }
 
     ActivityResultLauncher<Intent> openImageActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -142,15 +154,14 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == RESULT_OK) {
                 // get the image id from the image here
-                long currentImageID=result.getData().getLongExtra("IMAGE_ID",-1);
+                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
                 ImageEntity imageEntity = new ImageEntity();
-                imageEntity.imageId=currentImageID;
+                imageEntity.imageId = currentImageID;
                 noteEditViewModel.deleteImages(imageEntity);
                 Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
-            } else if(result.getResultCode()==-2) {
+            } else if (result.getResultCode() == -2) {
                 Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
-            }
-            else  {
+            } else {
                 // something unpredicted happened so i guess not delete image, so just leave it as is?
                 // this is also used for back button i guess now
                 // in other words, do nothing
@@ -161,18 +172,52 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
     @Override
     public void onNoteEditImagesClicked(View view, int position) {
-        ImageEntity imageEntity = adapter.getImagesList().get(position);
+        ImageEntity imageEntity = noteEditImagesAdapter.getImagesList().get(position);
 
         // here we need to open whatever we wanna do with the image.
         // make a new activity to display the image and such?
 
 
-
-        Intent intent  = new Intent(NoteEditActivity.this, NoteImageView.class);
+        Intent intent = new Intent(NoteEditActivity.this, NoteImageView.class);
         // add intent extras here
         intent.putExtra("IMAGE_ID", imageEntity.imageId);
         intent.putExtra("IMAGE_URI", imageEntity.imageUri.toString());
         openImageActivity.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> openAudioActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode()==RESULT_OK) {
+                // get the audio id here
+                long currentAudioId = result.getData().getLongExtra("AUDIO_ID", -1);
+                AudioEntity audioEntity = new AudioEntity();
+                audioEntity.audioId=currentAudioId;
+                noteEditViewModel.deleteAudio(audioEntity);
+                Toast.makeText(getApplicationContext(), "Audio deleted.", Toast.LENGTH_LONG).show();
+            }else if (result.getResultCode() == -2) {
+                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            } else {
+                // something unpredicted happened so i guess not delete image, so just leave it as is?
+                // this is also used for back button i guess now
+                // in other words, do nothing
+
+            }
+        }
+    });
+
+    @Override
+    public void onNoteEditAudioClicked(View view, int position) {
+        AudioEntity audioEntity = noteEditAudioAdapter.getAudiosList().get(position);
+
+        // here we do whatever we wanna do with the audio
+        // we have the audio file uri so i guess we can just deal with that
+
+        Intent intent = new Intent(NoteEditActivity.this, NoteAudioView.class);
+
+        intent.putExtra("IMAGE_ID", audioEntity.audioId);
+        intent.putExtra("IMAGE_URI", audioEntity.audioUri.toString());
+        openAudioActivity.launch(intent);
     }
 
     @Override
@@ -238,7 +283,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         String nb = noteBody.getText().toString();
 
         // we need to do the same with audio clips at some point
-        if(TextUtils.isEmpty(noteTitle.getText()) && TextUtils.isEmpty(noteBody.getText()) && noteEditViewModel.getNumberOfNoteImages() == 0) {
+        if (TextUtils.isEmpty(noteTitle.getText()) && TextUtils.isEmpty(noteBody.getText()) && noteEditViewModel.getNumberOfNoteImages() == 0 && noteEditViewModel.getNumberOfNoteAudio() == 0) {
             setResult(-3);
             finish();
         }
@@ -259,34 +304,34 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     }
 
     ActivityResultLauncher<String[]> chooseImage = registerForActivityResult(new ActivityResultContracts.OpenDocument(), new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri uri) {
-                    if(uri!=null) {
-                        // Handle the returned Uri
-                        // add the image to a database
-                        ImageEntity newImage = new ImageEntity();
-                        newImage.imageUri = uri;
-                        newImage.isDrawing = false;
-                        newImage.imageNoteId = currentNoteId;
-                        noteEditViewModel.insertImages(newImage);
-                        // this should automatically add the image to the recyclerview as well
-                    }else {
-                        // the user chose to not choose an image
-                        Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG);
-                    }
-                }
-            });
+        @Override
+        public void onActivityResult(Uri uri) {
+            if (uri != null) {
+                // Handle the returned Uri
+                // add the image to a database
+                ImageEntity newImage = new ImageEntity();
+                newImage.imageUri = uri;
+                newImage.isDrawing = false;
+                newImage.imageNoteId = currentNoteId;
+                noteEditViewModel.insertImages(newImage);
+                // this should automatically add the image to the recyclerview as well
+            } else {
+                // the user chose to not choose an image
+                Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG);
+            }
+        }
+    });
 
     private void ChooseImage() {
-        String[] documentTypes  = new String[1];
-        documentTypes[0]="image/*";
+        String[] documentTypes = new String[1];
+        documentTypes[0] = "image/*";
         chooseImage.launch(documentTypes);
     }
 
     ActivityResultLauncher<Intent> drawingActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode()==RESULT_OK) {
+            if (result.getResultCode() == RESULT_OK) {
                 // the uri will be an extra
                 Uri uri = Uri.parse(result.getData().getStringExtra("DRAWING_URI"));
 
@@ -296,7 +341,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 newImage.isDrawing = true;
                 newImage.imageNoteId = currentNoteId;
                 noteEditViewModel.insertImages(newImage);
-            }else {
+            } else {
                 Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -305,7 +350,6 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     private void DrawImage() {
         Intent drawImageIntent = new Intent(this, PaintActivity.class);
         drawingActivity.launch(drawImageIntent);
-
     }
 
     // KEEP THIS IN MIND WHILE USING THIS STUFF
@@ -317,8 +361,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         public void onActivityResult(Boolean result) {
             // do something with the result here
             // add the taken image to the database
-            if(result==true) {
-                Log.d("randomtag","non null camera activity result");
+            if (result == true) {
+                Log.d("randomtag", "non null camera activity result");
                 if (currentPhotoURI != null) {
                     ImageEntity newImage = new ImageEntity();
                     newImage.imageUri = currentPhotoURI;
@@ -330,22 +374,22 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                     // for some reason the uri was null, i.e., storage couldnt be accessed
                     Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG);
                 }
-            }else {
-                Log.d("randomtag","null camera activity result");
+            } else {
+                Log.d("randomtag", "null camera activity result");
                 // the user chose to not click a picture
                 Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG);
             }
         }
     });
 
-    Uri currentPhotoURI=null;
+    Uri currentPhotoURI = null;
 
     private void TakePhoto() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             // Device has a camera
             // Create the File where the photo should go
             File photoFile = null;
-            currentPhotoURI=null;
+            currentPhotoURI = null;
             try {
                 photoFile = CreateImageFile();
             } catch (IOException ex) {
@@ -366,41 +410,30 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         }
     }
 
+    ActivityResultLauncher<Intent> recordAudioLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == RESULT_OK) {
+                // the uri will be an extra
+                Uri uri = Uri.parse(result.getData().getStringExtra("AUDIO_URI"));
+
+                // add the audio to the database
+                AudioEntity newAudio = new AudioEntity();
+                newAudio.audioUri = uri;
+                newAudio.audioNoteId = currentNoteId;
+                newAudio.isRecording = true;
+                noteEditViewModel.insertAudio(newAudio);
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
+
     private void RecordAudio() {
         // ITS OUR TIME TO SHINE
-        MediaRecorder mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_2_TS);
-        try {
-            mediaRecorder.setOutputFile(CreateAudioFile().getName());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        try {
-            mediaRecorder.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-
-    // Requesting permission to RECORD_AUDIO
-    private boolean permissionToRecordAccepted = false;
-    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch(requestCode) {
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
-        }
-        if(!permissionToRecordAccepted) {
-            finish();
-        }
+        Intent intent = new Intent(NoteEditActivity.this, AudioRecorderActivity.class);
+        recordAudioLauncher.launch(intent);
     }
 
     private void DeleteNote() {
@@ -422,22 +455,6 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         // Save a file: path for use with ACTION_VIEW intents
         String currentPhotoPath = image.getAbsolutePath();
         return image;
-    }
-
-    private File CreateAudioFile() throws IOException {
-        // Create an audio file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String audioFileName = "AUDIO_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PODCASTS);
-        File audio = File.createTempFile(
-                audioFileName,  /* prefix */
-                ".3gp",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file path for use with ACTION_VIEW intents
-        String currentAudioPath = audio.getAbsolutePath();
-        return audio;
     }
 
 

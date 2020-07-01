@@ -96,23 +96,23 @@ public class PaintActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_color_grey:
-                paintView.SetColor(Color.rgb(178,190,181));
+                paintView.SetColor(Color.rgb(178, 190, 181));
                 return true;
 
             case R.id.action_color_lightblue:
-                paintView.SetColor(Color.rgb(172,229,238));
+                paintView.SetColor(Color.rgb(172, 229, 238));
                 return true;
 
             case R.id.action_color_lightgreen:
-                paintView.SetColor(Color.rgb(74,255,0));
+                paintView.SetColor(Color.rgb(74, 255, 0));
                 return true;
 
             case R.id.action_color_orange:
-                paintView.SetColor(Color.rgb(255,103,0));
+                paintView.SetColor(Color.rgb(255, 103, 0));
                 return true;
 
             case R.id.action_color_purple:
-                paintView.SetColor(Color.rgb(148,87,235));
+                paintView.SetColor(Color.rgb(148, 87, 235));
                 return true;
 
             case R.id.action_color_yellow:
@@ -141,27 +141,27 @@ public class PaintActivity extends AppCompatActivity {
 
             case R.id.action_save_paint:
                 // save the drawing here i guess idk
-                String path="";
+                String path = "";
                 try {
                     path = CreateDrawingFile();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(path!="") {
+                if (path != "") {
                     // we have the file path here
                     try (FileOutputStream out = new FileOutputStream(path)) {
                         paintView.getmBitmap().compress(Bitmap.CompressFormat.JPEG, 50, out);
                         out.close();
                         Uri drawingUri = Uri.fromFile(new File(path));
 
-                        Intent intent =  new Intent();
+                        Intent intent = new Intent();
                         intent.putExtra("DRAWING_URI", drawingUri.toString());
                         setResult(RESULT_OK, intent);
                         finish();
-                    }catch (IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
                 }
 
