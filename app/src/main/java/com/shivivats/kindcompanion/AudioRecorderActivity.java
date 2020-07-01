@@ -159,22 +159,6 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void onRecord(boolean start) {
-        if (start) {
-            startRecording();
-        } else {
-            stopRecording();
-        }
-    }
-
-    private void onPlay(boolean start) {
-        if (start) {
-            startPlaying();
-        } else {
-            stopPlaying();
-        }
-    }
-
     private void startPlaying() {
         player = new MediaPlayer();
         try {
@@ -187,17 +171,15 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
         playPauseImage.setImageResource(R.drawable.ic_pause);
 
-        if(seekBar.getMax()!=0 && seekBar.getProgress()==seekBar.getMax()) {
-            lastProgress=0;
-            chronometer.setBase(SystemClock.elapsedRealtime());
-
+        if (seekBar.getMax() != 0 && seekBar.getProgress() == seekBar.getMax()) {
+            lastProgress = 0;
         }
-
-            seekBar.setProgress(lastProgress);
-            player.seekTo(lastProgress);
-            seekBar.setMax(player.getDuration());
-            seekUpdation();
-            chronometer.start();
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        seekBar.setProgress(lastProgress);
+        player.seekTo(lastProgress);
+        seekBar.setMax(player.getDuration());
+        seekUpdation();
+        chronometer.start();
 
 
         /** once the audio is complete, timer is stopped here **/

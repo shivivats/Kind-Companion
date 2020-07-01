@@ -18,6 +18,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <Chronometer
+        android:id="@+id/audioViewChronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@id/audioViewPlayLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/audioViewTopBar" />
+
     <LinearLayout
         android:id="@+id/audioViewPlayLayout"
         android:layout_width="0dp"

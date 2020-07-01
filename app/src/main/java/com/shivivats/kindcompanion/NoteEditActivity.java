@@ -215,8 +215,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         Intent intent = new Intent(NoteEditActivity.this, NoteAudioView.class);
 
-        intent.putExtra("IMAGE_ID", audioEntity.audioId);
-        intent.putExtra("IMAGE_URI", audioEntity.audioUri.toString());
+        intent.putExtra("AUDIO_ID", audioEntity.audioId);
+        intent.putExtra("AUDIO_URI", audioEntity.audioUri.toString());
         openAudioActivity.launch(intent);
     }
 

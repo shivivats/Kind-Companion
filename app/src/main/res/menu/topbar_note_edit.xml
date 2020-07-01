@@ -7,10 +7,12 @@
     <item
         android:id="@+id/action_save_edit_note"
         android:title="@string/save"
-        app:showAsAction="always" /> <!-- add icon later -->
+        app:showAsAction="always"
+        android:icon="@drawable/ic_save_black_24dp"/> <!-- add icon later -->
 
     <item
         android:id="@+id/action_delete_edit_note"
         android:title="DELETE"
-        app:showAsAction="always" /> <!-- add icon later -->
+        app:showAsAction="always"
+        android:icon="@drawable/ic_delete"/> <!-- add icon later -->
 </menu>

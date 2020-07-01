@@ -21,57 +21,74 @@
         />
 
     <item
+        android:id="@+id/action_color_black"
+        android:title="Black"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_black"
+        />
+
+
+    <item
         android:id="@+id/action_color_red"
         android:title="Red"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_red"
         />
 
     <item
         android:id="@+id/action_color_blue"
         android:title="Blue"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_blue"
         />
 
     <item
         android:id="@+id/action_color_yellow"
         android:title="Yellow"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_yellow"
         />
 
     <item
         android:id="@+id/action_color_purple"
         android:title="Purple"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_purple"
         />
 
     <item
         android:id="@+id/action_color_lightblue"
         android:title="Light Blue"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_lightblue"
         />
 
     <item
         android:id="@+id/action_color_green"
         android:title="Green"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_green"
         />
 
     <item
         android:id="@+id/action_color_lightgreen"
         android:title="Light Green"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_lightgreen"
         />
 
     <item
         android:id="@+id/action_color_grey"
         android:title="Grey"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_grey"
         />
 
     <item
         android:id="@+id/action_color_orange"
         android:title="Orange"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_orange"
         />
 
     <item
@@ -84,6 +101,7 @@
         android:id="@+id/action_clear"
         android:title="Clear"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_clear"
         />
 
 

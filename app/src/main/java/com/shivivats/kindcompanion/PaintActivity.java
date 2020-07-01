@@ -84,27 +84,32 @@ public class PaintActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_color_black:
+                paintView.SetColor(Color.BLACK);
+                return true;
+
             case R.id.action_color_blue:
                 paintView.SetColor(Color.BLUE);
                 return true;
+
             case R.id.action_color_red:
                 paintView.SetColor(Color.RED);
                 return true;
 
             case R.id.action_color_green:
-                paintView.SetColor(Color.GREEN);
+                paintView.SetColor(Color.rgb(0,82,33));
                 return true;
 
             case R.id.action_color_grey:
-                paintView.SetColor(Color.rgb(178, 190, 181));
+                paintView.SetColor(Color.rgb(180, 180, 180));
                 return true;
 
             case R.id.action_color_lightblue:
-                paintView.SetColor(Color.rgb(172, 229, 238));
+                paintView.SetColor(Color.rgb(126, 249, 255));
                 return true;
 
             case R.id.action_color_lightgreen:
-                paintView.SetColor(Color.rgb(74, 255, 0));
+                paintView.SetColor(Color.GREEN);
                 return true;
 
             case R.id.action_color_orange:

@@ -50,7 +50,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_record" />
+            android:src="@drawable/ic_voice" />
 
         <ImageView
             android:id="@+id/audioRecorderImageStop"
