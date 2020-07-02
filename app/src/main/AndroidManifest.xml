@@ -19,7 +19,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".NoteAudioView"></activity>
+        <activity android:name=".LoginActivity">  <!-- Main Home Activity. Its the front page of the app for now -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".NoteAudioView" />
         <activity android:name=".AudioRecorderActivity" />
         <activity
             android:name=".NoteImageView"
@@ -29,12 +39,8 @@
             android:name=".NoteEditActivity"
             android:parentActivityName=".ReminderNoteListActivity" />
         <activity android:name=".ReminderNoteListActivity" />
-        <activity android:name=".FrontPageActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".FrontPageActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider

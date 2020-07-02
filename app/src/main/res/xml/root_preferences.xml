@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Display Options">
+
+        <EditTextPreference
+            app:key="name"
+            app:title="Your Name"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:key="theme"
+            app:title="Theme"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Security">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="biometrics"
+            app:summary="Turn Biometric authentication on or off."
+            app:title="Biometrics" />
+
+        <EditTextPreference
+            app:key="pin"
+            app:summary="Use a custom pin to log into the app."
+            app:title="Pin" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Reminder Options">
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Vault Options">
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

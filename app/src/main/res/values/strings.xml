@@ -11,7 +11,7 @@
     <string name="new_note">New Note</string>
     <string name="firstMainButton">Get it off \n my chest</string>
     <string name="secondMainButton">Spend time \n with myself</string>
-    <string name="thirdMainButton">Mood change</string>
+    <string name="thirdMainButton">Settings</string>
     <string name="frontPageWelcomeMessage">Welcome to Kind Companion!</string>
     <string name="fourthMainButton">Reminders</string>
     <string name="fifthMainButton">Vault</string>
@@ -24,4 +24,19 @@
     <string name="text_size_large">Text Size Large</string>
     <string name="save">SAVE</string>
     <string name="couldnt_be_saved">The note couldn\'t be saved.</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 </resources>

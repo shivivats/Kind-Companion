@@ -72,4 +72,10 @@ dependencies {
     implementation "androidx.fragment:fragment:$fragment_version"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 
+    // Preferences
+    implementation 'androidx.preference:preference:1.1.1'
+
+    // Biometric
+    implementation 'androidx.biometric:biometric:1.0.1'
+
 }
