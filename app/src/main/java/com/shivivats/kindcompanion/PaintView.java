@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -49,19 +50,47 @@ public class PaintView extends View {
         mPaint.setAlpha(0xff);
     }
 
-    public void init(DisplayMetrics displayMetrics) {
+    public void init(DisplayMetrics displayMetrics, boolean isEdit, Bitmap bitmap) {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
+        if (isEdit) {
+            Log.d("PAINT_VIEW", "isEdit: " + isEdit);
+            //Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            //Log.d("PAINT_VIEW","newBitmap: "+ newBitmap);
+            //bitmap.setConfig(Bitmap.Config.ARGB_8888);
+            Log.d("PAINT_VIEW", "bitmap width and height: " + bitmap.getWidth() + " " + bitmap.getHeight());
+            Log.d("PAINT_VIEW", "displayMetrics width and height: " + width + " " + height);
+            mBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+            //Log.d("PAINT_VIEW","mBitmap: "+ mBitmap);
+            //mBitmap = bitmap.copy(bitmap.getConfig(), true);
+            //mBitmap = bitmap;
 
-        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
+            if (mBitmap == null) {
+                Log.d("PAINT_VIEW", "mBitmap is null");
+            } else {
+                Log.d("PAINT_VIEW", "mBitmap is not null");
+            }
+            mCanvas = new Canvas(mBitmap);
+        } else {
+
+            mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            mCanvas = new Canvas(mBitmap);
+        }
+
 
         currentColor = DEFAULT_COLOR;
         strokeWidth = BRUSH_SIZE;
+
+        if (!isEdit) {
+            mCanvas.drawColor(DEFAULT_BG_COLOR);
+        }
+
+        //return mBitmap;
     }
 
     public void clear() {
-        backgroundColor = DEFAULT_BG_COLOR;
+        //backgroundColor = DEFAULT_BG_COLOR;
+        mCanvas.drawColor(DEFAULT_BG_COLOR);
         paths.clear();
         invalidate();
     }
@@ -94,7 +123,8 @@ public class PaintView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.save();
-        mCanvas.drawColor(backgroundColor);
+        //mCanvas.drawColor(backgroundColor);
+
 
         for (FingerPath fp : paths) {
             mPaint.setColor(fp.color);

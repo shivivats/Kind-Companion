@@ -23,6 +23,11 @@ public class FrontPageActivity extends AppCompatActivity {
         //startActivity(newNoteIntent);
     }
 
+    public void OnClickVault(View view) {
+        Intent vaultIntent = new Intent(this, VaultNoteListActivity.class);
+        startActivity(vaultIntent);
+    }
+
     public void OnClickReminders(View view) {
         Intent reminderIntent = new Intent(this, ReminderNoteListActivity.class);
         startActivity(reminderIntent);

@@ -9,8 +9,8 @@
 
     <string name="note_entry_title_hint">Title</string>
     <string name="new_note">New Note</string>
-    <string name="firstMainButton">Get it off \n my chest</string>
-    <string name="secondMainButton">Spend time \n with myself</string>
+    <string name="firstMainButton">Get it off my chest</string>
+    <string name="secondMainButton">Spend time with myself</string>
     <string name="thirdMainButton">Settings</string>
     <string name="frontPageWelcomeMessage">Welcome to Kind Companion!</string>
     <string name="fourthMainButton">Reminders</string>

@@ -2,13 +2,16 @@ package com.shivivats.kindcompanion;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,18 +32,74 @@ public class PaintActivity extends AppCompatActivity {
     private Toolbar paintViewTopBar;
     private Toolbar paintViewBottomBar;
 
+    private long currentImageId;
+
+    private Uri currentImageUri;
+
+    private boolean isEdit;
+
+    private MenuItem deleteButton;
+
+    private ImageView paintImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
 
+        Intent intent = getIntent();
+        isEdit = intent.getBooleanExtra("IS_EDIT", false);
+
+        Log.d("PAINT_ACTIVITY", "isEdit: " + isEdit);
+
+        if (isEdit) {
+            currentImageId = intent.getLongExtra("IMAGE_ID", -1);
+            if (currentImageId == -1) {
+                setResult(-4);
+                finish();
+            }
+            currentImageUri = Uri.parse(intent.getStringExtra("IMAGE_URI"));
+            Log.d("PAINT_ACTIVITY", "currentImageUri: " + currentImageUri);
+        } else {
+            currentImageId = -1;
+            currentImageUri = null;
+        }
+
+        paintImageView = findViewById(R.id.paintImageView);
+        paintImageView.setImageURI(currentImageUri);
+
         paintView = findViewById(R.id.paintView);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        paintView.init(metrics);
+        Bitmap bitmap = null;
+        //Bitmap returnedBitmap = null;
+        if (isEdit) {
+            // here we need to set the paintview canvas to be a bitmap from the image
+
+            //bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), currentImageUri);
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inMutable = true;
+            bitmap = BitmapFactory.decodeFile(currentImageUri.getPath(), options);
+            Log.d("PAINT_ACTIVITY", "bitmap: " + bitmap);
+
+
+            if (bitmap != null) {
+                // we can use the bitmap to pass to the paintview here
+                paintView.init(metrics, true, bitmap);
+            } else {
+                setResult(-4);
+                finish();
+            }
+        } else {
+            paintView.init(metrics, false, null);
+        }
 
         paintViewTopBar = findViewById(R.id.paintViewTopBar);
         paintViewBottomBar = findViewById(R.id.paintViewBottomBar);
+
+        paintImageView.setImageBitmap(bitmap);
+
 
         setSupportActionBar(paintViewTopBar);
 
@@ -48,10 +107,13 @@ public class PaintActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
-        // hide the title from the topbar
-        ab.setDisplayShowTitleEnabled(false);
+        if (isEdit) {
+            ab.setTitle("Edit Image");
+        } else {
+            ab.setTitle("New Drawing");
+        }
 
         // set the bottom bar
         paintViewBottomBar = findViewById(R.id.paintViewBottomBar);
@@ -60,7 +122,7 @@ public class PaintActivity extends AppCompatActivity {
         // we have the menu and all setup now we need to save the image into a file
         // i feel like we need to return the image somehow
 
-
+        this.invalidateOptionsMenu();
     }
 
     @Override
@@ -74,6 +136,14 @@ public class PaintActivity extends AppCompatActivity {
 
         for (int i = 0; i < bottomMenu.size(); i++) {
             bottomMenu.getItem(i).setOnMenuItemClickListener(menuItem -> onOptionsItemSelected(menuItem));
+        }
+
+        deleteButton = menu.findItem(R.id.action_delete_paint);
+
+        if (isEdit) {
+            deleteButton.setVisible(true);
+        } else {
+            deleteButton.setVisible(false);
         }
 
         return true;
@@ -143,36 +213,82 @@ public class PaintActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_save_paint:
-                // save the drawing here i guess idk
-                String path = "";
-                try {
-                    path = CreateDrawingFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (path != "") {
-                    // we have the file path here
-                    try (FileOutputStream out = new FileOutputStream(path)) {
-                        paintView.getmBitmap().compress(Bitmap.CompressFormat.JPEG, 50, out);
-                        out.close();
-                        Uri drawingUri = Uri.fromFile(new File(path));
-
-                        Intent intent = new Intent();
-                        intent.putExtra("DRAWING_URI", drawingUri.toString());
-                        setResult(RESULT_OK, intent);
-                        finish();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                if (isEdit) {
+                    UpdateDrawing();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
+                    SaveDrawing();
                 }
-
                 return true;
-
+            case R.id.action_delete_paint:
+                if (isEdit) {
+                    DeleteCurrentImage();
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void UpdateDrawing() {
+
+        // we also set the uri and such here
+        // or can we just set the new bitmap????
+        // idk
+
+        // we need to set the uri
+        // we need to set the isdrawing boolean
+
+        String path = currentImageUri.getPath();
+        try (FileOutputStream out = new FileOutputStream(path)) {
+            paintView.getmBitmap().compress(Bitmap.CompressFormat.JPEG, 50, out);
+            out.close();
+            Uri drawingUri = Uri.fromFile(new File(path));
+
+            Intent intent = new Intent();
+            intent.putExtra("IMAGE_URI", drawingUri.toString());
+            intent.putExtra("IMAGE_ID", currentImageId);
+            intent.putExtra("IS_DRAWING", true);
+
+            setResult(-3, intent);
+            finish();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void SaveDrawing() {
+        // save the drawing here i guess idk
+        String path = "";
+        try {
+            path = CreateDrawingFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (path != "") {
+            // we have the file path here
+            try (FileOutputStream out = new FileOutputStream(path)) {
+                paintView.getmBitmap().compress(Bitmap.CompressFormat.JPEG, 50, out);
+                out.close();
+                Uri drawingUri = Uri.fromFile(new File(path));
+
+                Intent intent = new Intent();
+                intent.putExtra("DRAWING_URI", drawingUri.toString());
+                setResult(RESULT_OK, intent);
+                finish();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void DeleteCurrentImage() {
+
+        Intent intent = new Intent();
+        intent.putExtra("IMAGE_ID", currentImageId);
+        setResult(-2, intent);
+        finish();
     }
 
     private String CreateDrawingFile() throws IOException {

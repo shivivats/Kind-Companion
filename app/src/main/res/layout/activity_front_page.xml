@@ -59,6 +59,7 @@
         android:id="@+id/fifthMainButton"
         android:layout_width="120dp"
         android:layout_height="80dp"
+        android:onClick="OnClickVault"
         android:text="@string/fifthMainButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sixthMainButton"

@@ -37,7 +37,7 @@ public class NoteImageView extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
         ab.setDisplayShowTitleEnabled(false);

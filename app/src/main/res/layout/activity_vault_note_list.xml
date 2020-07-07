@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReminderNoteListActivity">
+    tools:context=".VaultNoteListActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/noteReminderTopBar"
+        android:id="@+id/noteVaultTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -19,7 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/noteReminderRecyclerView"
+        android:id="@+id/noteVaultRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -27,11 +27,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noteReminderTopBar"
+        app:layout_constraintTop_toBottomOf="@id/noteVaultTopBar"
         tools:listitem="@layout/item_note_recyclerview" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/reminderListFab"
+        android:id="@+id/vaultListFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

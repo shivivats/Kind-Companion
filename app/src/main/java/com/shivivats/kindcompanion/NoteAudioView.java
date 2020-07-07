@@ -64,7 +64,7 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
         ab.setDisplayShowTitleEnabled(false);

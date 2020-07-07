@@ -2,7 +2,6 @@ package com.shivivats.kindcompanion;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,9 +22,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class ReminderNoteListActivity extends AppCompatActivity implements NoteListClickListener {
+public class VaultNoteListActivity extends AppCompatActivity implements NoteListClickListener {
 
-    private ReminderNoteViewModel reminderNoteViewModel;
+    private VaultNoteViewModel vaultNoteViewModel;
     private long currentNoteId;
     // KEEP THIS IN MIND WHILE USING THIS STUFF
     // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
@@ -38,7 +37,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
 
             if (result.getResultCode() == RESULT_OK) {
                 NoteEntity noteEntity = new NoteEntity();
-                noteEntity.noteType = result.getData().getIntExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+                noteEntity.noteType = result.getData().getIntExtra("noteType", NoteType.NOTE_VAULT.getValue());
                 noteEntity.noteTitle = result.getData().getStringExtra("noteTitle");
                 noteEntity.noteBody = result.getData().getStringExtra("noteBody");
                 noteEntity.noteId = result.getData().getLongExtra("noteId", -1);
@@ -46,10 +45,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 if (noteEntity.noteId == -1) {
                     DiscardNoteIfExists("The note couldn't be saved.");
                 } else {
-                    Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);
-                    Log.d("randomtagListActivity", "note body in list activity: " + noteEntity.noteBody);
                     Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
-                    reminderNoteViewModel.update(noteEntity);
+                    vaultNoteViewModel.update(noteEntity);
                 }
             } else if (result.getResultCode() == -2) {
                 DiscardNoteIfExists("Note deleted.");
@@ -61,19 +58,19 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         }
     });
 
-    private ReminderNoteListAdapter adapter;
-    private Toolbar reminderTopBar;
+    private VaultNoteListAdapter adapter;
+    private Toolbar vaultTopBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder_note_list);
+        setContentView(R.layout.activity_vault_note_list);
 
-        RecyclerView recyclerView = findViewById(R.id.noteReminderRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.noteVaultRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ReminderNoteListAdapter(this);
+        adapter = new VaultNoteListAdapter(this);
         adapter.setNoteListClickListener(this);
 
         recyclerView.setAdapter(adapter);
@@ -81,9 +78,9 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
         recyclerView.addItemDecoration(decoration);
 
-        reminderNoteViewModel = new ViewModelProvider(this).get(ReminderNoteViewModel.class);
+        vaultNoteViewModel = new ViewModelProvider(this).get(VaultNoteViewModel.class);
 
-        reminderNoteViewModel.getReminderNotes().observe(this, new Observer<List<NoteEntity>>() {
+        vaultNoteViewModel.getVaultNotes().observe(this, new Observer<List<NoteEntity>>() {
             @Override
             public void onChanged(@Nullable final List<NoteEntity> notes) {
                 // update the cached copy of the notes in the adapter
@@ -91,7 +88,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.reminderListFab);
+        FloatingActionButton fab = findViewById(R.id.vaultListFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,12 +96,12 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
             }
         });
 
-        reminderTopBar = findViewById(R.id.noteReminderTopBar);
-        setSupportActionBar(reminderTopBar);
+        vaultTopBar = findViewById(R.id.noteVaultTopBar);
+        setSupportActionBar(vaultTopBar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Reminder Notes");
+            actionBar.setTitle("Vault Notes");
         }
     }
 
@@ -114,8 +111,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         InsertBlankNote();
 
         // now we send the intent
-        Intent intent = new Intent(ReminderNoteListActivity.this, NoteEditActivity.class);
-        intent.putExtra("CURRENT_NOTE_TYPE", NoteType.NOTE_REMINDER.getValue());
+        Intent intent = new Intent(VaultNoteListActivity.this, NoteEditActivity.class);
+        intent.putExtra("CURRENT_NOTE_TYPE", NoteType.NOTE_VAULT.getValue());
         intent.putExtra("CURRENT_NOTE_ID", currentNoteId);
         startActivityForResult.launch(intent);
     }
@@ -125,21 +122,21 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         NoteEntity blankNote = new NoteEntity();
         blankNote.noteBody = "";
         blankNote.noteTitle = "";
-        blankNote.noteType = NoteType.NOTE_REMINDER.getValue();
+        blankNote.noteType = NoteType.NOTE_VAULT.getValue();
 
-        long noteId = reminderNoteViewModel.insertBlank(blankNote);
+        long noteId = vaultNoteViewModel.insertBlank(blankNote);
         currentNoteId = noteId;
         // now we have the id and we can pass it with the intent
     }
 
     @Override
     public void onNoteListItemClicked(View view, int position) {
-        NoteEntity noteEntity = adapter.getReminderNotesList().get(position);
+        NoteEntity noteEntity = adapter.getVaultNotesList().get(position);
 
         currentNoteId = noteEntity.noteId;
 
         // now we send the intent
-        Intent intent = new Intent(ReminderNoteListActivity.this, NoteEditActivity.class);
+        Intent intent = new Intent(VaultNoteListActivity.this, NoteEditActivity.class);
         intent.putExtra("CURRENT_NOTE_BODY", noteEntity.noteBody);
         intent.putExtra("CURRENT_NOTE_TITLE", noteEntity.noteTitle);
         intent.putExtra("CURRENT_NOTE_ID", noteEntity.noteId);
@@ -150,7 +147,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
     private void DiscardNoteIfExists(String toastText) {
         NoteEntity noteEntity = new NoteEntity();
         noteEntity.noteId = currentNoteId;
-        reminderNoteViewModel.delete(noteEntity);
+        vaultNoteViewModel.delete(noteEntity);
         Toast.makeText(
                 getApplicationContext(),
                 toastText,

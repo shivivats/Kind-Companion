@@ -18,7 +18,6 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -80,7 +79,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
         ab.setDisplayShowTitleEnabled(false);
@@ -229,7 +228,6 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         chronometer.setBase(SystemClock.elapsedRealtime());
         // show play button
         playPauseImage.setImageResource(R.drawable.ic_play);
-        Toast.makeText(this, "Recording saved successfully.", Toast.LENGTH_SHORT).show();
     }
 
     private void startPlaying() {

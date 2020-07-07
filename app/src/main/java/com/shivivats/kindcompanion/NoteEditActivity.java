@@ -45,17 +45,34 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     Uri currentPhotoURI = null;
     private long currentNoteId;
     private NoteEditViewModel noteEditViewModel;
-    ActivityResultLauncher<Intent> openImageActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+
+    ActivityResultLauncher<Intent> openImageEditActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if (result.getResultCode() == RESULT_OK) {
+            // here, we do -2 for delete
+            // -3 for update
+            // -4 for something went wrong
+            // and else
+            if (result.getResultCode() == -2) {
                 // get the image id from the image here
                 long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
                 ImageEntity imageEntity = new ImageEntity();
                 imageEntity.imageId = currentImageID;
                 noteEditViewModel.deleteImages(imageEntity);
                 Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
-            } else if (result.getResultCode() == -2) {
+            } else if (result.getResultCode() == -3) {
+                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
+                Uri uri = Uri.parse(result.getData().getStringExtra("IMAGE_URI"));
+                boolean isDrawing = result.getData().getBooleanExtra("IS_DRAWING", true);
+
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.imageId = currentImageID;
+                imageEntity.imageUri = uri;
+                imageEntity.isDrawing = isDrawing;
+                imageEntity.imageNoteId = currentNoteId;
+                noteEditViewModel.updateImages(imageEntity);
+                Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -4) {
                 Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
             } else {
                 // something unpredicted happened so i guess not delete image, so just leave it as is?
@@ -85,8 +102,6 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             }
         }
     });
-
-    // WE ARE INSERTING THE NOTE INTO THE DATABASE RIGHT FUCKIN NOW AS SOON AS ITS CREATED
     ActivityResultLauncher<String[]> chooseImage = registerForActivityResult(new ActivityResultContracts.OpenDocument(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri uri) {
@@ -161,12 +176,36 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 newAudio.audioNoteId = currentNoteId;
                 newAudio.isRecording = true;
                 noteEditViewModel.insertAudio(newAudio);
+                Toast.makeText(getApplicationContext(), "Recording saved successfully.", Toast.LENGTH_SHORT).show();
 
             } else {
                 Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
             }
         }
     });
+
+    ActivityResultLauncher<Intent> openImageViewActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == RESULT_OK) {
+                // get the image id from the image here
+                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.imageId = currentImageID;
+                noteEditViewModel.deleteImages(imageEntity);
+                Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -2) {
+                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            } else {
+                // something unpredicted happened so i guess not delete image, so just leave it as is?
+                // this is also used for back button i guess now
+                // in other words, do nothing
+
+            }
+        }
+    });
+
+
     private int currentNoteType;
     private NoteEditImagesAdapter noteEditImagesAdapter;
     private NoteEditAudioAdapter noteEditAudioAdapter;
@@ -178,6 +217,11 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         Intent intent = getIntent();
         currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
+        if (currentNoteId == -1) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+        currentNoteType = intent.getIntExtra("CURRENT_NOTE_TYPE", -1);
         if (currentNoteId == -1) {
             setResult(RESULT_CANCELED);
             finish();
@@ -210,7 +254,11 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
-        ab.setDisplayShowTitleEnabled(false);
+        if (TextUtils.isEmpty(noteTitle.getText())) {
+            ab.setDisplayShowTitleEnabled(false);
+        } else {
+            ab.setTitle(noteTitle.getText().toString());
+        }
 
         // set the bottom bar
         noteEditBottomBar = findViewById(R.id.noteEditBottomBar);
@@ -270,12 +318,28 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         // here we need to open whatever we wanna do with the image.
         // make a new activity to display the image and such?
 
+        if (imageEntity.isDrawing == true) {
 
-        Intent intent = new Intent(NoteEditActivity.this, NoteImageView.class);
-        // add intent extras here
-        intent.putExtra("IMAGE_ID", imageEntity.imageId);
-        intent.putExtra("IMAGE_URI", imageEntity.imageUri.toString());
-        openImageActivity.launch(intent);
+            Intent intent = new Intent(NoteEditActivity.this, PaintActivity.class);
+            // add intent extras here
+            intent.putExtra("IMAGE_ID", imageEntity.imageId);
+            intent.putExtra("IMAGE_URI", imageEntity.imageUri.toString());
+            intent.putExtra("IS_EDIT", true);
+
+            openImageEditActivity.launch(intent);
+        } else {
+
+            // here we need to open whatever we wanna do with the image.
+            // make a new activity to display the image and such?
+
+
+            Intent intent = new Intent(NoteEditActivity.this, NoteImageView.class);
+            // add intent extras here
+            intent.putExtra("IMAGE_ID", imageEntity.imageId);
+            intent.putExtra("IMAGE_URI", imageEntity.imageUri.toString());
+            openImageViewActivity.launch(intent);
+
+        }
     }
 
     @Override
@@ -369,7 +433,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         //noteEntity.noteBody=nb;
         replyIntent.putExtra("noteTitle", nt);
         replyIntent.putExtra("noteBody", nb);
-        replyIntent.putExtra("noteType", NoteType.NOTE_REMINDER.getValue());
+        replyIntent.putExtra("noteType", currentNoteType);
         replyIntent.putExtra("noteId", currentNoteId);
         setResult(RESULT_OK, replyIntent);
         finish();
@@ -383,6 +447,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
     private void DrawImage() {
         Intent drawImageIntent = new Intent(this, PaintActivity.class);
+        drawImageIntent.putExtra("IS_EDIT", false);
         drawingActivity.launch(drawImageIntent);
     }
 
