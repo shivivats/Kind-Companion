@@ -403,6 +403,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 DeleteNote();
                 return true;
 
+            case R.id.action_void_edit_note:
+                SendToVoid();
+                return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -502,5 +506,13 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         // Save a file: path for use with ACTION_VIEW intents
         String currentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+    private void SendToVoid() {
+        // we need to create a void animation here
+        // and then delete the note
+        // so we just
+        Toast.makeText(getApplicationContext(), "Your thoughts have been sent into the void, disappearing forever...", Toast.LENGTH_LONG).show();
+        DeleteNote();
     }
 }

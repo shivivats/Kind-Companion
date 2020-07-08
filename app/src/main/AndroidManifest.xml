@@ -19,40 +19,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".LoginActivity">  <!-- Main Home Activity. Its the front page of the app for now -->
+        <activity android:name=".LoginActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
 
         </activity>
-
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".FrontPageActivity" />
-
         <activity android:name=".NoteAudioView" />
-
         <activity android:name=".AudioRecorderActivity" />
-
         <activity android:name=".NoteImageView" />
-
         <activity android:name=".PaintActivity" />
-
         <activity android:name=".NoteEditActivity" />
-
         <activity
             android:name=".ReminderNoteListActivity"
             android:parentActivityName=".FrontPageActivity" />
-
         <activity
             android:name=".VaultNoteListActivity"
             android:parentActivityName=".FrontPageActivity" />
-
         <activity android:name=".FrontPageActivity"> <!-- Front Page Activity. This is the front page while debugging. -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <provider

@@ -3,24 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_stroke_small"
-        android:title="Stroke Small"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
-        android:id="@+id/action_stroke_medium"
-        android:title="Stroke Medium"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
-        android:id="@+id/action_stroke_big"
-        android:title="Stroke Big"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
         android:id="@+id/action_color_black"
         android:title="Black"
         app:showAsAction="ifRoom"
@@ -81,21 +63,33 @@
         android:id="@+id/action_color_grey"
         android:title="Grey"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_grey"
-        />
+        android:icon="@drawable/ic_grey" />
 
     <item
         android:id="@+id/action_color_orange"
         android:title="Orange"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_orange"
-        />
+        android:icon="@drawable/ic_orange" />
+
+    <item
+        android:id="@+id/action_stroke_small"
+        android:title="Stroke Small"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_stroke_medium"
+        android:title="Stroke Medium"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_stroke_big"
+        android:title="Stroke Big"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_eraser"
         android:title="Eraser"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_clear"

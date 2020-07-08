@@ -37,5 +37,9 @@ public class FrontPageActivity extends AppCompatActivity {
         Intent settingsIntent = new Intent(this, SettingsActivity.class);
         startActivity(settingsIntent);
     }
+
+    public void OnClickVoid(View view) {
+        Intent voidIntent;
+    }
 }
 

@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- this is the reminder note entry so we'll just have an option called "SAVE" on the topbar -->
 
     <item
         android:id="@+id/action_save_edit_note"
         android:title="@string/save"
         app:showAsAction="always"
-        android:icon="@drawable/ic_save_black_24dp"/> <!-- add icon later -->
+        android:icon="@drawable/ic_save_black_24dp" />
 
     <item
         android:id="@+id/action_delete_edit_note"
         android:title="DELETE"
         app:showAsAction="always"
-        android:icon="@drawable/ic_delete"/> <!-- add icon later -->
+        android:icon="@drawable/ic_delete" />
+
+    <item
+        android:id="@+id/action_void_edit_note"
+        android:title="Send into the void."
+        app:showAsAction="never" /> <!-- add icon later -->
+
 </menu>
