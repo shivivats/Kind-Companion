@@ -42,8 +42,10 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 noteEntity.noteTitle = result.getData().getStringExtra("noteTitle");
                 noteEntity.noteBody = result.getData().getStringExtra("noteBody");
                 noteEntity.noteId = result.getData().getLongExtra("noteId", -1);
+                noteEntity.noteImagesCount = result.getData().getIntExtra("noteNumberImages", -1);
+                noteEntity.noteAudioCount = result.getData().getIntExtra("noteNumberAudios", -1);
 
-                if (noteEntity.noteId == -1) {
+                if (noteEntity.noteId == -1 || noteEntity.noteImagesCount == -1 || noteEntity.noteAudioCount == -1) {
                     DiscardNoteIfExists("The note couldn't be saved.");
                 } else {
                     Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);

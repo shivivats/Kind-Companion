@@ -40,8 +40,8 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
             holder.noteTitleView.setText(current.noteTitle);
             holder.noteBodyView.setText(current.noteBody);
             holder.currentNoteId = current.noteId;
-            holder.noteImageCountView.setText(String.valueOf(current.noteImagesCount));
-            holder.noteAudioCountView.setText(String.valueOf(current.noteAudioCount));
+            holder.noteImageCountView.setText(current.noteImagesCount + " images");
+            holder.noteAudioCountView.setText(current.noteAudioCount + " audios");
         } else {
             // covers the case of data not being ready yet
             holder.noteTitleView.setText("No Title");

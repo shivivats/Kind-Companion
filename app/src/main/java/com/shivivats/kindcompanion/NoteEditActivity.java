@@ -439,6 +439,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         replyIntent.putExtra("noteBody", nb);
         replyIntent.putExtra("noteType", currentNoteType);
         replyIntent.putExtra("noteId", currentNoteId);
+        replyIntent.putExtra("noteNumberImages", noteEditImagesAdapter.getItemCount());
+        replyIntent.putExtra("noteNumberAudios", noteEditAudioAdapter.getItemCount());
         setResult(RESULT_OK, replyIntent);
         finish();
     }
