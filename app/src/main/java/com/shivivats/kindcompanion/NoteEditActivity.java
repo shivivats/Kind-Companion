@@ -251,7 +251,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
         if (TextUtils.isEmpty(noteTitle.getText())) {
@@ -422,7 +422,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         String nt = noteTitle.getText().toString();
         String nb = noteBody.getText().toString();
 
-        // we need to do the same with audio clips at some point
+
         if (TextUtils.isEmpty(noteTitle.getText()) && TextUtils.isEmpty(noteBody.getText()) && noteEditViewModel.getNumberOfNoteImages() == 0 && noteEditViewModel.getNumberOfNoteAudio() == 0) {
             setResult(-3);
             finish();
@@ -515,4 +515,5 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         Toast.makeText(getApplicationContext(), "Your thoughts have been sent into the void, disappearing forever...", Toast.LENGTH_LONG).show();
         DeleteNote();
     }
+
 }

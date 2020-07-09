@@ -32,4 +32,9 @@ public class NoteEntity {
     @ColumnInfo(name = "note_body", defaultValue = "")
     public String noteBody;
 
+    @ColumnInfo(name = "note_images_count", defaultValue = "0")
+    public int noteImagesCount;
+
+    @ColumnInfo(name = "note_audio_count", defaultValue = "0")
+    public int noteAudioCount;
 }

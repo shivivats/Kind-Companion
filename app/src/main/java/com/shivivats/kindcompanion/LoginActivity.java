@@ -23,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //createNotificationChannel();
+
         executor = ContextCompat.getMainExecutor(this);
         biometricPrompt = new BiometricPrompt(LoginActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
@@ -38,7 +41,12 @@ public class LoginActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(),
                         "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-                LoadFrontPage();
+                if (getIntent().getBooleanExtra("FROM_NOTIFICATION", false)) {
+                    // we got here from the notification
+                    LoadReminderNoteList();
+                } else {
+                    LoadFrontPage();
+                }
             }
 
             @Override
@@ -75,4 +83,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, FrontPageActivity.class);
         startActivity(intent);
     }
+
+    private void LoadReminderNoteList() {
+        Intent intent = new Intent(LoginActivity.this, ReminderNoteListActivity.class);
+        startActivity(intent);
+    }
+
+
 }

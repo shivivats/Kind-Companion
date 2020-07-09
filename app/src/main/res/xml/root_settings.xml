@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="Display Options">
 
@@ -31,6 +32,22 @@
 
     <PreferenceCategory app:title="Reminder Options">
 
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="reminder"
+            app:summary="Set Reminder"
+            app:title="Reminder" />
+
+        <Preference
+            android:title="Reminder Time"
+            app:key="reminderTimePicker"
+            app:persistent="true"
+            app:summary="Pick time for the reminder." />
+
+        <Preference
+            android:title="Reminder Time"
+            app:key="reminderDatePicker"
+            app:summary="Pick date for the reminder." />
 
     </PreferenceCategory>
 

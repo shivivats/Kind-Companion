@@ -154,6 +154,6 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         Toast.makeText(
                 getApplicationContext(),
                 toastText,
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
     }
 }

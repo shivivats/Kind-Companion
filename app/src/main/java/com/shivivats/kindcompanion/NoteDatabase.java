@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {NoteEntity.class, ImageEntity.class, AudioEntity.class}, version = 3, exportSchema = true)
+@Database(entities = {NoteEntity.class, ImageEntity.class, AudioEntity.class}, version = 6, exportSchema = true)
 @TypeConverters(Converters.class)
 public abstract class NoteDatabase extends RoomDatabase {
 
@@ -39,7 +39,7 @@ public abstract class NoteDatabase extends RoomDatabase {
 
                 NoteEntity sampleVaultNote = new NoteEntity();
                 sampleVaultNote.noteTitle = "Vault Preview";
-                sampleVaultNote.noteBody = "This is a sample note displaying how a note is going to look like placed in the Vault. \n The vault is a safe place that can even be password protected.";
+                sampleVaultNote.noteBody = "This is a sample note displaying how a note is going to look like placed in the Vault. \n The vault is a safe place that cant be accessed from outside the app.";
                 sampleVaultNote.noteType = NoteType.NOTE_VAULT.getValue();
                 noteEntityDao.insertNotes(sampleVaultNote);
 

@@ -38,8 +38,8 @@ public class FrontPageActivity extends AppCompatActivity {
         startActivity(settingsIntent);
     }
 
-    public void OnClickVoid(View view) {
-        Intent voidIntent;
+    public void OnClickUsefulResources(View view) {
+        Intent resourcesIntent;
     }
 }
 

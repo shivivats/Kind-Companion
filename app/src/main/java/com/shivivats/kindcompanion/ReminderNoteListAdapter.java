@@ -40,11 +40,15 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
             holder.noteTitleView.setText(current.noteTitle);
             holder.noteBodyView.setText(current.noteBody);
             holder.currentNoteId = current.noteId;
+            holder.noteImageCountView.setText(String.valueOf(current.noteImagesCount));
+            holder.noteAudioCountView.setText(String.valueOf(current.noteAudioCount));
         } else {
             // covers the case of data not being ready yet
             holder.noteTitleView.setText("No Title");
             holder.noteBodyView.setText("No Body");
             holder.currentNoteId = -1;
+            holder.noteImageCountView.setText("-1");
+            holder.noteAudioCountView.setText("-1");
         }
     }
 
@@ -72,6 +76,8 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
         private final CardView noteCardView;
         private final TextView noteTitleView;
         private final TextView noteBodyView;
+        private final TextView noteImageCountView;
+        private final TextView noteAudioCountView;
 
         public long currentNoteId;
 
@@ -80,6 +86,8 @@ public class ReminderNoteListAdapter extends RecyclerView.Adapter<ReminderNoteLi
             noteCardView = noteView.findViewById(R.id.noteCardView);
             noteTitleView = noteView.findViewById(R.id.noteTitleView);
             noteBodyView = noteView.findViewById(R.id.noteBodyView);
+            noteImageCountView = noteView.findViewById(R.id.noteImageCountView);
+            noteAudioCountView = noteView.findViewById(R.id.noteAudioCountView);
             currentNoteId = noteId;
 
             noteView.setOnClickListener(this);
