@@ -1,12 +1,18 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="reminder_entities">
+        <item>Every 15 Minutes</item>
+        <item>Every Half Hour</item>
+        <item>Every Hour</item>
+        <item>Every 12 Hours</item>
+        <item>Every Day</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="reminder_values">
+        <item>fifteen_minutes</item>
+        <item>half_hour</item>
+        <item>hour</item>
+        <item>half_day</item>
+        <item>day</item>
     </string-array>
 </resources>

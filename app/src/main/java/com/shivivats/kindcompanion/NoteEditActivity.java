@@ -514,6 +514,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         // we need to create a void animation here
         // and then delete the note
         // so we just
+
+        // we can also
         Toast.makeText(getApplicationContext(), "Your thoughts have been sent into the void, disappearing forever...", Toast.LENGTH_LONG).show();
         DeleteNote();
     }

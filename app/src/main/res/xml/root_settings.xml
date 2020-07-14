@@ -34,7 +34,7 @@
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
-            app:key="reminder"
+            app:key="reminderSwitch"
             app:summary="Set Reminder"
             app:title="Reminder" />
 
@@ -45,15 +45,28 @@
             app:summary="Pick time for the reminder." />
 
         <Preference
-            android:title="Reminder Time"
+            android:title="Reminder Date"
             app:key="reminderDatePicker"
+            app:persistent="true"
             app:summary="Pick date for the reminder." />
+
+        <ListPreference
+            android:title="Reminder Frequency"
+            app:defaultValue="day"
+            app:entries="@array/reminder_entities"
+            app:entryValues="@array/reminder_values"
+            app:key="reminderFrequencyPicker"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="Vault Options">
 
-
+        <EditTextPreference
+            app:defaultValue="0000"
+            app:key="vaultPin"
+            app:summary="Set the Vault pin."
+            app:title="Vault Pin" />
     </PreferenceCategory>
 
 </PreferenceScreen>

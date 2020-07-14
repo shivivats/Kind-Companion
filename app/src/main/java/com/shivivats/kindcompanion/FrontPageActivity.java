@@ -24,7 +24,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickVault(View view) {
-        Intent vaultIntent = new Intent(this, VaultNoteListActivity.class);
+        Intent vaultIntent = new Intent(this, VaultLogin.class);
         startActivity(vaultIntent);
     }
 
@@ -39,7 +39,13 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickUsefulResources(View view) {
-        Intent resourcesIntent;
+        Intent resourcesIntent = new Intent(this, UsefulKnowledgeActivity.class);
+        startActivity(resourcesIntent);
+    }
+
+    public void OnClickDealWithAnxiety(View view) {
+        Intent dealIntent = new Intent(this, DealWithAnxietyActivity.class);
+        startActivity(dealIntent);
     }
 }
 

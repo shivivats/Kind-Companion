@@ -5,13 +5,19 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -22,20 +28,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements PendingIntent.OnFinished {
 
     Toolbar settingsTopBar;
-    public static Calendar userCalendar = Calendar.getInstance();
+    public static Calendar userCalendar;
     SettingsFragment settingsFragment;
     AlarmManager alarmManager;
-    PendingIntent alarmIntent;
-    Intent intent = new Intent();
+    public static Calendar currentCalendar;
+    PendingIntent alarmPendingIntent;
+    Intent alarmIntent = new Intent();
+    EditTextPreference vaultPinPreference;
+    boolean reminderSwitchValue;
+    private long reminderInterval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +77,62 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SwitchPreferenceCompat reminderSwitch = settingsFragment.findPreference("reminder");
+
+        if (userCalendar == null) {
+            userCalendar = Calendar.getInstance();
+            userCalendar.setTimeInMillis(System.currentTimeMillis());
+        }
+        if (currentCalendar == null) {
+            currentCalendar = Calendar.getInstance();
+            currentCalendar.setTimeInMillis(System.currentTimeMillis());
+        }
+
+        SwitchPreferenceCompat reminderSwitch = settingsFragment.findPreference("reminderSwitch");
 
         if (reminderSwitch == null) {
             Log.d("SETTINGS_TAG", "reminder switch is null");
         }
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        reminderSwitchValue = sharedPreferences.getBoolean("reminderSwitch", false);
+
         reminderSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
 
                 if ((boolean) newValue == true) {
-                    createReminder();
+                    currentCalendar = userCalendar;
+                    createReminder(userCalendar.getTimeInMillis());
+                    enableReceiver();
+                    reminderSwitchValue = true;
+                    Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+                    //Log.d("SETTINGS_TAG", "reminder value is true");
                 } else {
                     // a way to disable the reminder
                     cancelReminder();
-
+                    disableReceiver();
+                    reminderSwitchValue = false;
+                    //Log.d("SETTINGS_TAG", "reminder value is false");
                 }
                 return true;
             }
         });
+
+
+        if (reminderSwitch != null) {
+            reminderSwitch.setSummaryProvider(new Preference.SummaryProvider() {
+                @Override
+                public CharSequence provideSummary(Preference preference) {
+                    if (reminderSwitchValue) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm");
+                        Date calendarDate = currentCalendar.getTime();
+
+                        return "Reminder set for " + formatter.format(calendarDate);
+                    } else
+                        return "Reminder not set.";
+                }
+            });
+        }
 
 
         Preference reminderTimePicker, reminderDatePicker;
@@ -109,27 +160,124 @@ public class SettingsActivity extends AppCompatActivity {
                 });
             }
         }
+
+
+        switch (sharedPreferences.getString("reminderFrequencyPicker", "day")) {
+            case "fifteen_minutes":
+                reminderInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
+                break;
+            case "half_hour":
+                reminderInterval = AlarmManager.INTERVAL_HALF_HOUR;
+                break;
+            case "hour":
+                reminderInterval = AlarmManager.INTERVAL_HOUR;
+                break;
+            case "half_day":
+                reminderInterval = AlarmManager.INTERVAL_HALF_DAY;
+                break;
+            case "day":
+                reminderInterval = AlarmManager.INTERVAL_DAY;
+                break;
+            default:
+                reminderInterval = AlarmManager.INTERVAL_DAY;
+                break;
+        }
+        ListPreference reminderFrequency = settingsFragment.findPreference("reminderFrequencyPicker");
+        reminderFrequency.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String value = (String) newValue;
+                switch (value) {
+                    case "fifteen_minutes":
+                        reminderInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
+                        break;
+                    case "half_hour":
+                        reminderInterval = AlarmManager.INTERVAL_HALF_HOUR;
+                        break;
+                    case "hour":
+                        reminderInterval = AlarmManager.INTERVAL_HOUR;
+                        break;
+                    case "half_day":
+                        reminderInterval = AlarmManager.INTERVAL_HALF_DAY;
+                        break;
+                    case "day":
+                        reminderInterval = AlarmManager.INTERVAL_DAY;
+                        break;
+                    default:
+                        reminderInterval = AlarmManager.INTERVAL_DAY;
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+        vaultPinPreference = settingsFragment.findPreference("vaultPin");
+        vaultPinPreference.setSummaryProvider(new Preference.SummaryProvider() {
+            @Override
+            public CharSequence provideSummary(Preference preference) {
+                EditTextPreference pref = (EditTextPreference) preference;
+                return "Current pin is: " + pref.getText();
+            }
+        });
+
+        vaultPinPreference.setOnBindEditTextListener(new EditTextPreference.OnBindEditTextListener() {
+            @Override
+            public void onBindEditText(@NonNull EditText editText) {
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+            }
+        });
+
+
     }
 
-    public void createReminder() {
-        intent = new Intent(this, NotifyService.class);
+    public void createReminder(long time) {
+        alarmIntent = new Intent(this, NotifyService.class);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmIntent = PendingIntent.getService(this, 0, intent, 0);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, userCalendar.getTimeInMillis(), 1000 * 60 * 5, alarmIntent);
-        Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+        alarmPendingIntent = PendingIntent.getService(this, 0, alarmIntent, 0);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, time, alarmPendingIntent);
+    }
+
+    public void enableReceiver() {
+        ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
+        PackageManager pm = getApplicationContext().getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
     }
 
     public void cancelReminder() {
         AlarmManager alarmManager =
                 (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent =
-                PendingIntent.getService(this, 0, intent,
+                PendingIntent.getService(this, 0, alarmIntent,
                         PendingIntent.FLAG_NO_CREATE);
         if (pendingIntent != null && alarmManager != null) {
             alarmManager.cancel(pendingIntent);
             Toast.makeText(getApplicationContext(), "Reminder removed.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Reminder couldn't be removed.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void disableReceiver() {
+        ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
+        PackageManager pm = getApplicationContext().getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    @Override
+    public void onSendFinished(PendingIntent pendingIntent, Intent intent, int resultCode, String resultData, Bundle resultExtras) {
+        if (pendingIntent == alarmPendingIntent && intent == alarmIntent && resultCode == RESULT_OK) {
+            currentCalendar = Calendar.getInstance();
+            currentCalendar.setTimeInMillis(System.currentTimeMillis() + reminderInterval);
+            createReminder(System.currentTimeMillis() + reminderInterval);
+            Log.d("SETTINGS_TAG", "pending intent finished");
         }
     }
 
@@ -173,8 +321,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -197,5 +344,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    public static class DeviceBootReceiver extends BroadcastReceiver {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+                // Set the alarm here.
+            }
+        }
+    }
 }

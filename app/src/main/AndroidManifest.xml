@@ -21,10 +21,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".VaultLogin"
+            android:parentActivityName=".FrontPageActivity"></activity>
+        <activity
+            android:name=".DealWithAnxietyActivity"
+            android:parentActivityName=".FrontPageActivity" />
+        <activity
+            android:name=".UsefulKnowledgeActivity"
+            android:parentActivityName=".FrontPageActivity" />
+
         <service
             android:name=".NotifyService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <receiver
+            android:name=".SettingsActivity$DeviceBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <activity android:name=".LoginActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
 

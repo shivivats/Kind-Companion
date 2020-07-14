@@ -10,12 +10,12 @@
     <string name="note_entry_title_hint">Title</string>
     <string name="new_note">New Note</string>
     <string name="firstMainButton">Get it off my chest</string>
-    <string name="secondMainButton">Spend time with myself</string>
-    <string name="thirdMainButton">Settings</string>
+    <string name="secondMainButton">Deal With Anxiety</string>
+    <string name="thirdMainButton">Useful Resources</string>
     <string name="frontPageWelcomeMessage">Welcome to Kind Companion!</string>
     <string name="fourthMainButton">Reminders</string>
     <string name="fifthMainButton">Vault</string>
-    <string name="sixthMainButton">Useful \n Resources</string>
+    <string name="sixthMainButton">Settings</string>
     <string name="store_note">Store as Note</string>
     <string name="store_vault">Store in Vault</string>
     <string name="send_void">Send into the void</string>
@@ -39,4 +39,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_useful_resources">UsefulResourcesActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
