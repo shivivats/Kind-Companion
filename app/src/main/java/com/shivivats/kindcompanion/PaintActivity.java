@@ -11,13 +11,13 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class PaintActivity extends AppCompatActivity {
+public class PaintActivity extends AppCompatActivity implements DeleteImageDialogFragment.DeleteImageListener, ClearCanvasDialogFragment.ClearCanvasListener {
 
     private PaintView paintView;
 
@@ -39,8 +39,6 @@ public class PaintActivity extends AppCompatActivity {
     private boolean isEdit;
 
     private MenuItem deleteButton;
-
-    private ImageView paintImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +62,6 @@ public class PaintActivity extends AppCompatActivity {
             currentImageId = -1;
             currentImageUri = null;
         }
-
-        paintImageView = findViewById(R.id.paintImageView);
-        paintImageView.setImageURI(currentImageUri);
 
         paintView = findViewById(R.id.paintView);
         DisplayMetrics metrics = new DisplayMetrics();
@@ -97,9 +92,6 @@ public class PaintActivity extends AppCompatActivity {
 
         paintViewTopBar = findViewById(R.id.paintViewTopBar);
         paintViewBottomBar = findViewById(R.id.paintViewBottomBar);
-
-        paintImageView.setImageBitmap(bitmap);
-
 
         setSupportActionBar(paintViewTopBar);
 
@@ -209,7 +201,7 @@ public class PaintActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_clear:
-                paintView.clear();
+                ClearCanvas();
                 return true;
 
             case R.id.action_save_paint:
@@ -219,9 +211,12 @@ public class PaintActivity extends AppCompatActivity {
                     SaveDrawing();
                 }
                 return true;
+
             case R.id.action_delete_paint:
                 if (isEdit) {
-                    DeleteCurrentImage();
+                    //show a dialog here that asks the user if they're sure
+                    DialogFragment newFragment = new DeleteImageDialogFragment();
+                    newFragment.show(getSupportFragmentManager(), "delete_paint");
                 }
                 return true;
             default:
@@ -305,5 +300,31 @@ public class PaintActivity extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         String currentDrawingPath = drawing.getAbsolutePath();
         return currentDrawingPath;
+    }
+
+    private void ClearCanvas() {
+        //show a dialog here that asks the user if they're sure
+        DialogFragment newFragment = new ClearCanvasDialogFragment();
+        newFragment.show(getSupportFragmentManager(), "clear_canvas");
+    }
+
+    @Override
+    public void onDeleteImageDialogPositiveClick(DialogFragment dialog) {
+        DeleteCurrentImage();
+    }
+
+    @Override
+    public void onDeleteImageDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onClearCanvasDialogPositiveClick(DialogFragment dialog) {
+        paintView.clear();
+    }
+
+    @Override
+    public void onClearCanvasDialogNegativeClick(DialogFragment dialog) {
+
     }
 }

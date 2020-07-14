@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DealWithAnxietyActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/dealWithAnxietyTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <Button
+        android:id="@+id/fiveThingsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="FiveThingsGame"
+        android:text="Five Things Game"
+        app:layout_constraintBottom_toTopOf="@id/paintingButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@id/dealWithAnxietyTopBar" />
+
+    <Button
+        android:id="@+id/paintingButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="PaintingGame"
+        android:text="Painting"
+        app:layout_constraintBottom_toTopOf="@id/relaxingMusicButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />
+
+    <Button
+        android:id="@+id/controlledBreathingButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="ControlledBreathing"
+        android:text="Controlled Breathing"
+        app:layout_constraintBottom_toTopOf="@+id/relaxingMusicButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/paintingButton" />
+
+    <Button
+        android:id="@+id/relaxingMusicButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="RelaxingMusic"
+        android:text="Relaxing Music"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/controlledBreathingButton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="105dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="306dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

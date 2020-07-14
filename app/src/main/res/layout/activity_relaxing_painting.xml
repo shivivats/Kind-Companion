@@ -4,33 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaintActivity">
+    tools:context=".RelaxingPaintingActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/paintViewTopBar"
+        android:id="@+id/relaxingPaintingTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@id/paintView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <com.shivivats.kindcompanion.PaintView
-        android:id="@+id/paintView"
+        android:id="@+id/relaxingPaintView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/paintViewBottomBar"
+        app:layout_constraintBottom_toTopOf="@id/relaxingPaintingBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paintViewTopBar" />
+        app:layout_constraintTop_toBottomOf="@+id/relaxingPaintingTopBar" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/paintViewBottomBar"
+        android:id="@+id/relaxingPaintingBottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

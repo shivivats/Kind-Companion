@@ -21,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener {
+public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener, DeleteNoteDialogFragment.DeleteNoteListener {
 
     public static final String EXTRA_REPLY = "com.shivivats.kindcompanion.";
 
@@ -400,7 +401,9 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 return true;
 
             case R.id.action_delete_edit_note:
-                DeleteNote();
+                //show a dialog here that asks the user if they're sure
+                DialogFragment newFragment = new DeleteNoteDialogFragment();
+                newFragment.show(getSupportFragmentManager(), "delete_note");
                 return true;
 
             case R.id.action_void_edit_note:
@@ -520,4 +523,14 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         DeleteNote();
     }
 
+
+    @Override
+    public void onDeleteNoteDialogPositiveClick(DialogFragment dialog) {
+        DeleteNote();
+    }
+
+    @Override
+    public void onDeleteNoteDialogNegativeClick(DialogFragment dialog) {
+
+    }
 }

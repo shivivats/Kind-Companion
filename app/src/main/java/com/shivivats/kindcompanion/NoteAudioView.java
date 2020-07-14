@@ -19,10 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import java.io.IOException;
 
-public class NoteAudioView extends AppCompatActivity implements View.OnClickListener {
+public class NoteAudioView extends AppCompatActivity implements View.OnClickListener, DeleteAudioDialogFragment.DeleteAudioListener {
 
     private long currentAudioId;
 
@@ -220,7 +221,9 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete_note_audio:
-                DeleteCurrentAudio();
+                //show a dialog here that asks the user if they're sure
+                DialogFragment newFragment = new DeleteAudioDialogFragment();
+                newFragment.show(getSupportFragmentManager(), "delete_audio");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -232,5 +235,16 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         intent.putExtra("AUDIO_ID", currentAudioId);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+
+    @Override
+    public void onDeleteAudioDialogPositiveClick(DialogFragment dialog) {
+        DeleteCurrentAudio();
+    }
+
+    @Override
+    public void onDeleteAudioDialogNegativeClick(DialogFragment dialog) {
+
     }
 }

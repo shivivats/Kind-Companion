@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VaultLogin">
+    tools:context=".ControlledBreathingActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/vaultLoginTopBar"
+        android:id="@+id/controlledBreathingTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -18,46 +18,49 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <EditText
-        android:id="@+id/vaultPinEntry"
+    <TextView
+        android:id="@+id/breathingInfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="4"
-        android:inputType="numberPassword"
-        app:layout_constraintBottom_toTopOf="@+id/vaultMessageText"
+        android:gravity="center"
+        android:text='This will guide you through some controlled breathing! \n Press "Start" to begin.'
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/breathingIndicatorTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vaultLoginTopBar" />
+        app:layout_constraintTop_toBottomOf="@id/controlledBreathingTopBar" />
 
     <TextView
-        android:id="@+id/vaultMessageText"
+        android:id="@+id/breathingIndicatorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:textSize="18sp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/breathingCounterTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/vaultPinEntry" />
+        app:layout_constraintTop_toBottomOf="@+id/breathingInfoTextView" />
+
+    <TextView
+        android:id="@+id/breathingCounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@id/breathingStartStopButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/breathingIndicatorTextView" />
+
 
     <Button
-        android:id="@+id/vaultLoginButton"
+        android:id="@+id/breathingStartStopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="OnLoginClick"
-        android:text="Open Vault"
+        android:text="Start"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/breathingCounterTextView" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="389dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

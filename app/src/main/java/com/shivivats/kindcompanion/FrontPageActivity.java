@@ -17,12 +17,6 @@ public class FrontPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_front_page);
     }
 
-    public void OnClickNewNote(View view) {
-        //Intent newNoteIntent = new Intent(this, NoteEditActivity.class);
-        //Log.d("FrontPageActivity", "New Note Button Intent");
-        //startActivity(newNoteIntent);
-    }
-
     public void OnClickVault(View view) {
         Intent vaultIntent = new Intent(this, VaultLogin.class);
         startActivity(vaultIntent);
@@ -46,6 +40,10 @@ public class FrontPageActivity extends AppCompatActivity {
     public void OnClickDealWithAnxiety(View view) {
         Intent dealIntent = new Intent(this, DealWithAnxietyActivity.class);
         startActivity(dealIntent);
+    }
+
+    public void OffMyChestActivity(View view) {
+
     }
 }
 

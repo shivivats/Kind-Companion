@@ -11,8 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
-public class NoteImageView extends AppCompatActivity {
+public class NoteImageView extends AppCompatActivity implements DeleteImageDialogFragment.DeleteImageListener {
 
     private long currentImageId;
 
@@ -67,7 +68,9 @@ public class NoteImageView extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_delete_note_image:
-                DeleteCurrentImage();
+                //show a dialog here that asks the user if they're sure
+                DialogFragment newFragment = new DeleteImageDialogFragment();
+                newFragment.show(getSupportFragmentManager(), "delete_image");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -80,5 +83,15 @@ public class NoteImageView extends AppCompatActivity {
         intent.putExtra("IMAGE_ID", currentImageId);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void onDeleteImageDialogPositiveClick(DialogFragment dialog) {
+        DeleteCurrentImage();
+    }
+
+    @Override
+    public void onDeleteImageDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
