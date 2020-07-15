@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -33,6 +32,9 @@ public class PaintView extends View {
     private Canvas mCanvas;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
+    private Bitmap baseBitmap;
+    private boolean isRelaxedEdit;
+
     public PaintView(Context context) {
         this(context, null);
     }
@@ -50,30 +52,23 @@ public class PaintView extends View {
         mPaint.setAlpha(0xff);
     }
 
-    public void init(DisplayMetrics displayMetrics, boolean isEdit, Bitmap bitmap) {
+    public void init(DisplayMetrics displayMetrics, boolean isEdit, Bitmap bitmap, boolean isRelaxedPaint) {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
-        if (isEdit) {
-            Log.d("PAINT_VIEW", "isEdit: " + isEdit);
-            //Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-            //Log.d("PAINT_VIEW","newBitmap: "+ newBitmap);
-            //bitmap.setConfig(Bitmap.Config.ARGB_8888);
-            Log.d("PAINT_VIEW", "bitmap width and height: " + bitmap.getWidth() + " " + bitmap.getHeight());
-            Log.d("PAINT_VIEW", "displayMetrics width and height: " + width + " " + height);
-            mBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
-            //Log.d("PAINT_VIEW","mBitmap: "+ mBitmap);
-            //mBitmap = bitmap.copy(bitmap.getConfig(), true);
-            //mBitmap = bitmap;
 
-            if (mBitmap == null) {
-                Log.d("PAINT_VIEW", "mBitmap is null");
-            } else {
-                Log.d("PAINT_VIEW", "mBitmap is not null");
-            }
+        isRelaxedEdit = isRelaxedPaint;
+
+        if (isEdit) {
+            mBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+            baseBitmap = mBitmap;
+            mCanvas = new Canvas(mBitmap);
+        } else if (isRelaxedPaint) {
+            mBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
+            baseBitmap = mBitmap;
             mCanvas = new Canvas(mBitmap);
         } else {
-
             mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            baseBitmap = mBitmap;
             mCanvas = new Canvas(mBitmap);
         }
 
@@ -81,11 +76,11 @@ public class PaintView extends View {
         currentColor = DEFAULT_COLOR;
         strokeWidth = BRUSH_SIZE;
 
-        if (!isEdit) {
+        if (!isEdit && !isRelaxedPaint) {
             mCanvas.drawColor(DEFAULT_BG_COLOR);
         }
 
-        //return mBitmap;
+
     }
 
     public void clear() {
@@ -124,15 +119,12 @@ public class PaintView extends View {
     protected void onDraw(Canvas canvas) {
         canvas.save();
         //mCanvas.drawColor(backgroundColor);
-
-
         for (FingerPath fp : paths) {
             mPaint.setColor(fp.color);
             mPaint.setStrokeWidth(fp.strokeWidth);
 
             mCanvas.drawPath(fp.path, mPaint);
         }
-
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
     }

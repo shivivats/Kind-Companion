@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<!--
+    <item
+        android:id="@+id/action_undo"
+        android:title="Undo"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_undo"
+        />
+    <item
+        android:id="@+id/action_redo"
+        android:title="Redo"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_redo"
+        />
+-->
     <item
         android:id="@+id/action_color_black"
         android:title="Black"
@@ -90,6 +103,7 @@
         android:id="@+id/action_eraser"
         android:title="Eraser"
         app:showAsAction="ifRoom" />
+
 
     <item
         android:id="@+id/action_clear"

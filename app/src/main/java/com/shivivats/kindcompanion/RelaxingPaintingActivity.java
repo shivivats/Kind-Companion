@@ -1,6 +1,9 @@
 package com.shivivats.kindcompanion;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -13,11 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Random;
+
 public class RelaxingPaintingActivity extends AppCompatActivity implements NextImageDialogFragment.NextImageListener, ClearCanvasDialogFragment.ClearCanvasListener {
 
     public PaintView paintView;
     Toolbar topBar, bottomBar;
     private Bitmap currentImage;
+    DisplayMetrics currentMetrics;
+
+
+    private String cbPrefix = "cb_";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +42,50 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         bottomBar = findViewById(R.id.relaxingPaintingBottomBar);
         paintView = findViewById(R.id.relaxingPaintView);
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        currentMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(currentMetrics);
 
         // set the bitmap to a random image from the colouring book folder
         LoadRandomImage();
-        paintView.init(metrics, true, currentImage);
+        InitPaintView();
 
         //this.invalidateOptionsMenu();
     }
 
     private void LoadRandomImage() {
         // IMPLEMENT THIS FUNCTION
+
+        // we need to load a random image from all the cb_ images in the drawables folder
+
+        TypedArray images = getResources().obtainTypedArray(R.array.cb_images);
+        Random rand = new Random();
+        int randomInt = rand.nextInt(images.length());
+        int randomImageID = images.getResourceId(randomInt, 0);
+
+        currentImage = decodeSampledBitmapFromResource(getResources(), randomImageID, currentMetrics.widthPixels, currentMetrics.heightPixels);
+    }
+
+    private void InitPaintView() {
+        paintView.init(currentMetrics, false, currentImage, true);
+    }
+
+    public Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        //options.inSampleSize=8;
+
+        //options.inSampleSize*=2;
+        // Decode bitmap with inSampleSize set
+
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
     }
 
     @Override
@@ -61,6 +102,27 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         }
 
         return true;
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            //final int halfHeight = height / 2;
+            //final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((height / inSampleSize) >= reqHeight
+                    && (width / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
     }
 
     @Override
@@ -129,10 +191,22 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
             case R.id.action_next_image:
                 NextImage();
                 return true;
+/*
+            case R.id.action_undo:
+                Undo();
+                return true;
 
+            case R.id.action_redo:
+                Redo();
+                return true;
+*/
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void Undo() {
+        //paintView.undo();
     }
 
     private void ClearCanvas() {
@@ -147,6 +221,9 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         newFragment.show(getSupportFragmentManager(), "next_image");
     }
 
+    private void Redo() {
+        //paintView.redo();
+    }
 
     @Override
     public void onClearCanvasDialogPositiveClick(DialogFragment dialog) {
@@ -163,12 +240,9 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         // do something for next image here
         paintView.clear();
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
         // set the bitmap to a random image from the colouring book folder
         LoadRandomImage();
-        paintView.init(metrics, true, currentImage);
+        InitPaintView();
     }
 
     @Override

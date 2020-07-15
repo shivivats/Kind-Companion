@@ -81,13 +81,13 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
 
             if (bitmap != null) {
                 // we can use the bitmap to pass to the paintview here
-                paintView.init(metrics, true, bitmap);
+                paintView.init(metrics, true, bitmap, false);
             } else {
                 setResult(-4);
                 finish();
             }
         } else {
-            paintView.init(metrics, false, null);
+            paintView.init(metrics, false, null, false);
         }
 
         paintViewTopBar = findViewById(R.id.paintViewTopBar);
@@ -211,7 +211,15 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                     SaveDrawing();
                 }
                 return true;
+/*
+            case R.id.action_undo:
+                Undo();
+                return true;
 
+            case R.id.action_redo:
+                Redo();
+                return true;
+*/
             case R.id.action_delete_paint:
                 if (isEdit) {
                     //show a dialog here that asks the user if they're sure
@@ -222,6 +230,14 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void Undo() {
+        //paintView.undo();
+    }
+
+    private void Redo() {
+        //paintView.redo();
     }
 
     private void UpdateDrawing() {

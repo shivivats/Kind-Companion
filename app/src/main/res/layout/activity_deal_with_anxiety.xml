@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:onClick="PaintingGame"
         android:text="Painting"
-        app:layout_constraintBottom_toTopOf="@id/relaxingMusicButton"
+        app:layout_constraintBottom_toTopOf="@id/controlledBreathingButton"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />

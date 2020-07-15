@@ -36,7 +36,7 @@ public class NextImageDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Move onto the next image? Progress will be wiped.")
+        builder.setMessage("Move onto the next image? Canvas will be wiped.")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         listener.onNextImageDialogPositiveClick(NextImageDialogFragment.this);
