@@ -30,18 +30,29 @@ public class DealWithAnxietyActivity extends AppCompatActivity {
         ab.setTitle("Deal With Anxiety");
     }
 
+
     public void FiveThingsGame(View view) {
         Intent intent = new Intent(this, FiveThingsActivity.class);
         startActivity(intent);
     }
 
-    public void PaintingGame(View view) {
-        Intent intent = new Intent(this, RelaxingPaintingFrontActivity.class);
+    public void AnxietyChecklist(View view) {
+        Intent intent = new Intent(this, AnxietyChecklistActivity.class);
+        startActivity(intent);
+    }
+
+    public void CrossItOff(View view) {
+        Intent intent = new Intent(this, CrossItOffActivity.class);
         startActivity(intent);
     }
 
     public void ControlledBreathing(View view) {
         Intent intent = new Intent(this, ControlledBreathingActivity.class);
+        startActivity(intent);
+    }
+
+    public void PaintingGame(View view) {
+        Intent intent = new Intent(this, RelaxingPaintingFrontActivity.class);
         startActivity(intent);
     }
 

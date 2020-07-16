@@ -6,22 +6,21 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+public class CrossItOffActivity extends AppCompatActivity {
 
-public class FiveThingsActivity extends AppCompatActivity {
+    //Future considerations: implementing an actual checklist in this activity
 
     Toolbar topbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_five_things);
+        setContentView(R.layout.activity_cross_it_off);
 
-        topbar = findViewById(R.id.fiveThingsTopBar);
+        topbar = findViewById(R.id.crossItOffTopbar);
         setSupportActionBar(topbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Five Things Game");
-
-
+        ab.setTitle("Cross It Off");
     }
 }

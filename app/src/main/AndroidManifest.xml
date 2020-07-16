@@ -22,8 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".FiveThingsActivity"
+            android:name=".CrossItOffActivity"
             android:parentActivityName=".DealWithAnxietyActivity"></activity>
+        <activity
+            android:name=".AnxietyChecklistActivity"
+            android:parentActivityName=".DealWithAnxietyActivity" />
+        <activity
+            android:name=".FiveThingsActivity"
+            android:parentActivityName=".DealWithAnxietyActivity" />
         <activity
             android:name=".RelaxingPaintingActivity"
             android:parentActivityName=".RelaxingPaintingFrontActivity" />

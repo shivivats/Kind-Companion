@@ -10,7 +10,7 @@
         android:id="@+id/firstMainButton"
         android:layout_width="120dp"
         android:layout_height="80dp"
-        android:onClick="OnClickNewNote"
+        android:onClick="OnClickOffMyChest"
         android:text="@string/firstMainButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/secondMainButton"

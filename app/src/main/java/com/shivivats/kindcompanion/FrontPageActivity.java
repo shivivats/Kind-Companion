@@ -42,7 +42,7 @@ public class FrontPageActivity extends AppCompatActivity {
         startActivity(dealIntent);
     }
 
-    public void OffMyChestActivity(View view) {
+    public void OnClickOffMyChest(View view) {
 
     }
 }
