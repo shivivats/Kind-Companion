@@ -22,6 +22,5 @@ public class FiveThingsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Five Things Game");
 
-
     }
 }
