@@ -3,15 +3,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ResourcesFragment">
 
-    <TextView
-        android:id="@+id/resourcesFragmentTextView"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello resource fragment"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/reachOutResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Reach Out"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/headspaceResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Headspace"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_android"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <!--
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/flowyResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Flowy"
+            android:textColor="@android:color/black"
+            app:icon="@drawable/ic_android"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+        -->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/stopBreatheThinkResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Stop, Breathe &#38; Think"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/samTheChatbotResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Sam the chatbot"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/befreindersWorldwideResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Befreinders Worldwide"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/psycomResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Ivan Goldberg's Psycom.net"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/yourLifeCountsResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Your Life Counts"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/suicidePreventionLifelineResourceButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Suicide Prevention Lifeline.org (USA)"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_browser"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+    </LinearLayout>
 
 </FrameLayout>

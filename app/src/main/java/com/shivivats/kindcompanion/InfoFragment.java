@@ -33,6 +33,12 @@ public class InfoFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         anxietyInfoButton = getActivity().findViewById(R.id.anxietyInfoButton);
         depressionInfoButton = getActivity().findViewById(R.id.depressionInfoButton);
         suicideInfoButton = getActivity().findViewById(R.id.suicideInfoButton);

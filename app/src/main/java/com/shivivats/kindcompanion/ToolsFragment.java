@@ -15,7 +15,7 @@ public class ToolsFragment extends Fragment {
 
     // Tools: About mindfulness, relaxation
 
-    Button mindfulnessButton, relaxationButton;
+    Button mindfulnessButton, relaxationButton, problemSolvingButton;
 
     public ToolsFragment() {
         // required empty public constructor
@@ -37,8 +37,15 @@ public class ToolsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         mindfulnessButton = getActivity().findViewById(R.id.mindfullnessToolsButton);
         relaxationButton = getActivity().findViewById(R.id.relaxationToolsButton);
+        problemSolvingButton = getActivity().findViewById(R.id.problemSolvingToolsButton);
 
         mindfulnessButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,5 +62,14 @@ public class ToolsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        problemSolvingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ProblemSolvingToolActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

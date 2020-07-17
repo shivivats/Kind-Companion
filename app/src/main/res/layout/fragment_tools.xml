@@ -21,6 +21,9 @@
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:icon="@drawable/ic_psychology"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp" />
 
@@ -39,6 +42,30 @@
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_self_improvement"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/problemSolvingToolsButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="Self Care: Problem Solving"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_think_bulb"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp" />
 

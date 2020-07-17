@@ -68,21 +68,22 @@
         android:layout_height="wrap_content"
         android:onClick="PaintingGame"
         android:text="Painting"
-        app:layout_constraintBottom_toTopOf="@id/relaxingMusicButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/controlledBreathingButton" />
-
-    <Button
-        android:id="@+id/relaxingMusicButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="RelaxingMusic"
-        android:text="Relaxing Music"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/paintingButton" />
+        app:layout_constraintTop_toBottomOf="@+id/controlledBreathingButton" />
+    <!--
+        <Button
+            android:id="@+id/relaxingMusicButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="RelaxingMusic"
+            android:text="Relaxing Music"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/paintingButton" />
+            -->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"

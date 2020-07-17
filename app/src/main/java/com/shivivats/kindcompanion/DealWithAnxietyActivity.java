@@ -1,7 +1,6 @@
 package com.shivivats.kindcompanion;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -55,9 +54,11 @@ public class DealWithAnxietyActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RelaxingPaintingFrontActivity.class);
         startActivity(intent);
     }
-
+/*
     public void RelaxingMusic(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=relaxing+music"));
         startActivity(intent);
     }
+    */
+
 }

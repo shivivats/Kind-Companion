@@ -22,8 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".RelaxationToolActivity"
+            android:name=".ProblemSolvingToolActivity"
             android:parentActivityName=".UsefulKnowledgeActivity"></activity>
+        <activity
+            android:name=".RelaxationToolActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity" />
         <activity
             android:name=".MindfulnessToolActivity"
             android:parentActivityName=".UsefulKnowledgeActivity" />
