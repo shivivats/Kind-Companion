@@ -18,6 +18,7 @@ public class RelaxingPaintingFrontActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_relaxing_painting_front);
 
         topBar = findViewById(R.id.relaxingPaintingFrontTopBar);

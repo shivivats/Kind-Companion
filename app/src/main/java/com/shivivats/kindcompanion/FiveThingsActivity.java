@@ -14,6 +14,7 @@ public class FiveThingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_five_things);
 
         topBar = findViewById(R.id.fiveThingsTopBar);

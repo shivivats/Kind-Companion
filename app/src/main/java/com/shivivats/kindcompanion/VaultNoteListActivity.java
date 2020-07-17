@@ -64,6 +64,7 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_vault_note_list);
 
         RecyclerView recyclerView = findViewById(R.id.noteVaultRecyclerView);

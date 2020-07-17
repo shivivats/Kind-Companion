@@ -15,6 +15,7 @@ public class CrossItOffActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_cross_it_off);
 
         topBar = findViewById(R.id.crossItOffTopBar);

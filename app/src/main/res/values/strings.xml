@@ -182,7 +182,7 @@
     <string name="action_next_image">Next Image</string>
     <string name="action_change_vault_pin">Change Pin</string>
     <string name="breathingStart">Start</string>
-    <string name="breathingStop">Start</string>
+    <string name="breathingStop">Stop</string>
     <string name="breatheOut">Breathe Out.</string>
     <string name="breatheIn">Breathe In.</string>
     <string name="breathingGetReady">Get Ready.</string>

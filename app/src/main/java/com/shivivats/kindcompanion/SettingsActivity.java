@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -27,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -51,11 +51,15 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
     boolean reminderSwitchValue;
     private long reminderInterval;
 
+    Activity thisActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_settings);
 
+        thisActivity = this;
         settingsFragment = new SettingsFragment();
 
         getSupportFragmentManager()
@@ -151,7 +155,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             }
         }
 
-
+/*
         switch (sharedPreferences.getString("reminderFrequencyPicker", "day")) {
             case "fifteen_minutes":
                 reminderInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
@@ -171,6 +175,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             default:
                 break;
         }
+
         ListPreference reminderFrequency = settingsFragment.findPreference("reminderFrequencyPicker");
         reminderFrequency.setOnPreferenceChangeListener((preference, newValue) -> {
             String value = (String) newValue;
@@ -196,7 +201,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             }
             return true;
         });
-
+*/
 
         vaultPinPreference = settingsFragment.findPreference("vaultPin");
         vaultPinPreference.setSummaryProvider(preference -> {
@@ -209,7 +214,11 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
         });
 
-
+        SwitchPreferenceCompat darkThemePreference = settingsFragment.findPreference("darkTheme");
+        darkThemePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            Utils.changeTheme(thisActivity);
+            return true;
+        });
     }
 
     public void createReminder(long time) {

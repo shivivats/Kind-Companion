@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -213,6 +215,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_note_edit);
 
         Intent intent = getIntent();
@@ -487,6 +490,46 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         finish();
     }
 
+    private void SendToVoid() {
+        // we need to create a void animation here
+        // and then delete the note
+        // so we just
+
+        // we can also
+        //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+        ConstraintLayout parentLayout = findViewById(R.id.noteEditParentConstraintLayout);
+        parentLayout.animate().alpha(0.f).setDuration(3000).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                VoidNote();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        /*LayoutTransition layoutTransition;
+        layoutTransition=new LayoutTransition();
+        Animator animator;
+        animator
+        layoutTransition.setAnimator(LayoutTransition.DISAPPEARING, animator);
+        parentLayout.setVisibility(View.INVISIBLE);*/
+
+
+    }
+
     private File CreateImageFile() throws IOException {
         // Create an image file name
         // This gives implied locale warning, however this is just for filenames and user wont see it, so that's ok
@@ -504,14 +547,9 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         return image;
     }
 
-    private void SendToVoid() {
-        // we need to create a void animation here
-        // and then delete the note
-        // so we just
-
-        // we can also
-        Toast.makeText(getApplicationContext(), "Your thoughts have been sent into the void, disappearing forever...", Toast.LENGTH_LONG).show();
-        DeleteNote();
+    private void VoidNote() {
+        setResult(-4);
+        finish();
     }
 
 

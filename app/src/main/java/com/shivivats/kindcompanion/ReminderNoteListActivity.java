@@ -53,6 +53,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 DiscardNoteIfExists("Note deleted.");
             } else if (result.getResultCode() == -3) {
                 DiscardNoteIfExists("Empty note discarded.");
+            } else if (result.getResultCode() == -4) {
+                DiscardNoteIfExists("Your thoughts have been sent into the void, disappearing forever...");
             } else {
                 DiscardNoteIfExists("The note couldn't be saved.");
             }
@@ -64,6 +66,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_reminder_note_list);
 
         RecyclerView recyclerView = findViewById(R.id.noteReminderRecyclerView);

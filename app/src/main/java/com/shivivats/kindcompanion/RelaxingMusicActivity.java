@@ -13,6 +13,7 @@ public class RelaxingMusicActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_relaxing_music);
 
         topBar = findViewById(R.id.relaxingMusicTopBar);

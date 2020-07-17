@@ -20,6 +20,7 @@ public class DealWithAnxietyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_deal_with_anxiety);
 
         topBar = findViewById(R.id.dealWithAnxietyTopBar);

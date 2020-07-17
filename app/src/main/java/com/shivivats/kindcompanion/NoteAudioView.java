@@ -43,6 +43,7 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_note_audio_view);
 
         playPauseImage = findViewById(R.id.audioViewImagePlayPause);

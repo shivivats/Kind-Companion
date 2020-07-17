@@ -20,6 +20,7 @@ public class NoteImageView extends AppCompatActivity implements DeleteImageDialo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_note_image_view);
 
         ImageView imageView = findViewById(R.id.noteImageImageView);

@@ -29,6 +29,7 @@ public class VaultLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_vault_login);
 
         loginButton = findViewById(R.id.vaultLoginButton);

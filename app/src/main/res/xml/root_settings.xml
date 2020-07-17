@@ -8,10 +8,11 @@
             app:title="Your Name"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            app:key="theme"
-            app:title="Theme"
-            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="darkTheme"
+            app:title="Dark Theme" />
+
 
     </PreferenceCategory>
 

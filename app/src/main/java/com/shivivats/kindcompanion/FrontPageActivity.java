@@ -14,6 +14,7 @@ public class FrontPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_front_page);
     }
 
@@ -43,7 +44,8 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickOffMyChest(View view) {
-
+        Intent dealIntent = new Intent(this, OffMyChestActivity.class);
+        startActivity(dealIntent);
     }
 }
 

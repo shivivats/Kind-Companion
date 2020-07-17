@@ -15,6 +15,7 @@ public class AnxietyChecklistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_anxiety_checklist);
 
         topBar = findViewById(R.id.anxietyChecklistTopBar);

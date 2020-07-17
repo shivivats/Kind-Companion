@@ -41,6 +41,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_paint);
 
         Intent intent = getIntent();

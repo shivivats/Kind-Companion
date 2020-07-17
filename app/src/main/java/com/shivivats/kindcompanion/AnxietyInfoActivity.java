@@ -13,6 +13,7 @@ public class AnxietyInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_anxiety_info);
 
         toolbar = findViewById(R.id.anxietyInfoTopBar);

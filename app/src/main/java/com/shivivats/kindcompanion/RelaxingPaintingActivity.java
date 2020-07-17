@@ -31,6 +31,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_relaxing_painting);
 
         topBar = findViewById(R.id.relaxingPaintingTopBar);

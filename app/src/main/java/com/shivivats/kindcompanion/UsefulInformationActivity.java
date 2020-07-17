@@ -33,6 +33,7 @@ public class UsefulInformationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_useful_information);
 
         tabLayout = findViewById(R.id.knowledgeTabLayout);

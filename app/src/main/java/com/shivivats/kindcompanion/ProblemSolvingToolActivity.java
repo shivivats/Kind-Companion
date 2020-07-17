@@ -13,6 +13,7 @@ public class ProblemSolvingToolActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_problem_solving_tool);
 
         toolbar = findViewById(R.id.problemSolvingToolTopBar);
