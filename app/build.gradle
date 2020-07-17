@@ -88,4 +88,7 @@ dependencies {
         exclude group: "com.android.support"
     }
 
+    // emoji library
+
+
 }

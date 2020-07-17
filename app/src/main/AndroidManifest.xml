@@ -22,8 +22,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".RelaxationToolActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity"></activity>
+        <activity
+            android:name=".MindfulnessToolActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity" />
+        <activity
+            android:name=".SuicideInfoActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity" />
+        <activity
+            android:name=".DepressionInfoActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity" />
+        <activity
+            android:name=".AnxietyInfoActivity"
+            android:parentActivityName=".UsefulKnowledgeActivity" />
+        <activity
             android:name=".CrossItOffActivity"
-            android:parentActivityName=".DealWithAnxietyActivity"></activity>
+            android:parentActivityName=".DealWithAnxietyActivity" />
         <activity
             android:name=".AnxietyChecklistActivity"
             android:parentActivityName=".DealWithAnxietyActivity" />

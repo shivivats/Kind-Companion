@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AnxietyInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/anxietyInfoTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/anxietyInfoCredits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:gravity="end"
+                android:text="Information taken from https://www.psycom.net/bookstore.anxiety.html"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoHeaderOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="web"
+                android:gravity="center"
+                android:text="Generalised Anxiety Disorder"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoCredits"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <TextView
+                android:id="@+id/anxietyInfoTextOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="If you find yourself in constant worry over anything and everything in your life, even when there should be no cause for concern, you might be suffering from Generalized Anxiety Disorder."
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoHeaderOne"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoTextTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="web"
+                android:text="Generalized Anxiety Disorder is one of the most common anxiety disorders. While it can occur at any point of life, the most common points of onset occur between childhood and middle age. \nIf you are a woman, you are twice as likely to suffer from Generalized Anxiety Disorder than men."
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoTextOne"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoSubtextOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="Generalized Anxiety Disorder is different than having a phobia about something in the sense that people with GAD have an uneasy feeling about life in general. \nOften associated with feelings of dread or unease, you are in a state of constant worry over everything. There is no “off” switch. \nIf you are suffering from Generalized Anxiety Disorder, you are experiencing a constant state of worry – and you cannot avoid it, because life, in general, is causing you anxiety."
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoTextTwo"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoSubtextTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="Studies have shown that if you are living with Generalized Anxiety Disorder, you are more likely to also suffer from other mental health issues and ailments. \nCommon conditions that are associated with Generalized Anxiety Disorder include depression(https://www.psycom.net/depression.central.html), irritable bowel syndrome, stress, attention deficit hyperactivity disorder(https://www.psycom.net/adult-adhd/), and substance abuse(https://www.psycom.net/depression.central.substance.html)."
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoSubtextOne"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoHeaderTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="web"
+                android:gravity="center"
+                android:text="Symptoms"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoSubtextTwo"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoTextThree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="Some of the symptoms of GAD are:"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoHeaderTwo"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <TextView
+                android:id="@+id/anxietyInfoSubtextThree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="&#8226; Perpetual state of constant worry\n&#8226; Inability to relax or enjoy quiet time\n&#8226; Muscle tightness or body aches\n&#8226; Feeling tense\n&#8226; Avoidance of stressful situations\n&#8226; Difficulty concentrating or focusing on things\n&#8226; No tolerance for uncertainty – needing to know what is going to happen and how it is going to happen\n&#8226; Constant feelings of dread or apprehension\n&#8226; Feeling overwhelmed and avoiding things or situations because of it\n&#8226; Intrusive thoughts of things that cause you to worry – even when you try to stop thinking about them\n&#8226; Feeling like you can’t control your emotions and constant worry – nothing you do helps you to relax\n&#8226; Not being able to sleep at all or to sleep well because you are in a constant state of worry\n&#8226; Feeling jumpy, on edge, or restless\n&#8226; Stomach upset – including nausea and diarrhea\n&#8226; Fatiguing easily\n&#8226; Heart palpitations – feeling like your heart is racing\n&#8226; Trembles or shakes\n&#8226; Sweating and dry mouth\n&#8226; Having difficulty breathing and/or feeling like you are choking\n&#8226; Feeling lightheaded or dizzy\n&#8226; Cold chills or hot flashes\n&#8226; Numbness or tingling sensations\n&#8226; Feeling like you have a lump in your throat\n&#8226; Persistent irritability"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoTextThree"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/anxietyInfoTextFour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoLink="web"
+                android:text="We strongly suggest going through the following link for more information regarding the Symptoms, Diagnosis, Causes and Treatment Options of Generalised Anxiety Disorder: https://www.psycom.net/bookstore.anxiety.html\nDISCLAIMER: The creators of the app are not responsible for the information on the website."
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anxietyInfoSubtextThree"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>

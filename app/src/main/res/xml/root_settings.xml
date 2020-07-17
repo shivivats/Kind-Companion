@@ -69,4 +69,18 @@
             app:title="Vault Pin" />
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="Info">
+
+        <Preference
+            android:title="Credits"
+            app:key="creditsPreference"
+            app:summary="Credits for the app." />
+
+        <Preference
+            android:title="About"
+            app:key="aboutPreference"
+            app:summary="About the app." />
+    </PreferenceCategory>
+
+
 </PreferenceScreen>
