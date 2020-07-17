@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class UsefulKnowledgeActivity extends AppCompatActivity {
+public class UsefulInformationActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 pager;
@@ -33,7 +33,7 @@ public class UsefulKnowledgeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_useful_knowledge);
+        setContentView(R.layout.activity_useful_information);
 
         tabLayout = findViewById(R.id.knowledgeTabLayout);
         pager = findViewById(R.id.knowledgePager);

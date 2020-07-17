@@ -23,22 +23,22 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ProblemSolvingToolActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity"></activity>
+            android:parentActivityName=".UsefulInformationActivity"></activity>
         <activity
             android:name=".RelaxationToolActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity" />
+            android:parentActivityName=".UsefulInformationActivity" />
         <activity
             android:name=".MindfulnessToolActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity" />
+            android:parentActivityName=".UsefulInformationActivity" />
         <activity
             android:name=".SuicideInfoActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity" />
+            android:parentActivityName=".UsefulInformationActivity" />
         <activity
             android:name=".DepressionInfoActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity" />
+            android:parentActivityName=".UsefulInformationActivity" />
         <activity
             android:name=".AnxietyInfoActivity"
-            android:parentActivityName=".UsefulKnowledgeActivity" />
+            android:parentActivityName=".UsefulInformationActivity" />
         <activity
             android:name=".CrossItOffActivity"
             android:parentActivityName=".DealWithAnxietyActivity" />
@@ -67,7 +67,7 @@
             android:name=".DealWithAnxietyActivity"
             android:parentActivityName=".FrontPageActivity" />
         <activity
-            android:name=".UsefulKnowledgeActivity"
+            android:name=".UsefulInformationActivity"
             android:parentActivityName=".FrontPageActivity" />
 
         <service

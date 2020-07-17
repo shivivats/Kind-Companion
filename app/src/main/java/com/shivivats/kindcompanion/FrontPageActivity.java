@@ -32,8 +32,8 @@ public class FrontPageActivity extends AppCompatActivity {
         startActivity(settingsIntent);
     }
 
-    public void OnClickUsefulResources(View view) {
-        Intent resourcesIntent = new Intent(this, UsefulKnowledgeActivity.class);
+    public void OnClickUsefulInformation(View view) {
+        Intent resourcesIntent = new Intent(this, UsefulInformationActivity.class);
         startActivity(resourcesIntent);
     }
 
