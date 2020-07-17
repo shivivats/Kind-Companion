@@ -23,7 +23,7 @@ public class ControlledBreathingActivity extends AppCompatActivity {
 
     Button breathingStartStopButton;
 
-    Toolbar topbar;
+    Toolbar topBar;
 
 
     @Override
@@ -39,15 +39,16 @@ public class ControlledBreathingActivity extends AppCompatActivity {
         breathingIndicatorTextView.setVisibility(View.INVISIBLE);
         breathingCounterTextView.setVisibility(View.INVISIBLE);
 
-        breathingStartStopButton.setText("Start");
+        breathingStartStopButton.setText(R.string.breathingStart);
         breathingStartStopButton.setOnClickListener(this::StartBreathing);
 
-        topbar = findViewById(R.id.controlledBreathingTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.controlledBreathingTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Controlled Breathing");
-
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Controlled Breathing");
+        }
 
         // breathe in for 4 seconds
         breatheInTimer = new CountDownTimer(4000, 1000) {
@@ -58,7 +59,7 @@ public class ControlledBreathingActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                breathingIndicatorTextView.setText("Breathe Out.");
+                breathingIndicatorTextView.setText(R.string.breatheOut);
                 breatheOutTimer.start();
             }
         };
@@ -72,7 +73,7 @@ public class ControlledBreathingActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                breathingIndicatorTextView.setText("Breathe In.");
+                breathingIndicatorTextView.setText(R.string.breatheIn);
                 breatheInTimer.start();
             }
         };
@@ -91,7 +92,7 @@ public class ControlledBreathingActivity extends AppCompatActivity {
     }
 
     public void startTimer() {
-        breathingIndicatorTextView.setText("Breathe In.");
+        breathingIndicatorTextView.setText(R.string.breatheIn);
         //breathingIndicatorTextView.setVisibility(View.VISIBLE);
         //breathingCounterTextView.setVisibility(View.VISIBLE);
         breatheInTimer.start();
@@ -100,11 +101,11 @@ public class ControlledBreathingActivity extends AppCompatActivity {
     }
 
     public void StartBreathing(View view) {
-        breathingIndicatorTextView.setText("Get Ready.");
+        breathingIndicatorTextView.setText(R.string.breathingGetReady);
         breathingIndicatorTextView.setVisibility(View.VISIBLE);
         breathingCounterTextView.setVisibility(View.VISIBLE);
         startingTimer.start();
-        breathingStartStopButton.setText("Stop");
+        breathingStartStopButton.setText(R.string.breathingStop);
         breathingStartStopButton.setOnClickListener(this::StopBreathing);
     }
 
@@ -112,7 +113,7 @@ public class ControlledBreathingActivity extends AppCompatActivity {
         breatheInTimer.cancel();
         breatheOutTimer.cancel();
         startingTimer.cancel();
-        breathingStartStopButton.setText("Start");
+        breathingStartStopButton.setText(R.string.breathingStart);
         breathingStartStopButton.setOnClickListener(this::StartBreathing);
         breathingIndicatorTextView.setVisibility(View.INVISIBLE);
         breathingCounterTextView.setVisibility(View.INVISIBLE);

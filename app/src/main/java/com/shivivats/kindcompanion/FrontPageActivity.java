@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FrontPageActivity extends AppCompatActivity {
 
-    SeekBar textScaleSeekbar;
+    SeekBar textScaleSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,22 +6,22 @@
 
     <item
         android:id="@+id/action_take_photo"
-        android:title="Take Photo"
+        android:title="@string/action_take_photo"
         app:showAsAction="never"
         android:icon="@drawable/ic_add_photo"/> <!-- add icon later -->
     <item
         android:id="@+id/action_choose_image"
-        android:title="Choose Image"
+        android:title="@string/action_choose_image"
         app:showAsAction="never"
         android:icon="@drawable/ic_image"/> <!-- add icon later -->
     <item
         android:id="@+id/action_draw_image"
-        android:title="Draw Image"
+        android:title="@string/action_draw_image"
         app:showAsAction="never"
         android:icon="@drawable/ic_brush"/> <!-- add icon later -->
     <item
         android:id="@+id/action_record_audio"
-        android:title="Record Audio"
+        android:title="@string/action_record_audio"
         app:showAsAction="never"
         android:icon="@drawable/ic_voice"/> <!-- add icon later -->
 </menu>

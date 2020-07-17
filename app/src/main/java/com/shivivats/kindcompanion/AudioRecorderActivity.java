@@ -1,6 +1,7 @@
 package com.shivivats.kindcompanion;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -38,8 +39,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     private static String fileName = null;
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
-    private String[] permissions = {Manifest.permission.RECORD_AUDIO};
-    private Toolbar audioRecorderTopBar;
+    private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private Chronometer chronometer;
     private ImageView recordImage;
     private ImageView stopImage;
@@ -51,13 +51,8 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     private MediaPlayer player = null;
 
     private int lastProgress = 0;
-    private Handler mHandler = new Handler();
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            seekUpdation();
-        }
-    };
+    private final Handler mHandler = new Handler();
+    final Runnable runnable = this::seekUpdate;
     private boolean isPlaying = false;
 
     @Override
@@ -71,7 +66,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initViews() {
-        audioRecorderTopBar = findViewById(R.id.audioRecorderTopBar);
+        Toolbar audioRecorderTopBar = findViewById(R.id.audioRecorderTopBar);
 
         setSupportActionBar(audioRecorderTopBar);
 
@@ -81,8 +76,9 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         // Enable the Up button
         //ab.setDisplayHomeAsUpEnabled(true);
 
-        // hide the title from the topbar
-        ab.setDisplayShowTitleEnabled(false);
+        // hide the title from the topBar
+        if (ab != null)
+            ab.setDisplayShowTitleEnabled(false);
 
         linearLayoutRecorder = findViewById(R.id.audioRecorderLinearLayout);
         linearLayoutPlayer = findViewById(R.id.audioRecorderPlayLayout);
@@ -155,10 +151,10 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         if (v == recordImage) {
-            prepareforRecording();
+            prepareForRecording();
             startRecording();
         } else if (v == stopImage) {
-            prepareforStop();
+            prepareForStop();
             stopRecording();
         } else if (v == playPauseImage) {
             if (!isPlaying && fileName != null) {
@@ -171,7 +167,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void prepareforRecording() {
+    private void prepareForRecording() {
         TransitionManager.beginDelayedTransition(linearLayoutRecorder);
         recordImage.setVisibility(View.GONE);
         stopImage.setVisibility(View.VISIBLE);
@@ -211,7 +207,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void prepareforStop() {
+    private void prepareForStop() {
         TransitionManager.beginDelayedTransition(linearLayoutRecorder);
         recordImage.setVisibility(View.VISIBLE);
         stopImage.setVisibility(View.GONE);
@@ -249,29 +245,26 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         seekBar.setProgress(lastProgress);
         player.seekTo(lastProgress);
         seekBar.setMax(player.getDuration());
-        seekUpdation();
+        seekUpdate();
         chronometer.start();
 
 
-        /** once the audio is complete, timer is stopped here **/
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                playPauseImage.setImageResource(R.drawable.ic_play);
-                isPlaying = false;
-                chronometer.stop();
-                //chronometer.setBase(SystemClock.elapsedRealtime());
-            }
+        // once the audio is complete, timer is stopped here
+        player.setOnCompletionListener(mp -> {
+            playPauseImage.setImageResource(R.drawable.ic_play);
+            isPlaying = false;
+            chronometer.stop();
+            //chronometer.setBase(SystemClock.elapsedRealtime());
         });
 
-        /** moving the track as per the seekBar's position**/
+        // moving the track as per the seekBar's position
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player != null && fromUser) {
                     //here the track's progress is being changed as per the progress bar
                     player.seekTo(progress);
-                    //timer is being updated as per the progress of the seekbar
+                    //timer is being updated as per the progress of the seekBar
                     chronometer.setBase(SystemClock.elapsedRealtime() - player.getCurrentPosition());
                     lastProgress = progress;
                 }
@@ -300,14 +293,14 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         chronometer.stop();
 
 
-        /** moving the track as per the seekBar's position**/
+        // moving the track as per the seekBar's position
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player != null && fromUser) {
                     //here the track's progress is being changed as per the progress bar
                     player.seekTo(progress);
-                    //timer is being updated as per the progress of the seekbar
+                    //timer is being updated as per the progress of the seekBar
                     chronometer.setBase(SystemClock.elapsedRealtime() - player.getCurrentPosition());
                     lastProgress = progress;
                 }
@@ -325,9 +318,19 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         });
     }
 
+    private void seekUpdate() {
+        if (player != null) {
+            int mCurrentPosition = player.getCurrentPosition();
+            seekBar.setProgress(mCurrentPosition);
+            lastProgress = mCurrentPosition;
+        }
+        mHandler.postDelayed(runnable, 100);
+    }
+
     private String CreateAudioFile() throws IOException {
         // Create an audio file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        // This gives implied locale warning, however this is just for filenames and user wont see it, so that's ok
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String audioFileName = "AUDIO_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PODCASTS);
         File audio = File.createTempFile(
@@ -337,17 +340,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         );
 
         // Save a file path for use with ACTION_VIEW intents
-        String currentAudioPath = audio.getAbsolutePath();
-        return currentAudioPath;
-    }
-
-    private void seekUpdation() {
-        if (player != null) {
-            int mCurrentPosition = player.getCurrentPosition();
-            seekBar.setProgress(mCurrentPosition);
-            lastProgress = mCurrentPosition;
-        }
-        mHandler.postDelayed(runnable, 100);
+        return audio.getAbsolutePath();
     }
 
 }

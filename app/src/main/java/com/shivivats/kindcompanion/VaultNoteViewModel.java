@@ -28,8 +28,7 @@ public class VaultNoteViewModel extends AndroidViewModel {
     }
 
     public long insertBlank(NoteEntity blank) {
-        long noteId = noteRepository.insertBlankNote(blank);
-        return noteId;
+        return noteRepository.insertBlankNote(blank);
     }
 
     public void update(NoteEntity noteEntity) {

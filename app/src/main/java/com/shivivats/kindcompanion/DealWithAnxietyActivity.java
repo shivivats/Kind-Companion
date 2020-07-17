@@ -14,7 +14,7 @@ public class DealWithAnxietyActivity extends AppCompatActivity {
     // maybe a drawing/colouring game as well
     // implementing breathing techniques
 
-    Toolbar topbar;
+    Toolbar topBar;
 
 
     @Override
@@ -22,11 +22,13 @@ public class DealWithAnxietyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_with_anxiety);
 
-        topbar = findViewById(R.id.dealWithAnxietyTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.dealWithAnxietyTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Deal With Anxiety");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Deal With Anxiety");
+        }
     }
 
 

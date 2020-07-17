@@ -33,12 +33,6 @@ public class ResourcesFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
@@ -53,20 +47,14 @@ public class ResourcesFragment extends Fragment {
         yourLifeCountsResourceButton = getActivity().findViewById(R.id.yourLifeCountsResourceButton);
         suicidePreventionLifelineResourceButton = getActivity().findViewById(R.id.suicidePreventionLifelineResourceButton);
 
-        reachOutResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://au.reachout.com/tools-and-apps"));
-                startActivity(intent);
-            }
+        reachOutResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://au.reachout.com/tools-and-apps"));
+            startActivity(intent);
         });
 
-        headspaceResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.getsomeheadspace.android"));
-                startActivity(intent);
-            }
+        headspaceResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.getsomeheadspace.android"));
+            startActivity(intent);
         });
 /*
         flowyResourceButton.setOnClickListener(new View.OnClickListener() {
@@ -77,52 +65,34 @@ public class ResourcesFragment extends Fragment {
             }
         });
 */
-        stopBreatheThinkResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UCkB9zEEqnP9kMIf5VChd99Q"));
-                startActivity(intent);
-            }
+        stopBreatheThinkResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UCkB9zEEqnP9kMIf5VChd99Q"));
+            startActivity(intent);
         });
 
-        samTheChatbotResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://headtohealth.gov.au/sam-the-chatbot"));
-                startActivity(intent);
-            }
+        samTheChatbotResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://headtohealth.gov.au/sam-the-chatbot"));
+            startActivity(intent);
         });
 
-        befreindersWorldwideResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.befrienders.org/"));
-                startActivity(intent);
-            }
+        befreindersWorldwideResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.befrienders.org/"));
+            startActivity(intent);
         });
 
-        psycomResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.psycom.net/"));
-                startActivity(intent);
-            }
+        psycomResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.psycom.net/"));
+            startActivity(intent);
         });
 
-        yourLifeCountsResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://yourlifecounts.org/"));
-                startActivity(intent);
-            }
+        yourLifeCountsResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://yourlifecounts.org/"));
+            startActivity(intent);
         });
 
-        suicidePreventionLifelineResourceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://suicidepreventionlifeline.org/help-yourself/"));
-                startActivity(intent);
-            }
+        suicidePreventionLifelineResourceButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://suicidepreventionlifeline.org/help-yourself/"));
+            startActivity(intent);
         });
     }
 

@@ -17,7 +17,7 @@
 -->
     <item
         android:id="@+id/action_color_black"
-        android:title="Black"
+        android:title="@string/action_color_black"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_black"
         />
@@ -25,89 +25,89 @@
 
     <item
         android:id="@+id/action_color_red"
-        android:title="Red"
+        android:title="@string/action_color_red"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_red"
         />
 
     <item
         android:id="@+id/action_color_blue"
-        android:title="Blue"
+        android:title="@string/action_color_blue"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_blue"
         />
 
     <item
         android:id="@+id/action_color_yellow"
-        android:title="Yellow"
+        android:title="@string/action_color_yellow"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_yellow"
         />
 
     <item
         android:id="@+id/action_color_purple"
-        android:title="Purple"
+        android:title="@string/action_color_purple"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_purple"
         />
 
     <item
         android:id="@+id/action_color_lightblue"
-        android:title="Light Blue"
+        android:title="@string/action_color_lightblue"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_lightblue"
         />
 
     <item
         android:id="@+id/action_color_green"
-        android:title="Green"
+        android:title="@string/action_color_green"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_green"
         />
 
     <item
         android:id="@+id/action_color_lightgreen"
-        android:title="Light Green"
+        android:title="@string/action_color_lightgreen"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_lightgreen"
         />
 
     <item
         android:id="@+id/action_color_grey"
-        android:title="Grey"
+        android:title="@string/action_color_grey"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_grey" />
 
     <item
         android:id="@+id/action_color_orange"
-        android:title="Orange"
+        android:title="@string/action_color_orange"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_orange" />
 
     <item
         android:id="@+id/action_stroke_small"
-        android:title="Stroke Small"
+        android:title="@string/action_stroke_small"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_stroke_medium"
-        android:title="Stroke Medium"
+        android:title="@string/action_stroke_medium"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_stroke_big"
-        android:title="Stroke Big"
+        android:title="@string/action_stroke_big"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_eraser"
-        android:title="Eraser"
+        android:title="@string/action_eraser"
         app:showAsAction="ifRoom" />
 
 
     <item
         android:id="@+id/action_clear"
-        android:title="Clear"
+        android:title="@string/action_clear"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_clear"
         />

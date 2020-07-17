@@ -22,20 +22,14 @@ public class ImageRepository {
     }
 
     void insert(ImageEntity imageEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            imageEntityDao.insertImages(imageEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> imageEntityDao.insertImages(imageEntity));
     }
 
     void update(ImageEntity imageEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            imageEntityDao.updateImages(imageEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> imageEntityDao.updateImages(imageEntity));
     }
 
     void delete(ImageEntity imageEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            imageEntityDao.deleteImages(imageEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> imageEntityDao.deleteImages(imageEntity));
     }
 }

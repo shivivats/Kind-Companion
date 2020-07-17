@@ -41,28 +41,27 @@ public class UsefulInformationActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.knowledgeTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Useful Knowledge");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Useful Knowledge");
+        }
 
         adapter = new ViewPagerFragmentAdapter(this);
         pager.setAdapter(adapter);
-        new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                // add the names here for more tabs
-                switch (position) {
-                    case 0:
-                        tab.setText("Info");
-                        break;
-                    case 1:
-                        tab.setText("Tools");
-                        break;
-                    case 2:
-                        tab.setText("Resources");
-                        break;
-                    default:
-                        tab.setText("Tab " + position);
-                }
+        new TabLayoutMediator(tabLayout, pager, (tab, position) -> {
+            // add the names here for more tabs
+            switch (position) {
+                case 0:
+                    tab.setText("Info");
+                    break;
+                case 1:
+                    tab.setText("Tools");
+                    break;
+                case 2:
+                    tab.setText("Resources");
+                    break;
+                default:
+                    tab.setText("Tab " + position);
             }
         }).attach();
     }

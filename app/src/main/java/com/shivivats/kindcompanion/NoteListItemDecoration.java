@@ -30,9 +30,9 @@ public class NoteListItemDecoration extends RecyclerView.ItemDecoration {
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
                 int dividerTop = child.getBottom() + params.bottomMargin;
-                int divierBottom = dividerTop + divider.getIntrinsicHeight();
+                int dividerBottom = dividerTop + divider.getIntrinsicHeight();
 
-                divider.setBounds(dividerLeft, dividerTop, dividerRight, divierBottom);
+                divider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom);
                 divider.draw(c);
             }
         }

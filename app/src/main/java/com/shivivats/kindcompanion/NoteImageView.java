@@ -17,20 +17,14 @@ public class NoteImageView extends AppCompatActivity implements DeleteImageDialo
 
     private long currentImageId;
 
-    private Uri currentImageUri;
-
-    private ImageView imageView;
-
-    private Toolbar noteImageViewTopBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_image_view);
 
-        imageView = findViewById(R.id.noteImageImageView);
+        ImageView imageView = findViewById(R.id.noteImageImageView);
 
-        noteImageViewTopBar = findViewById(R.id.noteImageTopBar);
+        Toolbar noteImageViewTopBar = findViewById(R.id.noteImageTopBar);
 
         setSupportActionBar(noteImageViewTopBar);
 
@@ -40,8 +34,10 @@ public class NoteImageView extends AppCompatActivity implements DeleteImageDialo
         // Enable the Up button
         //ab.setDisplayHomeAsUpEnabled(true);
 
-        // hide the title from the topbar
-        ab.setDisplayShowTitleEnabled(false);
+        // hide the title from the topBar
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
 
         Intent intent = getIntent();
         currentImageId = intent.getLongExtra("IMAGE_ID", -1);
@@ -51,7 +47,7 @@ public class NoteImageView extends AppCompatActivity implements DeleteImageDialo
             finish();
         }
 
-        currentImageUri = Uri.parse(intent.getStringExtra("IMAGE_URI"));
+        Uri currentImageUri = Uri.parse(intent.getStringExtra("IMAGE_URI"));
 
         imageView.setImageURI(currentImageUri);
     }

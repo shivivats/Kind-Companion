@@ -10,17 +10,20 @@ public class AnxietyChecklistActivity extends AppCompatActivity {
 
     // Not adding this right now as I can not find any particular source to quote the youtuber Zer0Doxy on
 
-    Toolbar topbar;
+    Toolbar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anxiety_checklist);
 
-        topbar = findViewById(R.id.anxietyChecklistTopbar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.anxietyChecklistTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Anxiety Checklist");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Anxiety Checklist");
+        }
+
     }
 }

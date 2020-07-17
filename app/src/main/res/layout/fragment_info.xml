@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".InfoFragment">
+    tools:context=".InfoFragment"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/anxietyInfoButton"
+        style="?android:borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/anxietyInfoButton"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:text="About Anxiety"
-            android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/anxietyInfoButton"
+        android:textColor="@android:color/black"
             app:icon="@drawable/ic_information"
             app:iconGravity="start"
-            app:iconTint="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
+        app:iconTint="@android:color/black"
+        android:textSize="@dimen/useful_info_button_text_size"
+        android:textStyle="bold"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp" />
 
@@ -38,12 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="About Depression"
+            android:text="@string/depressionInfoButton"
             android:textColor="@android:color/black"
             app:icon="@drawable/ic_information"
             app:iconGravity="start"
             app:iconTint="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp" />
@@ -59,12 +57,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="About Suicidal Feelings"
+            android:text="@string/suicideInfoButton"
             android:textColor="@android:color/black"
             app:icon="@drawable/ic_information"
             app:iconGravity="start"
             app:iconTint="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp" />
@@ -75,4 +73,3 @@
             android:background="?android:attr/listDivider" />
 
     </LinearLayout>
-</FrameLayout>

@@ -9,18 +9,20 @@ import androidx.appcompat.widget.Toolbar;
 
 public class FiveThingsActivity extends AppCompatActivity {
 
-    Toolbar topbar;
+    Toolbar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five_things);
 
-        topbar = findViewById(R.id.fiveThingsTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.fiveThingsTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Five Things Game");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Five Things Game");
+        }
 
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 public class AudioRepository {
 
-    private AudioEntityDao audioEntityDao;
-    private LiveData<List<AudioEntity>> currentNoteAudio;
+    private final AudioEntityDao audioEntityDao;
+    private final LiveData<List<AudioEntity>> currentNoteAudio;
 
     AudioRepository(Application application, long currentNoteId) {
         NoteDatabase db = NoteDatabase.getDatabase(application);
@@ -22,20 +22,14 @@ public class AudioRepository {
     }
 
     void insert(AudioEntity audioEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            audioEntityDao.insertAudio(audioEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> audioEntityDao.insertAudio(audioEntity));
     }
 
     void update(AudioEntity audioEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            audioEntityDao.updateAudio(audioEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> audioEntityDao.updateAudio(audioEntity));
     }
 
     void delete(AudioEntity audioEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            audioEntityDao.deleteAudio(audioEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> audioEntityDao.deleteAudio(audioEntity));
     }
 }

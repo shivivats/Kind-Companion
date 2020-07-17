@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class RelaxingPaintingFrontActivity extends AppCompatActivity {
 
-    Toolbar topbar;
+    Toolbar topBar;
 
     TextView relaxingPaintingHeaderView;
 
@@ -20,12 +20,13 @@ public class RelaxingPaintingFrontActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relaxing_painting_front);
 
-        topbar = findViewById(R.id.relaxingPaintingFrontTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.relaxingPaintingFrontTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Relaxing Painting");
-
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Relaxing Painting");
+        }
         relaxingPaintingHeaderView = findViewById(R.id.relaxingPaintingHeaderView);
     }
 

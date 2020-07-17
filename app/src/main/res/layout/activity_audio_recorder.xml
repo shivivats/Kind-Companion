@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
+        android:elevation="@dimen/toolbar_elevation"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -50,6 +50,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
+            android:contentDescription="@string/audioRecorderImageRecordContentDescription"
             android:src="@drawable/ic_voice" />
 
         <ImageView
@@ -62,6 +63,7 @@
             android:focusable="true"
             android:src="@drawable/ic_stop"
             android:tint="@android:color/darker_gray"
+            android:contentDescription="@string/audioRecorderImageStopContentDescription"
             android:visibility="gone" />
 
     </LinearLayout>
@@ -88,11 +90,12 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_play"
+            android:contentDescription="@string/audioRecorderImagePlayPauseContentDescription"
             android:tint="@android:color/darker_gray" />
 
         <SeekBar
             android:id="@+id/audioRecorderPlaySeekBar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />

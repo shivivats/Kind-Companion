@@ -10,17 +10,19 @@ public class CrossItOffActivity extends AppCompatActivity {
 
     //Future considerations: implementing an actual checklist in this activity
 
-    Toolbar topbar;
+    Toolbar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cross_it_off);
 
-        topbar = findViewById(R.id.crossItOffTopbar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.crossItOffTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Cross It Off");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Cross It Off");
+        }
     }
 }

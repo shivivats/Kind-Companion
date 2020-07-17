@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ToolsFragment">
+    tools:context=".ToolsFragment"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mindfullnessToolsButton"
+        style="?android:borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mindfullnessToolsButton"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:text="Mindfulness"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/mindfullnessToolsButton"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/useful_info_button_text_size"
+        android:textStyle="bold"
             app:icon="@drawable/ic_psychology"
             app:iconGravity="start"
             app:iconTint="@android:color/black"
@@ -38,9 +35,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="Relaxation"
+            android:text="@string/relaxationToolsButton"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:backgroundTint="@android:color/white"
             app:cornerRadius="0sp"
@@ -59,9 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="Self Care: Problem Solving"
+            android:text="@string/problemSolvingToolsButton"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:icon="@drawable/ic_think_bulb"
             app:iconGravity="start"
@@ -75,4 +72,3 @@
             android:background="?android:attr/listDivider" />
 
     </LinearLayout>
-</FrameLayout>

@@ -20,7 +20,9 @@ public class RelaxationToolActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.relaxationToolTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Relaxation");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Relaxation");
+        }
     }
 }

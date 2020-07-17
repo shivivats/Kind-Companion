@@ -30,41 +30,25 @@ public class InfoFragment extends Fragment {
 
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         anxietyInfoButton = getActivity().findViewById(R.id.anxietyInfoButton);
         depressionInfoButton = getActivity().findViewById(R.id.depressionInfoButton);
         suicideInfoButton = getActivity().findViewById(R.id.suicideInfoButton);
 
-        anxietyInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AnxietyInfoActivity.class);
-                startActivity(intent);
-            }
+        anxietyInfoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AnxietyInfoActivity.class);
+            startActivity(intent);
         });
 
-        depressionInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DepressionInfoActivity.class);
-                startActivity(intent);
-            }
+        depressionInfoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), DepressionInfoActivity.class);
+            startActivity(intent);
         });
 
-        suicideInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SuicideInfoActivity.class);
-                startActivity(intent);
-            }
+        suicideInfoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SuicideInfoActivity.class);
+            startActivity(intent);
         });
     }
 

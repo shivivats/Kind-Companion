@@ -18,7 +18,9 @@ public class MindfulnessToolActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.mindfulnessToolTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Mindfulness");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Mindfulness");
+        }
     }
 }

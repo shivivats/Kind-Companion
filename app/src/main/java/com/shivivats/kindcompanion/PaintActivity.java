@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,7 +30,6 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
 
     private PaintView paintView;
 
-    private Toolbar paintViewTopBar;
     private Toolbar paintViewBottomBar;
 
     private long currentImageId;
@@ -37,8 +37,6 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
     private Uri currentImageUri;
 
     private boolean isEdit;
-
-    private MenuItem deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         paintView = findViewById(R.id.paintView);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        Bitmap bitmap = null;
+        Bitmap bitmap;
         //Bitmap returnedBitmap = null;
         if (isEdit) {
             // here we need to set the paintview canvas to be a bitmap from the image
@@ -90,7 +88,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
             paintView.init(metrics, false, null, false);
         }
 
-        paintViewTopBar = findViewById(R.id.paintViewTopBar);
+        Toolbar paintViewTopBar = findViewById(R.id.paintViewTopBar);
         paintViewBottomBar = findViewById(R.id.paintViewBottomBar);
 
         setSupportActionBar(paintViewTopBar);
@@ -101,7 +99,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         // Enable the Up button
         //ab.setDisplayHomeAsUpEnabled(true);
 
-        if (isEdit) {
+        if (isEdit && ab != null) {
             ab.setTitle("Edit Image");
         } else {
             ab.setTitle("New Drawing");
@@ -127,10 +125,10 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         getMenuInflater().inflate(R.menu.bottombar_paint, bottomMenu);
 
         for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(menuItem -> onOptionsItemSelected(menuItem));
+            bottomMenu.getItem(i).setOnMenuItemClickListener(this::onOptionsItemSelected);
         }
 
-        deleteButton = menu.findItem(R.id.action_delete_paint);
+        MenuItem deleteButton = menu.findItem(R.id.action_delete_paint);
 
         if (isEdit) {
             deleteButton.setVisible(true);
@@ -275,7 +273,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (path != "") {
+        if (!path.equals("")) {
             // we have the file path here
             try (FileOutputStream out = new FileOutputStream(path)) {
                 paintView.getmBitmap().compress(Bitmap.CompressFormat.JPEG, 50, out);
@@ -304,7 +302,8 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
 
     private String CreateDrawingFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        // This gives implied locale warning, however this is just for filenames and user wont see it, so that's ok
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String drawingFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File drawing = File.createTempFile(
@@ -314,8 +313,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-        String currentDrawingPath = drawing.getAbsolutePath();
-        return currentDrawingPath;
+        return drawing.getAbsolutePath();
     }
 
     private void ClearCanvas() {

@@ -32,9 +32,7 @@ public class NoteRepository {
     }
 
     void insertNote(NoteEntity noteEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            noteEntityDao.insertNotes(noteEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> noteEntityDao.insertNotes(noteEntity));
     }
 
     long insertBlankNote(NoteEntity blank) {
@@ -42,15 +40,12 @@ public class NoteRepository {
 
         Future<Long> insertBlankNoteFuture = NoteDatabase.databaseWriteExecutor.submit(() -> {
             long currId = noteEntityDao.insertBlankNote(blank);
-            Long longCurrId = currId;
-            return longCurrId;
+            return (Long) currId;
         });
 
         try {
             noteId = insertBlankNoteFuture.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -58,15 +53,11 @@ public class NoteRepository {
     }
 
     void update(NoteEntity noteEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            noteEntityDao.updateNotes(noteEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> noteEntityDao.updateNotes(noteEntity));
     }
 
     void delete(NoteEntity noteEntity) {
-        NoteDatabase.databaseWriteExecutor.execute(() -> {
-            noteEntityDao.deleteNotes(noteEntity);
-        });
+        NoteDatabase.databaseWriteExecutor.execute(() -> noteEntityDao.deleteNotes(noteEntity));
     }
 
 }

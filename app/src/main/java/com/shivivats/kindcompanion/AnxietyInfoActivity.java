@@ -18,7 +18,9 @@ public class AnxietyInfoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.anxietyInfoTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Anxiety Information");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Anxiety Information");
+        }
     }
 }

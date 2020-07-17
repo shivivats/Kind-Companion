@@ -8,17 +8,19 @@ import androidx.appcompat.widget.Toolbar;
 
 public class RelaxingMusicActivity extends AppCompatActivity {
 
-    Toolbar topbar;
+    Toolbar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relaxing_music);
 
-        topbar = findViewById(R.id.relaxingMusicTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.relaxingMusicTopBar);
+        setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Relaxing Music List");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Relaxing Music List");
+        }
     }
 }

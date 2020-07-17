@@ -34,12 +34,6 @@ public class ToolsFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
@@ -47,28 +41,19 @@ public class ToolsFragment extends Fragment {
         relaxationButton = getActivity().findViewById(R.id.relaxationToolsButton);
         problemSolvingButton = getActivity().findViewById(R.id.problemSolvingToolsButton);
 
-        mindfulnessButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MindfulnessToolActivity.class);
-                startActivity(intent);
-            }
+        mindfulnessButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), MindfulnessToolActivity.class);
+            startActivity(intent);
         });
 
-        relaxationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RelaxationToolActivity.class);
-                startActivity(intent);
-            }
+        relaxationButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), RelaxationToolActivity.class);
+            startActivity(intent);
         });
 
-        problemSolvingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ProblemSolvingToolActivity.class);
-                startActivity(intent);
-            }
+        problemSolvingButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ProblemSolvingToolActivity.class);
+            startActivity(intent);
         });
 
     }

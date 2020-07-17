@@ -18,7 +18,9 @@ public class SuicideInfoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.suicideInfoTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Suicial Thoughts");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Suicidal Thoughts");
+        }
     }
 }

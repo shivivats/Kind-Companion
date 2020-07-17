@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_delete_note_audio"
-        android:title="DELETE"
+        android:title="@string/action_delete_note_audio"
         app:showAsAction="always"
         android:icon="@drawable/ic_delete"/> <!-- add icon later -->
 

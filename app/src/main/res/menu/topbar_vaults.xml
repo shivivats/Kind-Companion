@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_change_vault_pin"
-        android:title="Change Pin"
+        android:title="@string/action_change_vault_pin"
         app:showAsAction="never" />
 
 </menu>

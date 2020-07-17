@@ -10,18 +10,14 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class ReminderNoteListActivity extends AppCompatActivity implements NoteListClickListener {
 
@@ -64,7 +60,6 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
     });
 
     private ReminderNoteListAdapter adapter;
-    private Toolbar reminderTopBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,23 +80,15 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
 
         reminderNoteViewModel = new ViewModelProvider(this).get(ReminderNoteViewModel.class);
 
-        reminderNoteViewModel.getReminderNotes().observe(this, new Observer<List<NoteEntity>>() {
-            @Override
-            public void onChanged(@Nullable final List<NoteEntity> notes) {
-                // update the cached copy of the notes in the adapter
-                adapter.setNotes(notes);
-            }
+        reminderNoteViewModel.getReminderNotes().observe(this, notes -> {
+            // update the cached copy of the notes in the adapter
+            adapter.setNotes(notes);
         });
 
         FloatingActionButton fab = findViewById(R.id.reminderListFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OnAddFabClick();
-            }
-        });
+        fab.setOnClickListener(view -> OnAddFabClick());
 
-        reminderTopBar = findViewById(R.id.noteReminderTopBar);
+        Toolbar reminderTopBar = findViewById(R.id.noteReminderTopBar);
         setSupportActionBar(reminderTopBar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -129,8 +116,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         blankNote.noteTitle = "";
         blankNote.noteType = NoteType.NOTE_REMINDER.getValue();
 
-        long noteId = reminderNoteViewModel.insertBlank(blankNote);
-        currentNoteId = noteId;
+        currentNoteId = reminderNoteViewModel.insertBlank(blankNote);
         // now we have the id and we can pass it with the intent
     }
 

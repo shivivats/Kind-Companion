@@ -2,7 +2,6 @@ package com.shivivats.kindcompanion;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,16 +36,10 @@ public class ClearCanvasDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Are you sure you want to clear the canvas?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        listener.onClearCanvasDialogPositiveClick(ClearCanvasDialogFragment.this);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        listener.onClearCanvasDialogNegativeClick(ClearCanvasDialogFragment.this);
-                    }
+                .setPositiveButton("Yes", (dialog, id) -> listener.onClearCanvasDialogPositiveClick(ClearCanvasDialogFragment.this))
+                .setNegativeButton("No", (dialog, id) -> {
+                    // User cancelled the dialog
+                    listener.onClearCanvasDialogNegativeClick(ClearCanvasDialogFragment.this);
                 });
         // Create the AlertDialog object and return it
         return builder.create();

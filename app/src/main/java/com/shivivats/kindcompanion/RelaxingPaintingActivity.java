@@ -36,9 +36,10 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         topBar = findViewById(R.id.relaxingPaintingTopBar);
         setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Relaxing Painting");
-
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Relaxing Painting");
+        }
         bottomBar = findViewById(R.id.relaxingPaintingBottomBar);
         paintView = findViewById(R.id.relaxingPaintView);
 
@@ -64,6 +65,8 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         int randomImageID = images.getResourceId(randomInt, 0);
 
         currentImage = decodeSampledBitmapFromResource(getResources(), randomImageID, currentMetrics.widthPixels, currentMetrics.heightPixels);
+
+        images.recycle();
     }
 
     private void InitPaintView() {
@@ -98,7 +101,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         getMenuInflater().inflate(R.menu.bottombar_paint, bottomMenu);
 
         for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(menuItem -> onOptionsItemSelected(menuItem));
+            bottomMenu.getItem(i).setOnMenuItemClickListener(this::onOptionsItemSelected);
         }
 
         return true;
@@ -216,7 +219,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
     }
 
     private void NextImage() {
-        // also show a dialogue here if theyre sure they wanna go to the next image
+        // also show a dialogue here if they're sure they wanna go to the next image
         DialogFragment newFragment = new NextImageDialogFragment();
         newFragment.show(getSupportFragmentManager(), "next_image");
     }

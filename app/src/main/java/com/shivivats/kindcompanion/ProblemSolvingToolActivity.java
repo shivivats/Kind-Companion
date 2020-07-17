@@ -18,7 +18,9 @@ public class ProblemSolvingToolActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.problemSolvingToolTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Self Care: Problem Solving");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Self Care: Problem Solving");
+        }
     }
 }

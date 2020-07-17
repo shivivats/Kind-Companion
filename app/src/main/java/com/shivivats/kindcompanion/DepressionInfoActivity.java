@@ -18,7 +18,9 @@ public class DepressionInfoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.depressionInfoTopBar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Depression Information");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Depression Information");
+        }
     }
 }

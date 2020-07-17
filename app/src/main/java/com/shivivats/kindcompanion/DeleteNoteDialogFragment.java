@@ -2,7 +2,6 @@ package com.shivivats.kindcompanion;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,16 +37,10 @@ public class DeleteNoteDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Delete the note?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        listener.onDeleteNoteDialogPositiveClick(DeleteNoteDialogFragment.this);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        listener.onDeleteNoteDialogNegativeClick(DeleteNoteDialogFragment.this);
-                    }
+                .setPositiveButton("Yes", (dialog, id) -> listener.onDeleteNoteDialogPositiveClick(DeleteNoteDialogFragment.this))
+                .setNegativeButton("No", (dialog, id) -> {
+                    // User cancelled the dialog
+                    listener.onDeleteNoteDialogNegativeClick(DeleteNoteDialogFragment.this);
                 });
         // Create the AlertDialog object and return it
         return builder.create();

@@ -12,18 +12,14 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class VaultNoteListActivity extends AppCompatActivity implements NoteListClickListener {
 
@@ -64,7 +60,6 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
     });
 
     private VaultNoteListAdapter adapter;
-    private Toolbar vaultTopBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,23 +80,15 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
 
         vaultNoteViewModel = new ViewModelProvider(this).get(VaultNoteViewModel.class);
 
-        vaultNoteViewModel.getVaultNotes().observe(this, new Observer<List<NoteEntity>>() {
-            @Override
-            public void onChanged(@Nullable final List<NoteEntity> notes) {
-                // update the cached copy of the notes in the adapter
-                adapter.setNotes(notes);
-            }
+        vaultNoteViewModel.getVaultNotes().observe(this, notes -> {
+            // update the cached copy of the notes in the adapter
+            adapter.setNotes(notes);
         });
 
         FloatingActionButton fab = findViewById(R.id.vaultListFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OnAddFabClick();
-            }
-        });
+        fab.setOnClickListener(view -> OnAddFabClick());
 
-        vaultTopBar = findViewById(R.id.noteVaultTopBar);
+        Toolbar vaultTopBar = findViewById(R.id.noteVaultTopBar);
         setSupportActionBar(vaultTopBar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -129,8 +116,7 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
         blankNote.noteTitle = "";
         blankNote.noteType = NoteType.NOTE_VAULT.getValue();
 
-        long noteId = vaultNoteViewModel.insertBlank(blankNote);
-        currentNoteId = noteId;
+        currentNoteId = vaultNoteViewModel.insertBlank(blankNote);
         // now we have the id and we can pass it with the intent
     }
 

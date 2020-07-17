@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener, DeleteNoteDialogFragment.DeleteNoteListener {
 
@@ -117,7 +116,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 // this should automatically add the image to the recyclerview as well
             } else {
                 // the user chose to not choose an image
-                Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -154,13 +153,13 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                     noteEditViewModel.insertImages(newImage);
                     // this should automatically add the image to the recyclerview as well
                 } else {
-                    // for some reason the uri was null, i.e., storage couldnt be accessed
-                    Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG);
+                    // for some reason the uri was null, i.e., storage couldn't be accessed
+                    Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Log.d("randomtag", "null camera activity result");
                 // the user chose to not click a picture
-                Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -255,10 +254,12 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         //ab.setDisplayHomeAsUpEnabled(true);
 
         // hide the title from the topbar
-        if (TextUtils.isEmpty(noteTitle.getText())) {
-            ab.setDisplayShowTitleEnabled(false);
-        } else {
-            ab.setTitle(noteTitle.getText().toString());
+        if (ab != null) {
+            if (TextUtils.isEmpty(noteTitle.getText())) {
+                ab.setDisplayShowTitleEnabled(false);
+            } else {
+                ab.setTitle(noteTitle.getText().toString());
+            }
         }
 
         // set the bottom bar
@@ -266,7 +267,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     }
 
     private void InitRecyclerView() {
-        // add the recyler view for the image
+        // add the recycler view for the image
         RecyclerView imageRecyclerView = findViewById(R.id.noteEditRecyclerImageView);
 
         GridLayoutManager imageViewManager = new GridLayoutManager(this, 4, GridLayoutManager.VERTICAL, false);
@@ -277,7 +278,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         imageRecyclerView.setAdapter(noteEditImagesAdapter);
 
-        // so we prolly wanna load all the images sent to us. wait no we dont? - IDK WHY THIS COMMENT EXISTS BUT IM TOO AFRAID TO DELETE IT
+        // so we prolly wanna load all the images sent to us. wait no we don't? - IDK WHY THIS COMMENT EXISTS BUT IM TOO AFRAID TO DELETE IT
 
         // add recycler view for the audios
         RecyclerView audioRecyclerView = findViewById(R.id.noteEditRecyclerAudioView);
@@ -295,20 +296,14 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         noteEditViewModel = new ViewModelProvider(this, new NoteEditViewModelFactory(this.getApplication(), currentNoteId)).get(NoteEditViewModel.class);
 
         // add an observer for the livedata
-        noteEditViewModel.getCurrentNoteImages().observe(this, new Observer<List<ImageEntity>>() {
-            @Override
-            public void onChanged(List<ImageEntity> imageEntities) {
-                // update the cached copy of image entities in the adapter
-                noteEditImagesAdapter.setImages(imageEntities);
-            }
+        noteEditViewModel.getCurrentNoteImages().observe(this, imageEntities -> {
+            // update the cached copy of image entities in the adapter
+            noteEditImagesAdapter.setImages(imageEntities);
         });
 
-        noteEditViewModel.getCurrentNoteAudio().observe(this, new Observer<List<AudioEntity>>() {
-            @Override
-            public void onChanged(List<AudioEntity> audioEntities) {
-                // update the cached copy of audio entities in the adapter
-                noteEditAudioAdapter.setAudios(audioEntities);
-            }
+        noteEditViewModel.getCurrentNoteAudio().observe(this, audioEntities -> {
+            // update the cached copy of audio entities in the adapter
+            noteEditAudioAdapter.setAudios(audioEntities);
         });
     }
 
@@ -366,12 +361,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         getMenuInflater().inflate(R.menu.bottombar_note_edit, bottomMenu);
 
         for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    return onOptionsItemSelected(menuItem);
-                }
-            });
+            bottomMenu.getItem(i).setOnMenuItemClickListener(this::onOptionsItemSelected);
         }
 
         return true;
@@ -413,7 +403,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
-                // We dont need to handle the "up/back" button here bc its gonna default to the superclass
+                // We don't need to handle the "up/back" button here bc its gonna default to the superclass
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -481,8 +471,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 takePicLauncher.launch(photoURI);
             }
         } else {
-            // Device doesnt have a camera, show a toast or something
-            Toast.makeText(this, "Camera not found on device.", Toast.LENGTH_LONG);
+            // Device doesn't have a camera, show a toast or something
+            Toast.makeText(this, "Camera not found on device.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -499,7 +489,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
     private File CreateImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        // This gives implied locale warning, however this is just for filenames and user wont see it, so that's ok
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(

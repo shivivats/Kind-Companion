@@ -31,21 +31,13 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
     private ImageView playPauseImage;
     private SeekBar seekBar;
-    private LinearLayout playLayout;
     private Chronometer chronometer;
-
-    private Toolbar noteAudioViewTopBar;
 
     private MediaPlayer player = null;
 
     private int lastProgress = 0;
-    private Handler mHandler = new Handler();
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            seekUpdation();
-        }
-    };
+    private final Handler mHandler = new Handler();
+    final Runnable runnable = this::seekUpdate;
     private boolean isPlaying = false;
 
     @Override
@@ -55,10 +47,10 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
         playPauseImage = findViewById(R.id.audioViewImagePlayPause);
         seekBar = findViewById(R.id.audioViewSeekBar);
-        playLayout = findViewById(R.id.audioViewPlayLayout);
+        LinearLayout playLayout = findViewById(R.id.audioViewPlayLayout);
         chronometer = findViewById(R.id.audioViewChronometer);
 
-        noteAudioViewTopBar = findViewById(R.id.audioViewTopBar);
+        Toolbar noteAudioViewTopBar = findViewById(R.id.audioViewTopBar);
 
         setSupportActionBar(noteAudioViewTopBar);
 
@@ -67,8 +59,10 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         // Enable the Up button
         //ab.setDisplayHomeAsUpEnabled(true);
 
-        // hide the title from the topbar
-        ab.setDisplayShowTitleEnabled(false);
+        // hide the title from the topBar
+        if (ab != null) {
+            ab.setDisplayShowTitleEnabled(false);
+        }
 
         Intent intent = getIntent();
         currentAudioId = intent.getLongExtra("AUDIO_ID", -1);
@@ -124,29 +118,26 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         seekBar.setProgress(lastProgress);
         player.seekTo(lastProgress);
         seekBar.setMax(player.getDuration());
-        seekUpdation();
+        seekUpdate();
         chronometer.start();
 
 
-        /** once the audio is complete, timer is stopped here **/
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                playPauseImage.setImageResource(R.drawable.ic_play);
-                isPlaying = false;
-                chronometer.stop();
-                //chronometer.setBase(SystemClock.elapsedRealtime());
-            }
+        // once the audio is complete, timer is stopped here
+        player.setOnCompletionListener(mp -> {
+            playPauseImage.setImageResource(R.drawable.ic_play);
+            isPlaying = false;
+            chronometer.stop();
+            //chronometer.setBase(SystemClock.elapsedRealtime());
         });
 
-        /** moving the track as per the seekBar's position**/
+        // moving the track as per the seekBar's position
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player != null && fromUser) {
                     //here the track's progress is being changed as per the progress bar
                     player.seekTo(progress);
-                    //timer is being updated as per the progress of the seekbar
+                    //timer is being updated as per the progress of the seekBar
                     chronometer.setBase(SystemClock.elapsedRealtime() - player.getCurrentPosition());
                     lastProgress = progress;
                 }
@@ -162,6 +153,15 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
             }
         });
+    }
+
+    private void seekUpdate() {
+        if (player != null) {
+            int mCurrentPosition = player.getCurrentPosition();
+            seekBar.setProgress(mCurrentPosition);
+            lastProgress = mCurrentPosition;
+        }
+        mHandler.postDelayed(runnable, 100);
     }
 
     private void stopPlaying() {
@@ -175,14 +175,14 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         chronometer.stop();
 
 
-        /** moving the track as per the seekBar's position**/
+        // moving the track as per the seekBar's position
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (player != null && fromUser) {
                     //here the track's progress is being changed as per the progress bar
                     player.seekTo(progress);
-                    //timer is being updated as per the progress of the seekbar
+                    //timer is being updated as per the progress of the seekBar
                     chronometer.setBase(SystemClock.elapsedRealtime() - player.getCurrentPosition());
                     lastProgress = progress;
                 }
@@ -198,15 +198,6 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
             }
         });
-    }
-
-    private void seekUpdation() {
-        if (player != null) {
-            int mCurrentPosition = player.getCurrentPosition();
-            seekBar.setProgress(mCurrentPosition);
-            lastProgress = mCurrentPosition;
-        }
-        mHandler.postDelayed(runnable, 100);
     }
 
     @Override

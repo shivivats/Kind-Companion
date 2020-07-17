@@ -23,7 +23,7 @@ public class VaultLogin extends AppCompatActivity {
     TextView messageText;
     EditText pinEntry;
 
-    Toolbar topbar;
+    Toolbar topBar;
 
 
     @Override
@@ -35,12 +35,14 @@ public class VaultLogin extends AppCompatActivity {
         messageText = findViewById(R.id.vaultMessageText);
         pinEntry = findViewById(R.id.vaultPinEntry);
 
-        topbar = findViewById(R.id.vaultLoginTopBar);
-        setSupportActionBar(topbar);
+        topBar = findViewById(R.id.vaultLoginTopBar);
+        setSupportActionBar(topBar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setTitle("Vault Login");
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Vault Login");
+        }
     }
 
     @Override
@@ -58,7 +60,7 @@ public class VaultLogin extends AppCompatActivity {
             startActivity(intent);
         } else {
             messageText.setVisibility(View.VISIBLE);
-            messageText.setText("Wrong pin! Try again!");
+            messageText.setText(R.string.vaultLoginWrongPin);
         }
     }
 
