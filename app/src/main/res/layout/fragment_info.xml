@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoFragment"
-    android:orientation="vertical">
+    tools:context=".InfoFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/anxietyInfoButton"
-        style="?android:borderlessButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:text="@string/anxietyInfoButton"
-        android:textColor="@android:color/black"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/anxietyInfoButton"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/anxietyInfoButton"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/useful_info_button_text_size"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/white"
+            app:cornerRadius="0sp"
             app:icon="@drawable/ic_information"
             app:iconGravity="start"
-        app:iconTint="@android:color/black"
-        android:textSize="@dimen/useful_info_button_text_size"
-        android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp" />
+            app:iconTint="@android:color/black" />
 
         <View
             android:layout_width="match_parent"
@@ -38,13 +41,13 @@
             android:fontFamily="sans-serif-thin"
             android:text="@string/depressionInfoButton"
             android:textColor="@android:color/black"
-            app:icon="@drawable/ic_information"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black"
             android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp" />
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_information"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
 
         <View
             android:layout_width="match_parent"
@@ -59,17 +62,18 @@
             android:fontFamily="sans-serif-thin"
             android:text="@string/suicideInfoButton"
             android:textColor="@android:color/black"
-            app:icon="@drawable/ic_information"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black"
             android:textSize="@dimen/useful_info_button_text_size"
             android:textStyle="bold"
             app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp" />
+            app:cornerRadius="0sp"
+            app:icon="@drawable/ic_information"
+            app:iconGravity="start"
+            app:iconTint="@android:color/black" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="?android:attr/listDivider" />
-
     </LinearLayout>
+</ScrollView>
+

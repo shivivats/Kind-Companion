@@ -30,4 +30,8 @@
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
     </style>
 
+    <style name="useful_info_button">
+
+    </style>
+
 </resources>

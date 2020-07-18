@@ -64,7 +64,7 @@
     <PreferenceCategory app:title="Vault Options">
 
         <EditTextPreference
-            app:defaultValue="0000"
+            app:defaultValue="1234"
             app:key="vaultPin"
             app:summary="Set the Vault pin."
             app:title="Vault Pin" />

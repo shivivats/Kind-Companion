@@ -1,5 +1,6 @@
 package com.shivivats.kindcompanion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,7 +18,7 @@ public class OffMyChestActivity extends AppCompatActivity {
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_off_my_chest);
 
-        topBar = findViewById(R.id.suicideInfoTopBar);
+        topBar = findViewById(R.id.offMyChestTopBar);
         setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -27,7 +28,13 @@ public class OffMyChestActivity extends AppCompatActivity {
 
     }
 
-    public void onClickNoteButton(View v) {
+    public void onClickReminderButton(View v) {
+        Intent intent = new Intent(this, ReminderNoteListActivity.class);
+        startActivity(intent);
+    }
 
+    public void onClickVaultButton(View v) {
+        Intent intent = new Intent(this, VaultLoginActivity.class);
+        startActivity(intent);
     }
 }

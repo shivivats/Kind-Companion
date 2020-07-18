@@ -19,7 +19,7 @@ public class FrontPageActivity extends AppCompatActivity {
     }
 
     public void OnClickVault(View view) {
-        Intent vaultIntent = new Intent(this, VaultLogin.class);
+        Intent vaultIntent = new Intent(this, VaultLoginActivity.class);
         startActivity(vaultIntent);
     }
 

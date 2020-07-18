@@ -328,7 +328,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
     }
 
     private void ReturnToNoteEdit() {
-        setResult(-3);
+        setResult(-5);
         finish();
     }
 

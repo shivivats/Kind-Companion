@@ -21,7 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark">
-        <activity android:name=".OffMyChestActivity"></activity>
+        <activity
+            android:name=".OffMyChestActivity"
+            android:parentActivityName=".FrontPageActivity" />
         <activity
             android:name=".ProblemSolvingToolActivity"
             android:parentActivityName=".UsefulInformationActivity" />
@@ -62,7 +64,7 @@
             android:name=".ControlledBreathingActivity"
             android:parentActivityName=".DealWithAnxietyActivity" />
         <activity
-            android:name=".VaultLogin"
+            android:name=".VaultLoginActivity"
             android:parentActivityName=".FrontPageActivity" />
         <activity
             android:name=".DealWithAnxietyActivity"

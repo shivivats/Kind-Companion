@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -22,7 +23,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -63,6 +63,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 noteEditViewModel.deleteImages(imageEntity);
                 Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -3) {
+                // this is where we update the drawing
+
                 long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
                 Uri uri = Uri.parse(result.getData().getStringExtra("IMAGE_URI"));
                 boolean isDrawing = result.getData().getBooleanExtra("IS_DRAWING", true);
@@ -140,6 +142,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 newImage.imageNoteId = currentNoteId;
                 noteEditViewModel.insertImages(newImage);
             } else if (result.getResultCode() == -3) {
+                //nothing happens bc we simply cancel the activity
+            } else if (result.getResultCode() == -5) {
                 //nothing happens bc we simply cancel the activity
             } else {
                 Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
@@ -251,6 +255,12 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         SetToolbars();
 
         InitRecyclerView();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        StoreNote();
     }
 
     private void SetToolbars() {
@@ -509,7 +519,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         // we can also
         //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
-        ConstraintLayout parentLayout = findViewById(R.id.noteEditParentConstraintLayout);
+        LinearLayout parentLayout = findViewById(R.id.noteEditParentLinearLayout);
         parentLayout.animate().alpha(0.f).setDuration(3000).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {

@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
 
-public class VaultLogin extends AppCompatActivity {
+public class VaultLoginActivity extends AppCompatActivity {
 
     Button loginButton;
     TextView messageText;
@@ -54,8 +54,8 @@ public class VaultLogin extends AppCompatActivity {
 
     public void OnLoginClick(View view) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.d("VAULT_TAG", "pin is " + sharedPreferences.getString("vaultPin", "0000") + ", entered pin is " + pinEntry.getText());
-        if (pinEntry.getText().toString().equals(sharedPreferences.getString("vaultPin", "0000"))) {
+        Log.d("VAULT_TAG", "pin is " + sharedPreferences.getString("vaultPin", "1234") + ", entered pin is " + pinEntry.getText());
+        if (pinEntry.getText().toString().equals(sharedPreferences.getString("vaultPin", "1234"))) {
 
             Intent intent = new Intent(this, VaultNoteListActivity.class);
             startActivity(intent);
