@@ -8,4 +8,10 @@
         android:icon="@drawable/ic_save_black_24dp"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_cancel_record"
+        android:icon="@drawable/ic_cancel"
+        android:title="@string/acton_cancel"
+        app:showAsAction="always" />
+
 </menu>

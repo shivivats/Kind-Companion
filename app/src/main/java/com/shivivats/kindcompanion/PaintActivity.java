@@ -226,6 +226,10 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                     newFragment.show(getSupportFragmentManager(), "delete_paint");
                 }
                 return true;
+
+            case R.id.action_cancel_paint:
+                ReturnToNoteEdit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -321,6 +325,11 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         //show a dialog here that asks the user if they're sure
         DialogFragment newFragment = new ClearCanvasDialogFragment();
         newFragment.show(getSupportFragmentManager(), "clear_canvas");
+    }
+
+    private void ReturnToNoteEdit() {
+        setResult(-3);
+        finish();
     }
 
     @Override

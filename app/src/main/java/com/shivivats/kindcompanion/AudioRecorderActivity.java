@@ -144,6 +144,10 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
                 finish();
                 return true;
 
+            case R.id.action_cancel_record:
+                ReturnToNoteEdit();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -342,6 +346,11 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
         // Save a file path for use with ACTION_VIEW intents
         return audio.getAbsolutePath();
+    }
+
+    private void ReturnToNoteEdit() {
+        setResult(-3);
+        finish();
     }
 
 }

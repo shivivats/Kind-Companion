@@ -14,4 +14,10 @@
         android:title="@string/action_delete_paint"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/action_cancel_paint"
+        android:icon="@drawable/ic_cancel"
+        android:title="@string/acton_cancel"
+        app:showAsAction="always" />
+
 </menu>

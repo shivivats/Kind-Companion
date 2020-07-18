@@ -5,13 +5,15 @@ import android.net.Uri;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Note_Images", foreignKeys = @ForeignKey(entity = NoteEntity.class,
         parentColumns = "note_id",
         childColumns = "image_note_id",
         onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE))
+        onUpdate = ForeignKey.CASCADE),
+        indices = {@Index(value = {"image_note_id"})})
 public class ImageEntity {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "image_id")

@@ -4,8 +4,14 @@
 
     <item
         android:id="@+id/action_delete_note_audio"
-        android:title="@string/action_delete_note_audio"
+        android:icon="@drawable/ic_delete"
         app:showAsAction="always"
-        android:icon="@drawable/ic_delete"/> <!-- add icon later -->
+        android:title="@string/action_delete" />
+
+    <item
+        android:id="@+id/acton_cancel_note_audio"
+        android:icon="@drawable/ic_cancel"
+        android:title="@string/acton_cancel"
+        app:showAsAction="always" />
 
 </menu>

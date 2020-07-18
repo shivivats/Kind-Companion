@@ -69,10 +69,19 @@ public class NoteImageView extends AppCompatActivity implements DeleteImageDialo
                 DialogFragment newFragment = new DeleteImageDialogFragment();
                 newFragment.show(getSupportFragmentManager(), "delete_image");
                 return true;
+
+            case R.id.action_cancel_note_image:
+                ReturnToNoteEdit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void ReturnToNoteEdit() {
+        setResult(-5);
+        finish();
     }
 
     private void DeleteCurrentImage() {

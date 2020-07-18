@@ -76,6 +76,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -4) {
                 Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -5) {
+                //nothing happens bc we simply cancel the activity
             } else {
                 // something unpredicted happened so i guess not delete image, so just leave it as is?
                 // this is also used for back button i guess now
@@ -96,8 +98,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 Toast.makeText(getApplicationContext(), "Audio deleted.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -2) {
                 Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -3) {
+                //nothing happens bc we simply cancel the activity
             } else {
-                // something unpredicted happened so i guess not delete image, so just leave it as is?
+                // something unpredicted happened so i guess not delete audio, so just leave it as is?
                 // this is also used for back button i guess now
                 // in other words, do nothing
 
@@ -135,6 +139,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 newImage.isDrawing = true;
                 newImage.imageNoteId = currentNoteId;
                 noteEditViewModel.insertImages(newImage);
+            } else if (result.getResultCode() == -3) {
+                //nothing happens bc we simply cancel the activity
             } else {
                 Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
             }
@@ -180,6 +186,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 noteEditViewModel.insertAudio(newAudio);
                 Toast.makeText(getApplicationContext(), "Recording saved successfully.", Toast.LENGTH_SHORT).show();
 
+            } else if (result.getResultCode() == -3) {
+                //nothing happens bc we simply cancel the activity
             } else {
                 Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
             }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "0d719d54003f85086d3d2cbeca73401d",
+    "identityHash": "123f82b5f85d34e436219935d09fb563",
     "entities": [
       {
         "tableName": "Notes",
@@ -94,7 +94,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_Note_Images_image_note_id",
+            "unique": false,
+            "columnNames": [
+              "image_note_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Note_Images_image_note_id` ON `${TABLE_NAME}` (`image_note_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "Notes",
@@ -145,7 +154,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_Note_Audio_audio_note_id",
+            "unique": false,
+            "columnNames": [
+              "audio_note_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Note_Audio_audio_note_id` ON `${TABLE_NAME}` (`audio_note_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "Notes",
@@ -164,7 +182,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0d719d54003f85086d3d2cbeca73401d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '123f82b5f85d34e436219935d09fb563')"
     ]
   }
 }

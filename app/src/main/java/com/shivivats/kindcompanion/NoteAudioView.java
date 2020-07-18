@@ -57,11 +57,12 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
         ActionBar ab = getSupportActionBar();
 
-        // Enable the Up button
-        //ab.setDisplayHomeAsUpEnabled(true);
 
-        // hide the title from the topBar
         if (ab != null) {
+            // Enable the Up button
+            //ab.setDisplayHomeAsUpEnabled(true);
+
+            // hide the title from the topBar
             ab.setDisplayShowTitleEnabled(false);
         }
 
@@ -217,9 +218,17 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
                 DialogFragment newFragment = new DeleteAudioDialogFragment();
                 newFragment.show(getSupportFragmentManager(), "delete_audio");
                 return true;
+            case R.id.acton_cancel_note_audio:
+                ReturnToNoteEdit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void ReturnToNoteEdit() {
+        setResult(-3);
+        finish();
     }
 
     private void DeleteCurrentAudio() {
