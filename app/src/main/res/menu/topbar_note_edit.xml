@@ -16,8 +16,14 @@
         android:icon="@drawable/ic_delete" />
 
     <item
+        android:id="@+id/action_discard_edit_note"
+        android:title="@string/action_discard_edit_note"
+        app:showAsAction="never" /> <!-- add icon later -->
+
+    <item
         android:id="@+id/action_void_edit_note"
         android:title="@string/action_void_edit_note"
         app:showAsAction="never" /> <!-- add icon later -->
+
 
 </menu>

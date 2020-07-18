@@ -6,10 +6,25 @@ android {
 
     defaultConfig {
         applicationId "com.shivivats.kindcompanion"
+        /*
+        Android Versions
+        21: 94.1%
+        22: 92.3%
+        api level 23: 84.9% cumulative distribution
+        provides fingerprint authentication at least, so we're going with this as the minimum
+        24: 73.7%
+        25: 66.2%
+        26: 60.8%
+        27: 53.5%
+        28: 39.5%
+        29: 8.2%
+         */
+        // defines the minimum api level required to run the app
         minSdkVersion 23
+        // specifies the api level used to test the app
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

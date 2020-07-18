@@ -55,6 +55,10 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 DiscardNoteIfExists("Empty note discarded.");
             } else if (result.getResultCode() == -4) {
                 DiscardNoteIfExists("Your thoughts have been sent into the void, disappearing forever...");
+            } else if (result.getResultCode() == -5) {
+                Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
+                // if we dont update the note or anything then the changes are discarded, ja?
+
             } else {
                 DiscardNoteIfExists("The note couldn't be saved.");
             }

@@ -374,7 +374,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save_edit_note:
-                StoreReminder();
+                StoreNote();
                 return true;
 
             case R.id.action_choose_image:
@@ -400,7 +400,11 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 return true;
 
             case R.id.action_void_edit_note:
-                SendToVoid();
+                SendToVoidAnimation();
+                return true;
+
+            case R.id.action_discard_edit_note:
+                DiscardChanges();
                 return true;
 
             default:
@@ -411,7 +415,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         }
     }
 
-    private void StoreReminder() {
+    private void StoreNote() {
 
         // here we do the intent stuff
         Intent replyIntent = new Intent();
@@ -490,7 +494,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         finish();
     }
 
-    private void SendToVoid() {
+    private void SendToVoidAnimation() {
         // we need to create a void animation here
         // and then delete the note
         // so we just
@@ -552,6 +556,11 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         finish();
     }
 
+    private void DiscardChanges() {
+
+        setResult(-5);
+        finish();
+    }
 
     @Override
     public void onDeleteNoteDialogPositiveClick(DialogFragment dialog) {

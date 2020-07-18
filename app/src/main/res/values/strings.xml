@@ -196,4 +196,5 @@
     <string name="noteImageImageViewContentDescription">Image inserted into the note.</string>
     <string name="vaultPinEntryHint">Pin...</string>
     <string name="audioCardImagePlayPauseContentDescription">Play or pause the audio playback image button.</string>
+    <string name="action_discard_edit_note">Discard Changes</string>
 </resources>
