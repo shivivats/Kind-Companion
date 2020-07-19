@@ -40,8 +40,16 @@ public class VaultNoteListAdapter extends RecyclerView.Adapter<VaultNoteListAdap
             holder.noteTitleView.setText(current.noteTitle);
             holder.noteBodyView.setText(current.noteBody);
             holder.currentNoteId = current.noteId;
-            holder.noteImageCountView.setText(current.noteImagesCount + " images");
-            holder.noteAudioCountView.setText(current.noteAudioCount + " audios");
+            if (current.noteImagesCount == 1) {
+                holder.noteImageCountView.setText(current.noteImagesCount + " image");
+            } else {
+                holder.noteImageCountView.setText(current.noteImagesCount + " images");
+            }
+            if (current.noteAudioCount == 1) {
+                holder.noteAudioCountView.setText(current.noteAudioCount + " audio");
+            } else {
+                holder.noteAudioCountView.setText(current.noteAudioCount + " audios");
+            }
         } else {
             // covers the case of data not being ready yet
             holder.noteTitleView.setText(R.string.noteNoTitle);

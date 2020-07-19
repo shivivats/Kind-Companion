@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class AnxietyInfoActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+    //Toolbar toolbar;
+    MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +19,7 @@ public class AnxietyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anxiety_info);
 
         toolbar = findViewById(R.id.anxietyInfoTopBar);
+
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {

@@ -102,6 +102,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Reminder Notes");
         }
+
+        //registerForContextMenu(recyclerView);
     }
 
     public void OnAddFabClick() {

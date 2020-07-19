@@ -142,6 +142,7 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
         startActivityForResult.launch(intent);
     }
 
+
     private void DiscardNoteIfExists(String toastText) {
         NoteEntity noteEntity = new NoteEntity();
         noteEntity.noteId = currentNoteId;
