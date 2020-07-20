@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -20,11 +19,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class VaultNoteListActivity extends AppCompatActivity implements NoteListClickListener {
 
     private VaultNoteViewModel vaultNoteViewModel;
     private long currentNoteId;
+    RecyclerView recyclerView;
+
+    private VaultNoteListAdapter adapter;
     // KEEP THIS IN MIND WHILE USING THIS STUFF
     // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
     //                ActivityResultCallback<O> callback)
@@ -46,7 +49,10 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
                 if (noteEntity.noteId == -1 || noteEntity.noteImagesCount == -1 || noteEntity.noteAudioCount == -1) {
                     DiscardNoteIfExists("The note couldn't be saved.");
                 } else {
-                    Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
+                    Snackbar.make(recyclerView, "Note saved successfully.", Snackbar.LENGTH_SHORT)
+                            .setAnchorView(findViewById(R.id.vaultListFab))
+                            .show();
+                    //Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
                     vaultNoteViewModel.update(noteEntity);
                 }
             } else if (result.getResultCode() == -2) {
@@ -56,7 +62,10 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
             } else if (result.getResultCode() == -4) {
                 DiscardNoteIfExists("Your thoughts have been sent into the void, disappearing forever...");
             } else if (result.getResultCode() == -5) {
-                Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(recyclerView, "Changes discarded.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(findViewById(R.id.vaultListFab))
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
                 // if we dont update the note or anything then the changes are discarded, ja?
 
             } else {
@@ -65,15 +74,13 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
         }
     });
 
-    private VaultNoteListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_vault_note_list);
 
-        RecyclerView recyclerView = findViewById(R.id.noteVaultRecyclerView);
+        recyclerView = findViewById(R.id.noteVaultRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -147,10 +154,10 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
         NoteEntity noteEntity = new NoteEntity();
         noteEntity.noteId = currentNoteId;
         vaultNoteViewModel.delete(noteEntity);
-        Toast.makeText(
-                getApplicationContext(),
-                toastText,
-                Toast.LENGTH_LONG).show();
+        Snackbar.make(recyclerView, toastText, Snackbar.LENGTH_SHORT)
+                .setAnchorView(findViewById(R.id.vaultListFab))
+                .show();
+        //Toast.makeText(getApplicationContext(),toastText,Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -36,7 +36,7 @@ public class DeleteNoteDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Delete the note?")
+        builder.setTitle("Delete the note?")
                 .setPositiveButton("Yes", (dialog, id) -> listener.onDeleteNoteDialogPositiveClick(DeleteNoteDialogFragment.this))
                 .setNegativeButton("No", (dialog, id) -> {
                     // User cancelled the dialog

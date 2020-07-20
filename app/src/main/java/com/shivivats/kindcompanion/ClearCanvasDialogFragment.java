@@ -34,8 +34,10 @@ public class ClearCanvasDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you want to clear the canvas?")
+        builder.setTitle("Are you sure you want to clear the canvas?")
+                .setMessage("This will erase your current progress")
                 .setPositiveButton("Yes", (dialog, id) -> listener.onClearCanvasDialogPositiveClick(ClearCanvasDialogFragment.this))
                 .setNegativeButton("No", (dialog, id) -> {
                     // User cancelled the dialog
@@ -43,6 +45,19 @@ public class ClearCanvasDialogFragment extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+
+        // Material dialogue is the same as regular one bc we;'re using material theme
+        /*
+        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(getActivity());
+        dialogBuilder.setTitle("Are you sure you want to clear the canvas?")
+                .setMessage("This will erase your current progress")
+                .setPositiveButton("Yes",(dialog, id) -> listener.onClearCanvasDialogPositiveClick(ClearCanvasDialogFragment.this))
+                .setNegativeButton("No", (dialog, id) -> {
+            // User cancelled the dialog
+            listener.onClearCanvasDialogNegativeClick(ClearCanvasDialogFragment.this);
+        });
+
+        return dialogBuilder.create();*/
     }
 
     /* The activity that creates an instance of this dialog fragment must

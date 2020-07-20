@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -31,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +63,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 ImageEntity imageEntity = new ImageEntity();
                 imageEntity.imageId = currentImageID;
                 noteEditViewModel.deleteImages(imageEntity);
-                Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Image deleted.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -3) {
                 // this is where we update the drawing
 
@@ -77,9 +80,15 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 imageEntity.isDrawing = isDrawing;
                 imageEntity.imageNoteId = currentNoteId;
                 noteEditViewModel.updateImages(imageEntity);
-                Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Image updated.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -4) {
-                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Something went wrong. Please try again.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -5) {
                 //nothing happens bc we simply cancel the activity
             } else {
@@ -99,9 +108,15 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 AudioEntity audioEntity = new AudioEntity();
                 audioEntity.audioId = currentAudioId;
                 noteEditViewModel.deleteAudio(audioEntity);
-                Toast.makeText(getApplicationContext(), "Audio deleted.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Audio deleted.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Audio deleted.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -2) {
-                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Something went wrong. Please try again.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -3) {
                 //nothing happens bc we simply cancel the activity
             } else {
@@ -126,7 +141,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 // this should automatically add the image to the recyclerview as well
             } else {
                 // the user chose to not choose an image
-                Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Image chooser closed.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Image chooser closed.", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -148,7 +166,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             } else if (result.getResultCode() == -5) {
                 //nothing happens bc we simply cancel the activity
             } else {
-                Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(noteBody, "Drawing could not be saved.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
             }
         }
     });
@@ -168,12 +189,18 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                     // this should automatically add the image to the recyclerview as well
                 } else {
                     // for some reason the uri was null, i.e., storage couldn't be accessed
-                    Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG).show();
+                    Snackbar.make(noteBody, "Photo couldn't be saved.", Snackbar.LENGTH_SHORT)
+                            .setAnchorView(noteEditBottomBar)
+                            .show();
+                    //Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Log.d("randomtag", "null camera activity result");
                 // the user chose to not click a picture
-                Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Camera closed.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Camera closed.", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -190,12 +217,18 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 newAudio.audioNoteId = currentNoteId;
                 newAudio.isRecording = true;
                 noteEditViewModel.insertAudio(newAudio);
-                Toast.makeText(getApplicationContext(), "Recording saved successfully.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(noteBody, "Recording saved successfully.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Recording saved successfully.", Toast.LENGTH_SHORT).show();
 
             } else if (result.getResultCode() == -3) {
                 //nothing happens bc we simply cancel the activity
             } else {
-                Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(noteBody, "Audio could not be saved.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
             }
         }
     });
@@ -209,9 +242,15 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 ImageEntity imageEntity = new ImageEntity();
                 imageEntity.imageId = currentImageID;
                 noteEditViewModel.deleteImages(imageEntity);
-                Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Image deleted.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
             } else if (result.getResultCode() == -2) {
-                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+                Snackbar.make(noteBody, "Something went wrong. Please try again.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
             } else {
                 // something unpredicted happened so i guess not delete image, so just leave it as is?
                 // this is also used for back button i guess now
@@ -499,7 +538,10 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             }
         } else {
             // Device doesn't have a camera, show a toast or something
-            Toast.makeText(this, "Camera not found on device.", Toast.LENGTH_LONG).show();
+            Snackbar.make(noteBody, "Camera not found on device.", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(noteEditBottomBar)
+                    .show();
+            //Toast.makeText(this, "Camera not found on device.", Toast.LENGTH_LONG).show();
         }
     }
 

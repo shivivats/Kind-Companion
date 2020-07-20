@@ -12,13 +12,14 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -293,7 +294,10 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(paintView, "Drawing could not be saved.", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(paintViewBottomBar)
+                    .show();
+            //Toast.makeText(getApplicationContext(), "Drawing could not be saved.", Toast.LENGTH_SHORT).show();
         }
     }
 

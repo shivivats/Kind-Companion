@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -18,11 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ReminderNoteListActivity extends AppCompatActivity implements NoteListClickListener {
 
     private ReminderNoteViewModel reminderNoteViewModel;
     private long currentNoteId;
+    private RecyclerView recyclerView;
+
+    private ReminderNoteListAdapter adapter;
     // KEEP THIS IN MIND WHILE USING THIS STUFF
     // public abstract ActivityResultLauncher<I> registerForActivityResult (ActivityResultContract<I, O> contract,
     //                ActivityResultCallback<O> callback)
@@ -46,7 +49,10 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 } else {
                     Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);
                     Log.d("randomtagListActivity", "note body in list activity: " + noteEntity.noteBody);
-                    Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
+                    Snackbar.make(recyclerView, "Note saved successfully.", Snackbar.LENGTH_SHORT)
+                            .setAnchorView(findViewById(R.id.reminderListFab))
+                            .show();
+                    //Toast.makeText(getApplicationContext(), "Note saved successfully.", Toast.LENGTH_LONG).show();
                     reminderNoteViewModel.update(noteEntity);
                 }
             } else if (result.getResultCode() == -2) {
@@ -56,7 +62,10 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
             } else if (result.getResultCode() == -4) {
                 DiscardNoteIfExists("Your thoughts have been sent into the void, disappearing forever...");
             } else if (result.getResultCode() == -5) {
-                Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(recyclerView, "Changes discarded.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(findViewById(R.id.reminderListFab))
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
                 // if we dont update the note or anything then the changes are discarded, ja?
 
             } else {
@@ -65,15 +74,13 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         }
     });
 
-    private ReminderNoteListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_reminder_note_list);
 
-        RecyclerView recyclerView = findViewById(R.id.noteReminderRecyclerView);
+        recyclerView = findViewById(R.id.noteReminderRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -148,9 +155,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
         NoteEntity noteEntity = new NoteEntity();
         noteEntity.noteId = currentNoteId;
         reminderNoteViewModel.delete(noteEntity);
-        Toast.makeText(
-                getApplicationContext(),
-                toastText,
-                Toast.LENGTH_SHORT).show();
+        Snackbar.make(recyclerView, toastText, Snackbar.LENGTH_SHORT)
+                .setAnchorView(findViewById(R.id.reminderListFab))
+                .show();
     }
 }

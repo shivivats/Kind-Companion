@@ -36,7 +36,7 @@ public class DeleteAudioDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you want to delete the audio?")
+        builder.setTitle("Delete the audio?")
                 .setPositiveButton("Yes", (dialog, id) -> listener.onDeleteAudioDialogPositiveClick(DeleteAudioDialogFragment.this))
                 .setNegativeButton("No", (dialog, id) -> {
                     // User cancelled the dialog

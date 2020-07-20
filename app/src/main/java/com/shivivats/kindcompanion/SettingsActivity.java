@@ -33,6 +33,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
@@ -107,7 +109,9 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
                 createReminder(userCalendar.getTimeInMillis());
                 enableReceiver();
                 reminderSwitchValue = true;
-                Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.settings), "Reminder set", Snackbar.LENGTH_SHORT)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
                 //Log.d("SETTINGS_TAG", "reminder value is true");
             } else {
                 // a way to disable the reminder
@@ -245,9 +249,13 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
                         PendingIntent.FLAG_NO_CREATE);
         if (pendingIntent != null && alarmManager != null) {
             alarmManager.cancel(pendingIntent);
-            Toast.makeText(getApplicationContext(), "Reminder removed.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.settings), "Reminder removed.", Snackbar.LENGTH_SHORT)
+                    .show();
+            //Toast.makeText(getApplicationContext(), "Reminder removed.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Reminder couldn't be removed.", Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.settings), "Reminder couldn't be removed.", Snackbar.LENGTH_SHORT)
+                    .show();
+            //Toast.makeText(getApplicationContext(), "Reminder couldn't be removed.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -304,6 +312,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             // Do something with the time chosen by the user
             userCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
             userCalendar.set(Calendar.MINUTE, minute);
+
             Toast.makeText(getContext(), "Time set for " + hourOfDay + " " + minute + ", kindly set the reminder again.", Toast.LENGTH_LONG).show();
 
         }
