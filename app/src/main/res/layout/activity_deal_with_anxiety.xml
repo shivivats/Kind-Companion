@@ -1,101 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     tools:context=".DealWithAnxietyActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/dealWithAnxietyTopBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:liftOnScroll="true">
 
-    <Button
-        android:id="@+id/fiveThingsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="FiveThingsGame"
-        android:text="@string/fiveThingsButton"
-        app:layout_constraintBottom_toTopOf="@id/crossItOffButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@id/dealWithAnxietyTopBar" />
-    <!--
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dealWithAnxietyTopBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <Button
-            android:id="@+id/anxietyChecklistButton"
+            android:id="@+id/fiveThingsButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="AnxietyChecklist"
-            android:text="Anxiety Checklist"
+            android:layout_margin="32dp"
+            android:onClick="FiveThingsGame"
+            android:text="@string/fiveThingsButton"
             app:layout_constraintBottom_toTopOf="@id/crossItOffButton"
-            app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />
-    -->
-    <Button
-        android:id="@+id/crossItOffButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="CrossItOff"
-        android:text="@string/crossItOffButton"
-        app:layout_constraintBottom_toTopOf="@id/controlledBreathingButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/controlledBreathingButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="ControlledBreathing"
-        android:text="@string/controlledBreathingButton"
-        app:layout_constraintBottom_toTopOf="@+id/paintingButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/crossItOffButton" />
-
-    <Button
-        android:id="@+id/paintingButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="PaintingGame"
-        android:text="@string/paintingButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/controlledBreathingButton" />
-    <!--
         <Button
-            android:id="@+id/relaxingMusicButton"
+            android:id="@+id/crossItOffButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="RelaxingMusic"
-            android:text="Relaxing Music"
+            android:layout_margin="32dp"
+            android:onClick="CrossItOff"
+            android:text="@string/crossItOffButton"
+            app:layout_constraintBottom_toTopOf="@id/controlledBreathingButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />
+
+        <Button
+            android:id="@+id/controlledBreathingButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:onClick="ControlledBreathing"
+            android:text="@string/controlledBreathingButton"
+            app:layout_constraintBottom_toTopOf="@+id/paintingButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crossItOffButton" />
+
+        <Button
+            android:id="@+id/paintingButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:onClick="PaintingGame"
+            android:text="@string/paintingButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
-            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/paintingButton" />
-            -->
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/controlledBreathingButton" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="105dp" />
+        <!--
+            <Button
+                android:id="@+id/anxietyChecklistButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="AnxietyChecklist"
+                android:text="Anxiety Checklist"
+                app:layout_constraintBottom_toTopOf="@id/crossItOffButton"
+                app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/fiveThingsButton" />
+            <Button
+                android:id="@+id/relaxingMusicButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:onClick="RelaxingMusic"
+                android:text="Relaxing Music"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/paintingButton" />
+         -->
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="306dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

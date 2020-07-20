@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?><!--
+ In code:
+     card.setOnLongClickListener {
+         card.setChecked(!card.isChecked)
+         true
+     }
+ we havent set corner radius to 4dp here
+ no need to set the card style if we're using the material components theme
+ elevation we'll see later
+ -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/imageCardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/small_margin"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="0dp">
+    <ImageButton
+        android:id="@+id/imageViewItem"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_weight="1"
+        android:background="#00FFFFFF"
+        android:clickable="false"
+        android:contentDescription="@string/imageViewItem"
+        android:scaleType="fitXY" />
 
-        <ImageButton
-            android:id="@+id/imageViewItem"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_marginEnd="411dp"
-            android:layout_weight="1"
-            android:background="#00FFFFFF"
-            android:contentDescription="@string/imageViewItem"
-            android:padding="5dp"
-            android:scaleType="fitStart"
-            android:clickable="false"/>
-
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
-
+</com.google.android.material.card.MaterialCardView>
 
 

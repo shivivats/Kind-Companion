@@ -143,7 +143,7 @@
     <string name="relaxationToolTextThree">Every single one of us has one. Our own unique collection of ways to deal with life, to get to a state of mental well-being. \nIt’s made up of things that only you have. Eg. What kind of personality you have, strengths and weaknesses, if you like being alone, or with people. Relaxing is a part of it. \nWith the right tools, everyone can flourish!</string>
     <string name="relaxationToolTextTwo">Whether you are overwhelmed by work or personal things, taking time to relax is important. \nJust remember: you won’t have any resources (body or mind-wise) if you don\'t do it. \nIf you are too busy: just make the relaxation thing a routine, like an appointment with yourself!</string>
     <string name="relaxationToolsButton">Relaxation</string>
-    <string name="relaxingPaintingHeaderView">This activity will take you through a series of images that you can paint in or just clear and draw your own from scratch. \n We recommend putting on some relaxing music in the background while you do that. \n Note: The images drawn here can not be saved. This is a feature we are considering to implement in the future. If you want to draw something that can be saved, please use the notes feature or take a screenshot of your drawing when you\'re done. \nChanging the screen orientation mid-paint might also cause your progress to be lost.</string>
+    <string name="relaxingPaintingHeaderView">This activity will take you through a series of images that you can paint in or just clear and draw your own from scratch. \n We recommend putting on some relaxing music in the background while you do that.</string>
     <string name="reminder_button">Store as \n Reminder</string>
     <string name="reply_title">Default reply action</string>
     <string name="samTheChatbotResourceButton">Sam the chatbot</string>
@@ -157,7 +157,7 @@
     <string name="store_vault">Store in Vault</string>
     <string name="suicideInfoButton">About Suicidal Feelings</string>
     <string name="suicideInfoCredits">Information taken from https://suicidepreventionlifeline.org/help-yourself/</string>
-    <string name="suicideInfoHeaderOne">Help yourself</string>
+    <string name="suicideInfoHeaderOne">Help Yourself</string>
     <string name="suicideInfoHeaderTwo">Help Others</string>
     <string name="suicideInfoSubtextFive">If you have identified somebody that is at risk of suicide, you should to approach them carefully. Try not to act as a mental healthcare professional and get them in touch with appropriate resources such as a professional or a helpline.</string>
     <string name="suicideInfoSubtextFour">They use phrases like \"I\'m feeling suicidal, I\'m scared\", \"I need to talk/need help\", \"I don\'t know how I can keep going\", \"I feel hopeless\"</string>
@@ -185,4 +185,5 @@
     <string name="vault_button">Store in \n Vault</string>
     <string name="void_button">Send into \n the void</string>
     <string name="yourLifeCountsResourceButton">Your Life Counts</string>
+    <string name="relaxingPaintingTextOne">Note: The images drawn here can not be saved. This is a feature we are considering to implement in the future. If you want to draw something that can be saved, please use the notes feature or take a screenshot of your drawing when you\'re done. \nChanging the screen orientation mid-paint might also cause your progress to be lost.</string>
 </resources>

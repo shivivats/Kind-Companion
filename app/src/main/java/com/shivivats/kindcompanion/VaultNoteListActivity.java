@@ -82,8 +82,8 @@ public class VaultNoteListActivity extends AppCompatActivity implements NoteList
 
         recyclerView.setAdapter(adapter);
 
-        NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
-        recyclerView.addItemDecoration(decoration);
+        //NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
+        //recyclerView.addItemDecoration(decoration);
 
         vaultNoteViewModel = new ViewModelProvider(this).get(VaultNoteViewModel.class);
 

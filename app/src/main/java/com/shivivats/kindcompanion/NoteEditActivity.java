@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -22,13 +21,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomappbar.BottomAppBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,8 +44,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     EditText noteTitle;
     EditText noteBody;
 
-    Toolbar noteEditHeaderBar;
-    Toolbar noteEditBottomBar;
+    MaterialToolbar noteEditHeaderBar;
+    BottomAppBar noteEditBottomBar;
     Uri currentPhotoURI = null;
     private long currentNoteId;
     private NoteEditViewModel noteEditViewModel;
@@ -519,7 +521,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
         // we can also
         //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
-        LinearLayout parentLayout = findViewById(R.id.noteEditParentLinearLayout);
+        CoordinatorLayout parentLayout = findViewById(R.id.noteEditParentLayout);
         parentLayout.animate().alpha(0.f).setDuration(3000).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {

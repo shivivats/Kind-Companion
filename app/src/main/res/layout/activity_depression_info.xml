@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
     tools:context=".DepressionInfoActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/depressionInfoTopBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:liftOnScroll="true">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/depressionInfoTopBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
 
-    <ScrollView
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,7 +40,8 @@
                 android:autoLink="web"
                 android:gravity="end"
                 android:text="@string/depressionInfoCredits"
-                android:textSize="12sp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurface"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +59,7 @@
                 android:autoLink="web"
                 android:gravity="center"
                 android:text="@string/depressionInfoHeaderOne"
-                android:textSize="@dimen/header_text_size"
+                android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +78,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/depressionInfoTextOne"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +95,7 @@
                 android:autoLink="web"
                 android:gravity="center"
                 android:text="@string/depressionInfoHeaderTwo"
-                android:textSize="@dimen/header_text_size"
+                android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +113,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/depressionInfoTextThree"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +131,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/depressionInfoSubtextThree"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +148,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/depressionInfoTextFour"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -153,6 +157,7 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
-</LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -111,7 +111,7 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
             Log.e("AUDIO_VIEW", "prepare() failed");
         }
 
-        playPauseImage.setImageResource(R.drawable.ic_pause);
+        playPauseImage.setImageResource(R.drawable.baseline_pause_24);
 
         if (seekBar.getMax() != 0 && seekBar.getProgress() == seekBar.getMax()) {
             lastProgress = 0;
@@ -126,7 +126,7 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
 
         // once the audio is complete, timer is stopped here
         player.setOnCompletionListener(mp -> {
-            playPauseImage.setImageResource(R.drawable.ic_play);
+            playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
             isPlaying = false;
             chronometer.stop();
             //chronometer.setBase(SystemClock.elapsedRealtime());
@@ -173,7 +173,7 @@ public class NoteAudioView extends AppCompatActivity implements View.OnClickList
         }
 
         //showing the play button
-        playPauseImage.setImageResource(R.drawable.ic_play);
+        playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
         chronometer.stop();
 
 

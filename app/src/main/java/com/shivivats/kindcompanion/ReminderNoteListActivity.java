@@ -82,8 +82,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
 
         recyclerView.setAdapter(adapter);
 
-        NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
-        recyclerView.addItemDecoration(decoration);
+        //NoteListItemDecoration decoration = new NoteListItemDecoration(getDrawable(R.drawable.divider));
+        //recyclerView.addItemDecoration(decoration);
 
         reminderNoteViewModel = new ViewModelProvider(this).get(ReminderNoteViewModel.class);
 

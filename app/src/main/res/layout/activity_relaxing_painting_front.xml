@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     tools:context=".RelaxingPaintingFrontActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/relaxingPaintingFrontTopBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:liftOnScroll="true">
 
-    <TextView
-        android:id="@+id/relaxingPaintingHeaderView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/relaxingPaintingHeaderView"
-        app:layout_constraintBottom_toTopOf="@id/paintingStartButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relaxingPaintingFrontTopBar" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/relaxingPaintingFrontTopBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
 
-    <Button
-        android:id="@+id/paintingStartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="OnStartPaintingClick"
-        android:text="@string/paintingStartButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/relaxingPaintingHeaderView" />
-    <!--
-        <Button
-            android:id="@+id/paintingRelaxingMusicButton"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/relaxingPaintingHeaderView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="OnRelaxingMusicClick"
-            android:text="Relaxing Music List"
+            android:layout_margin="@dimen/big_margin"
+            android:gravity="center"
+            android:text="@string/relaxingPaintingHeaderView"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toTopOf="@id/relaxingPaintingTextOne"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/relaxingPaintingTextOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:gravity="center"
+            android:text="@string/relaxingPaintingTextOne"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toTopOf="@id/paintingStartButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relaxingPaintingHeaderView" />
+
+        <Button
+            android:id="@+id/paintingStartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_margin"
+            android:onClick="OnStartPaintingClick"
+            android:text="@string/paintingStartButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/paintingStartButton" />
-    -->
+            app:layout_constraintTop_toBottomOf="@id/relaxingPaintingTextOne" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -17,7 +17,7 @@
     </string-array>
 
     <integer-array name="cb_images">
-        <item>@drawable/cb_adult_coloring_2110241</item>
+        <item>@drawable/cb_animal_1294930</item>
         <item>@drawable/cb_american_football_2809838</item>
         <item>@drawable/cb_apple_937611</item>
         <item>@drawable/cb_castle_2432501</item>
@@ -25,34 +25,30 @@
         <item>@drawable/cb_cat_2055483</item>
         <item>@drawable/cb_coloring_page_2413315</item>
         <item>@drawable/cb_coloring_page_2413325</item>
-        <item>@drawable/cb_colouring_pages_5051886</item>
-        <item>@drawable/cb_colouring_pages_5051888</item>
-        <item>@drawable/cb_colouring_pages_5051890</item>
-        <item>@drawable/cb_colouring_pages_5051894</item>
-        <item>@drawable/cb_colouring_pages_5051901</item>
-        <item>@drawable/cb_colouring_pages_5051902</item>
-        <item>@drawable/cb_colouring_pages_5051903</item>
-        <item>@drawable/cb_colouring_pages_5051905</item>
-        <item>@drawable/cb_colouring_pages_5051909</item>
-        <item>@drawable/cb_colouring_pages_5051910</item>
-        <item>@drawable/cb_colouring_pages_5051911</item>
-        <item>@drawable/cb_colouring_pages_5051912</item>
-        <item>@drawable/cb_drawing_4412390</item>
-        <item>@drawable/cb_drawing_4937939</item>
-        <item>@drawable/cb_drawing_5301627</item>
-        <item>@drawable/cb_flower_1989655</item>
-        <item>@drawable/cb_flower_1989655_1920</item>
+        <item>@drawable/cb_aviator_145478</item>
+        <item>@drawable/cb_bag_3193388</item>
+        <item>@drawable/cb_bird_2957208</item>
+        <item>@drawable/cb_cat_2722309</item>
+        <item>@drawable/cb_coat_of_arms_2363968</item>
+        <item>@drawable/cb_coloring_book_1294888</item>
+        <item>@drawable/cb_coloring_book_1294888_1</item>
+        <item>@drawable/cb_coloring_book_1294888_2</item>
+        <item>@drawable/cb_coloring_page_1882545</item>
+        <item>@drawable/cb_egg_2971677</item>
+        <item>@drawable/cb_fish_792761_1920</item>
+        <item>@drawable/cb_flower_220325</item>
+        <item>@drawable/cb_helicopter_145477</item>
+        <item>@drawable/cb_horse_145445</item>
+        <item>@drawable/cb_jet_145479</item>
+        <item>@drawable/cb_plane_145480</item>
+        <item>@drawable/cb_ship_2382103_1920</item>
         <item>@drawable/cb_flower_1989680</item>
         <item>@drawable/cb_home_1873706</item>
         <item>@drawable/cb_ice_cream_2066804</item>
-        <item>@drawable/cb_ice_cream_2066809</item>
-        <item>@drawable/cb_ice_cream_2066812</item>
-        <item>@drawable/cb_mandala_1957166</item>
-        <item>@drawable/cb_mandala_1991311</item>
+        <item>@drawable/cb_waterdeep_2477817</item>
         <item>@drawable/cb_mandala_1996754</item>
         <item>@drawable/cb_mermaid_2915541</item>
         <item>@drawable/cb_owl_coloring_page_clipart</item>
-        <item>@drawable/cb_pattern_2105084</item>
         <item>@drawable/cb_poinsettia_2978519</item>
         <item>@drawable/cb_praying_boy_1929325</item>
         <item>@drawable/cb_school_enrollment_4447737</item>

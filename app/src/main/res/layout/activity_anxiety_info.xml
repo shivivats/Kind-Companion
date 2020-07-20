@@ -11,16 +11,6 @@
         android:layout_height="wrap_content"
         app:liftOnScroll="true">
 
-        <!-- can add navgation icon later, we didn't copy elevation, background color, theme or popup theme -->
-        <!--
-        background colour is set by default to colorPrimary
-        elevation is set by default to 4dp
-        navigation icon is null by default
-        navigation icon color is  colorControlNormal by default
-        title color is set by default to textColorPrimary
-        menu icon color is set to colorControlNormal by default
-
-        -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/anxietyInfoTopBar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -51,8 +41,9 @@
                 android:autoLink="web"
                 android:gravity="end"
                 android:text="@string/anxietyInfoCredits"
-                android:textSize="12sp"
                 android:textStyle="italic"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurface"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +60,8 @@
                 android:autoLink="web"
                 android:gravity="center"
                 android:text="@string/anxietyInfoHeaderOne"
-                android:textSize="@dimen/header_text_size"
                 android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +79,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoTextOne"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +95,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoTextTwo"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +112,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoSubtextOne"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +129,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoSubtextTwo"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -155,8 +146,8 @@
                 android:autoLink="web"
                 android:gravity="center"
                 android:text="@string/anxietyInfoHeaderTwo"
-                android:textSize="@dimen/header_text_size"
                 android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +164,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoTextThree"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +182,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoSubtextThree"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -208,7 +199,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
                 android:text="@string/anxietyInfoTextFour"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

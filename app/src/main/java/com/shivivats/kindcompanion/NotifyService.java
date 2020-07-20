@@ -35,7 +35,7 @@ public class NotifyService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_heart)
+                .setSmallIcon(R.drawable.baseline_favorite_24)
                 .setContentTitle("Kind Reminder")
                 .setContentText("Reminder to look at your notes!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -11,50 +11,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/reachOutResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/reachOutResourceButton"
-            android:textColor="@android:color/black"
-        android:textSize="@dimen/useful_info_button_text_size"
-        android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/headspaceResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/headspaceResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_android"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_android_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
         <!--
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/flowyResourceButton"
             style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
@@ -73,134 +59,87 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
         -->
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/stopBreatheThinkResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/stopBreatheThinkResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/samTheChatbotResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/samTheChatbotResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/befreindersWorldwideResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/befreindersWorldwideResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/psycomResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/psycomResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/yourLifeCountsResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/yourLifeCountsResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            android:background="?attr/dividerHorizontal" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/suicidePreventionLifelineResourceButton"
-            style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
             android:text="@string/suicidePreventionLifelineResourceButton"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/useful_info_button_text_size"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/white"
-            app:cornerRadius="0sp"
-            app:icon="@drawable/ic_browser"
-            app:iconGravity="start"
-            app:iconTint="@android:color/black" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="?android:attr/listDivider" />
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:textSize="20sp"
+            app:icon="@drawable/baseline_language_24" />
 
     </LinearLayout>
 </ScrollView>

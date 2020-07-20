@@ -13,8 +13,9 @@ public class FrontPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_front_page);
     }
 

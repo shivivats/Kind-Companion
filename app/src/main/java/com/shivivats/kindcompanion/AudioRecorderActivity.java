@@ -228,7 +228,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         chronometer.stop();
         chronometer.setBase(SystemClock.elapsedRealtime());
         // show play button
-        playPauseImage.setImageResource(R.drawable.ic_play);
+        playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
     }
 
     private void startPlaying() {
@@ -241,7 +241,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
             Log.e(LOG_TAG, "prepare() failed");
         }
 
-        playPauseImage.setImageResource(R.drawable.ic_pause);
+        playPauseImage.setImageResource(R.drawable.baseline_pause_24);
 
         if (seekBar.getMax() != 0 && seekBar.getProgress() == seekBar.getMax()) {
             lastProgress = 0;
@@ -256,7 +256,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
         // once the audio is complete, timer is stopped here
         player.setOnCompletionListener(mp -> {
-            playPauseImage.setImageResource(R.drawable.ic_play);
+            playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
             isPlaying = false;
             chronometer.stop();
             //chronometer.setBase(SystemClock.elapsedRealtime());
@@ -294,7 +294,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         }
 
         //showing the play button
-        playPauseImage.setImageResource(R.drawable.ic_play);
+        playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
         chronometer.stop();
 
 

@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
     tools:context=".CrossItOffActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/crossItOffTopBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:liftOnScroll="true">
 
-    <ScrollView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/crossItOffTopBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +42,7 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:gravity="center"
                 android:text="@string/crossItOffHeader"
-                android:textSize="@dimen/header_text_size"
+                android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +56,7 @@
                 android:layout_marginStart="@dimen/big_margin"
                 android:layout_marginTop="@dimen/big_margin"
                 android:text="@string/number_one"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextOne"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +70,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginEnd="@dimen/big_margin"
                 android:text="@string/crossItOffTextOne"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberOne"
@@ -83,7 +84,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffSubtextOne"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberOne"
@@ -98,8 +99,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/number_two"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextTwo"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,8 +114,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffTextTwo"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberTwo"
@@ -129,8 +128,7 @@
                 android:layout_marginStart="@dimen/big_margin"
                 android:layout_marginTop="@dimen/big_margin"
                 android:text="@string/number_three"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextThree"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,8 +142,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginEnd="@dimen/big_margin"
                 android:text="@string/crossItOffTextThree"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberThree"
@@ -159,7 +156,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffSubtextThree"
-                android:textSize="@dimen/subtext_size"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberThree"
@@ -174,8 +171,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/number_four"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextFour"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,8 +186,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffTextFour"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberFour"
@@ -206,8 +201,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/number_five"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextFive"
                 app:layout_constraintStart_toStartOf="parent"
@@ -222,8 +216,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffTextFive"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberFive"
@@ -238,8 +231,7 @@
                 android:layout_marginTop="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/number_six"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/crossItOffTextSix"
                 app:layout_constraintStart_toStartOf="parent"
@@ -254,8 +246,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffTextSix"
-                android:textSize="@dimen/regular_text_size"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/crossItOffNumberSix"
@@ -271,7 +262,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:text="@string/crossItOffFooter"
-                android:textSize="@dimen/regular_text_size"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -288,7 +279,8 @@
                 android:layout_marginBottom="@dimen/big_margin"
                 android:gravity="end"
                 android:text="@string/crossItOffCredits"
-                android:textSize="12sp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurface"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -297,5 +289,6 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

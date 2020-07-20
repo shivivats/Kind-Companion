@@ -109,7 +109,7 @@
         android:id="@+id/action_clear"
         android:title="@string/action_clear"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_clear"
+        android:icon="@drawable/baseline_clear_24"
         />
 
 

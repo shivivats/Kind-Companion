@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/noteEditParentLinearLayout"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/noteEditParentLayout"
+    android:layout_width="match_parent"
     android:animateLayoutChanges="true"
-    android:orientation="vertical"
     tools:context=".NoteEditActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/noteEditTopBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:liftOnScroll="true">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/noteEditTopBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
 
-    <ScrollView
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <EditText
                 android:id="@+id/noteEditTitleField"
@@ -40,6 +47,7 @@
                 android:ems="10"
                 android:hint="@string/note_entry_title_hint"
                 android:inputType="textPersonName"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintBottom_toTopOf="@+id/noteEditBodyField"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +66,7 @@
                 android:gravity="start|top"
                 android:hint="@string/note_entry_hint"
                 android:inputType="textMultiLine"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toTopOf="@+id/noteEditRecyclerImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,14 +102,17 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
-    <androidx.appcompat.widget.Toolbar
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/noteEditBottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:layout_gravity="bottom"
+        app:hideOnScroll="true"
 
-</LinearLayout>
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

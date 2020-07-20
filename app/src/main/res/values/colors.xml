@@ -25,4 +25,5 @@
     <color name="colorOnBackgroundDark">#FFFFFF</color>
     <color name="colorOnSurfaceDark">#FFFFFF</color>
     <color name="colorOnErrorDark">#000000</color>
+
 </resources>
