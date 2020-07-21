@@ -236,6 +236,15 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isEdit) {
+            UpdateDrawing();
+        } else {
+            SaveDrawing();
+        }
+    }
+
     private void Undo() {
         //paintView.undo();
     }

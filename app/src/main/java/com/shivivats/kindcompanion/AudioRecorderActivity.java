@@ -27,6 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.transition.TransitionManager;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,7 +38,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
     private static final String LOG_TAG = "AudioRecorder";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private static String fileName = null;
+    private static String fileName;
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
     private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
@@ -47,19 +49,26 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     private SeekBar seekBar;
     private LinearLayout linearLayoutRecorder;
     private LinearLayout linearLayoutPlayer;
-    private MediaRecorder recorder = null;
-    private MediaPlayer player = null;
+    private MediaRecorder recorder;
+    private MediaPlayer player;
 
     private int lastProgress = 0;
     private final Handler mHandler = new Handler();
     final Runnable runnable = this::seekUpdate;
     private boolean isPlaying = false;
+    private boolean isRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_audio_recorder);
+
+        fileName = null;
+        recorder = null;
+        player = null;
+        isPlaying = false;
+        isRecording = false;
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
@@ -136,13 +145,26 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         switch (item.getItemId()) {
             case R.id.action_save_record:
                 // save recording here
-                Uri audioUri = Uri.fromFile(new File(fileName));
+                Log.d("RECORDER_TAG", "save pressed");
+                if (fileName != null && !isRecording) {
+                    Log.d("RECORDER_TAG", "not recording and not null file");
+                    Log.d("RECORDER_TAG", "filename is " + fileName);
+                    Uri audioUri = Uri.fromFile(new File(fileName));
 
-                Intent intent = new Intent();
-                intent.putExtra("AUDIO_URI", audioUri.toString());
-                setResult(RESULT_OK, intent);
-                finish();
-                return true;
+                    Intent intent = new Intent();
+                    intent.putExtra("AUDIO_URI", audioUri.toString());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                    return true;
+                } else if (isRecording) {
+                    Snackbar.make(linearLayoutRecorder, "Stop recording first!", Snackbar.LENGTH_SHORT)
+                            .show();
+                    return true;
+                } else {
+                    Snackbar.make(linearLayoutRecorder, "Nothing to save.", Snackbar.LENGTH_SHORT)
+                            .show();
+                    return true;
+                }
 
             case R.id.action_cancel_record:
                 ReturnToNoteEdit();
@@ -209,7 +231,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         //starting the chronometer
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
-
+        isRecording = true;
     }
 
     private void prepareForStop() {
@@ -226,9 +248,11 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
         // starting the chronometer
         chronometer.stop();
+        isRecording = false;
         chronometer.setBase(SystemClock.elapsedRealtime());
         // show play button
         playPauseImage.setImageResource(R.drawable.baseline_play_arrow_24);
+
     }
 
     private void startPlaying() {

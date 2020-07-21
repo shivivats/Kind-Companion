@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -223,6 +224,27 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             Utils.changeTheme(thisActivity);
             return true;
         });
+
+
+        Preference creditsPreference, aboutPreference;
+        creditsPreference = settingsFragment.findPreference("creditsPreference");
+        aboutPreference = settingsFragment.findPreference("aboutPreference");
+        creditsPreference.setOnPreferenceClickListener(preference -> {
+            Intent intent = new Intent(thisActivity, ApplicationCreditsActivity.class);
+            startActivity(intent);
+            return true;
+        });
+
+        aboutPreference.setOnPreferenceClickListener(preference -> {
+            Intent intent = new Intent(thisActivity, ApplicationAboutActivity.class);
+            startActivity(intent);
+            return true;
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpTo(this, new Intent(this, FrontPageActivity.class));
     }
 
     public void createReminder(long time) {

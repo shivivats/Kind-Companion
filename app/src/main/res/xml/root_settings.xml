@@ -4,7 +4,7 @@
     <PreferenceCategory app:title="Display Options">
 
         <EditTextPreference
-            app:key="name"
+            app:key="username"
             app:title="Your Name"
             app:useSimpleSummaryProvider="true" />
 

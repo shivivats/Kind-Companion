@@ -1,22 +1,34 @@
 package com.shivivats.kindcompanion;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 public class FrontPageActivity extends AppCompatActivity {
 
     SeekBar textScaleSeekBar;
+    TextView frontPageHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Utils.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
-
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_front_page);
+        frontPageHeader = findViewById(R.id.frontPageHeader);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String username = sharedPreferences.getString("username", "");
+
+        if (frontPageHeader != null && !TextUtils.equals(username, "")) {
+            frontPageHeader.setText("Welcome to Kind Companion, " + username + "!");
+        }
     }
 
     public void OnClickVault(View view) {

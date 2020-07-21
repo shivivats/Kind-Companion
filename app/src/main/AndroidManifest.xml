@@ -22,6 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark">
         <activity
+            android:name=".ApplicationAboutActivity"
+            android:parentActivityName=".SettingsActivity" />
+        <activity
+            android:name=".ApplicationCreditsActivity"
+            android:parentActivityName=".SettingsActivity" />
+        <activity
             android:name=".OffMyChestActivity"
             android:parentActivityName=".FrontPageActivity" />
         <activity
