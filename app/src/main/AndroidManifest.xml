@@ -18,9 +18,9 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark">
         <activity
@@ -94,8 +94,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".LoginActivity"> <!-- Main Home Activity. Its the front page of the app for now -->
-
+        <activity
+            android:name=".LoginActivity"
+            android:finishOnTaskLaunch="true"
+            android:noHistory="true"> <!-- Main Home Activity. Its the front page of the app for now -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -113,10 +119,7 @@
             android:name=".VaultNoteListActivity"
             android:parentActivityName=".FrontPageActivity" />
         <activity android:name=".FrontPageActivity"> <!-- Front Page Activity. This is the front page while debugging. -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <provider

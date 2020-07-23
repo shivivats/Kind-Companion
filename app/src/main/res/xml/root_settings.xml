@@ -24,10 +24,17 @@
             app:summary="Turn Biometric authentication on or off."
             app:title="Biometrics" />
 
-        <EditTextPreference
-            app:key="pin"
-            app:summary="Use a custom pin to log into the app."
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="useLoginPin"
+            app:summary="Use the Pin to log into the app."
             app:title="Pin" />
+
+        <EditTextPreference
+            app:defaultValue="1234"
+            app:key="appPin"
+            app:summary="Set the pin to log into the app."
+            app:title="Set Pin" />
 
     </PreferenceCategory>
 
