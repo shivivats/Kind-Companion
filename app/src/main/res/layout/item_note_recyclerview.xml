@@ -4,7 +4,7 @@
             card.setChecked(!card.isChecked)
             true
         }
-    we havent set corner radius to 4dp here
+    we haven't set corner radius to 4dp here
     no need to set the card style if we're using the material components theme
     elevation we'll see later
     -->

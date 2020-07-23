@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         // if needed by your app.
         Button biometricLoginButton = findViewById(R.id.biometricLoginButton);
         biometricLoginButton.setOnClickListener(view -> {
-            if (PreferenceManager.getDefaultSharedPreferences(this /* Activity context */).getBoolean("biometrics", true) == true) {
+            if (PreferenceManager.getDefaultSharedPreferences(this /* Activity context */).getBoolean("biometrics", false) == true) {
                 biometricPrompt.authenticate(promptInfo);
             } else {
                 LoadFrontPage();

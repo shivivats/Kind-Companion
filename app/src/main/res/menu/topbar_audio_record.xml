@@ -6,12 +6,12 @@
         android:id="@+id/action_save_record"
         android:title="@string/action_save_record"
         android:icon="@drawable/baseline_save_24"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_cancel_record"
         android:icon="@drawable/baseline_cancel_24"
         android:title="@string/acton_cancel"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

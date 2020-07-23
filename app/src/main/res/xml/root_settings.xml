@@ -19,7 +19,7 @@
     <PreferenceCategory app:title="Security">
 
         <SwitchPreferenceCompat
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:key="biometrics"
             app:summary="Turn Biometric authentication on or off."
             app:title="Biometrics" />

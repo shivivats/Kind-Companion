@@ -66,7 +66,7 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                         .setAnchorView(findViewById(R.id.reminderListFab))
                         .show();
                 //Toast.makeText(getApplicationContext(), "Changes discarded.", Toast.LENGTH_SHORT).show();
-                // if we dont update the note or anything then the changes are discarded, ja?
+                // if we don't update the note or anything then the changes are discarded, ja?
 
             } else {
                 DiscardNoteIfExists("The note couldn't be saved.");
