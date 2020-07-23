@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -179,7 +178,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             // do something with the result here
             // add the taken image to the database
             if (result == true) {
-                Log.d("randomtag", "non null camera activity result");
+                //Log.d("randomtag", "non null camera activity result");
                 if (currentPhotoURI != null) {
                     ImageEntity newImage = new ImageEntity();
                     newImage.imageUri = currentPhotoURI;
@@ -195,7 +194,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                     //Toast.makeText(getApplicationContext(), "Photo couldn't be saved.", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Log.d("randomtag", "null camera activity result");
+                //Log.d("randomtag", "null camera activity result");
                 // the user chose to not click a picture
                 Snackbar.make(noteBody, "Camera closed.", Snackbar.LENGTH_SHORT)
                         .setAnchorView(noteEditBottomBar)
@@ -488,8 +487,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
             finish();
         }
 
-        Log.d("randomtagEntryActivity", "note title in entry activity: " + nt);
-        Log.d("randomtagEntryActivity", "note body in entry activity: " + nb);
+        //Log.d("randomtagEntryActivity", "note title in entry activity: " + nt);
+        //Log.d("randomtagEntryActivity", "note body in entry activity: " + nb);
 
         //NoteEntity noteEntity= new NoteEntity();
         //noteEntity.noteType=NoteType.NOTE_REMINDER.getValue();

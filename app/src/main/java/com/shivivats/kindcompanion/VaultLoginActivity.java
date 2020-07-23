@@ -3,7 +3,6 @@ package com.shivivats.kindcompanion;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +53,7 @@ public class VaultLoginActivity extends AppCompatActivity {
 
     public void OnLoginClick(View view) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.d("VAULT_TAG", "pin is " + sharedPreferences.getString("vaultPin", "1234") + ", entered pin is " + pinEntry.getText());
+        //Log.d("VAULT_TAG", "pin is " + sharedPreferences.getString("vaultPin", "1234") + ", entered pin is " + pinEntry.getText());
         if (pinEntry.getText().toString().equals(sharedPreferences.getString("vaultPin", "1234"))) {
 
             Intent intent = new Intent(this, VaultNoteListActivity.class);

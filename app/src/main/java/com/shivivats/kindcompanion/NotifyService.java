@@ -7,7 +7,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -58,7 +57,7 @@ public class NotifyService extends Service {
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
             } else {
-                Log.d("NOTIFICATIONS_TAG", "notification manager for channel null");
+                //Log.d("NOTIFICATIONS_TAG", "notification manager for channel null");
             }
 
         }
@@ -69,10 +68,10 @@ public class NotifyService extends Service {
             notificationManager.notify((int) System.currentTimeMillis(), builder.build());
 
         } else {
-            Log.d("NOTIFICATIONS_TAG", "notification manager null");
+            //Log.d("NOTIFICATIONS_TAG", "notification manager null");
         }
 
-        Log.d("NOTIFICATIONS_TAG", "notification set");
+        //Log.d("NOTIFICATIONS_TAG", "notification set");
     }
 
     @Override

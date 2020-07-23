@@ -1,6 +1,8 @@
 package com.shivivats.kindcompanion;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -65,6 +67,16 @@ public class UsefulInformationActivity extends AppCompatActivity {
                     tab.setText("Tab " + position);
             }
         }).attach();
+
+        Intent intent = getIntent();
+        String currentTab = intent.getStringExtra("TAB_NAME");
+        if (TextUtils.equals(currentTab, "INFO")) {
+            pager.setCurrentItem(0);
+        } else if (TextUtils.equals(currentTab, "TOOLS")) {
+            pager.setCurrentItem(1);
+        } else if (TextUtils.equals(currentTab, "RESOURCES")) {
+            pager.setCurrentItem(2);
+        }
     }
 
 

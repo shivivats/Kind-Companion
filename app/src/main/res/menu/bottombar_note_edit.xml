@@ -7,21 +7,21 @@
     <item
         android:id="@+id/action_take_photo"
         android:title="@string/action_take_photo"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_add_a_photo_24" /> <!-- add icon later -->
     <item
         android:id="@+id/action_choose_image"
         android:title="@string/action_choose_image"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_add_photo_alternate_24" /> <!-- add icon later -->
     <item
         android:id="@+id/action_draw_image"
         android:title="@string/action_draw_image"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_brush_24" /> <!-- add icon later -->
     <item
         android:id="@+id/action_record_audio"
         android:title="@string/action_record_audio"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_record_voice_over_24" /> <!-- add icon later -->
 </menu>

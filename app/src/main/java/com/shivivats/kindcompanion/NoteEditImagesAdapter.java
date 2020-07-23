@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -27,15 +26,15 @@ public class NoteEditImagesAdapter extends RecyclerView.Adapter<NoteEditImagesAd
         noteEditImagesClickListener = listener;
     }
 
-    @NotNull
+    @NonNull
     @Override
-    public NoteImagesViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public NoteImagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.item_note_entry_image, parent, false);
         return new NoteImagesViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NotNull NoteImagesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NoteImagesViewHolder holder, int position) {
         if (images != null) {
             ImageEntity current = images.get(position);
             holder.imageView.setImageURI(current.imageUri);

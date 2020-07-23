@@ -145,10 +145,10 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         switch (item.getItemId()) {
             case R.id.action_save_record:
                 // save recording here
-                Log.d("RECORDER_TAG", "save pressed");
+                //Log.d("RECORDER_TAG", "save pressed");
                 if (fileName != null && !isRecording) {
-                    Log.d("RECORDER_TAG", "not recording and not null file");
-                    Log.d("RECORDER_TAG", "filename is " + fileName);
+                    //Log.d("RECORDER_TAG", "not recording and not null file");
+                    //Log.d("RECORDER_TAG", "filename is " + fileName);
                     Uri audioUri = Uri.fromFile(new File(fileName));
 
                     Intent intent = new Intent();
@@ -212,7 +212,7 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
             e.printStackTrace();
         }
 
-        Log.d(LOG_TAG, fileName);
+        //Log.d(LOG_TAG, fileName);
 
         recorder.setOutputFile(fileName);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);

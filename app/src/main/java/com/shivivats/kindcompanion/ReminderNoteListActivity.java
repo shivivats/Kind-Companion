@@ -2,7 +2,6 @@ package com.shivivats.kindcompanion;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.result.ActivityResult;
@@ -47,8 +46,8 @@ public class ReminderNoteListActivity extends AppCompatActivity implements NoteL
                 if (noteEntity.noteId == -1 || noteEntity.noteImagesCount == -1 || noteEntity.noteAudioCount == -1) {
                     DiscardNoteIfExists("The note couldn't be saved.");
                 } else {
-                    Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);
-                    Log.d("randomtagListActivity", "note body in list activity: " + noteEntity.noteBody);
+                    //Log.d("randomtagListActivity", "note title in list activity: " + noteEntity.noteTitle);
+                    //Log.d("randomtagListActivity", "note body in list activity: " + noteEntity.noteBody);
                     Snackbar.make(recyclerView, "Note saved successfully.", Snackbar.LENGTH_SHORT)
                             .setAnchorView(findViewById(R.id.reminderListFab))
                             .show();

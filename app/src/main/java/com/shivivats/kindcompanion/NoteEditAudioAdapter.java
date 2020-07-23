@@ -8,10 +8,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -29,15 +28,15 @@ public class NoteEditAudioAdapter extends RecyclerView.Adapter<NoteEditAudioAdap
         noteEditAudioClickListener = listener;
     }
 
-    @NotNull
+    @NonNull
     @Override
-    public NoteEditAudioAdapter.NoteAudioViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+    public NoteEditAudioAdapter.NoteAudioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.item_note_entry_audio, parent, false);
         return new NoteEditAudioAdapter.NoteAudioViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NotNull NoteEditAudioAdapter.NoteAudioViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NoteEditAudioAdapter.NoteAudioViewHolder holder, int position) {
         if (audios != null) {
             AudioEntity current = audios.get(position);
             // holder.imageView.setImageURI(current.imageUri);

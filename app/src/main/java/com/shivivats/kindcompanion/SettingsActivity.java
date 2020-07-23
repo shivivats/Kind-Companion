@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -35,8 +34,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.snackbar.Snackbar;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -97,7 +94,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
         SwitchPreferenceCompat reminderSwitch = settingsFragment.findPreference("reminderSwitch");
 
         if (reminderSwitch == null) {
-            Log.d("SETTINGS_TAG", "reminder switch is null");
+            //Log.d("SETTINGS_TAG", "reminder switch is null");
         }
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -296,7 +293,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             currentCalendar = Calendar.getInstance();
             currentCalendar.setTimeInMillis(System.currentTimeMillis() + reminderInterval);
             createReminder(System.currentTimeMillis() + reminderInterval);
-            Log.d("SETTINGS_TAG", "pending intent finished");
+            //Log.d("SETTINGS_TAG", "pending intent finished");
         }
     }
 
@@ -342,7 +339,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-        @NotNull
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker

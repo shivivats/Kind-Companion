@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -48,7 +47,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
         Intent intent = getIntent();
         isEdit = intent.getBooleanExtra("IS_EDIT", false);
 
-        Log.d("PAINT_ACTIVITY", "isEdit: " + isEdit);
+        //Log.d("PAINT_ACTIVITY", "isEdit: " + isEdit);
 
         if (isEdit) {
             currentImageId = intent.getLongExtra("IMAGE_ID", -1);
@@ -57,7 +56,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                 finish();
             }
             currentImageUri = Uri.parse(intent.getStringExtra("IMAGE_URI"));
-            Log.d("PAINT_ACTIVITY", "currentImageUri: " + currentImageUri);
+            //Log.d("PAINT_ACTIVITY", "currentImageUri: " + currentImageUri);
         } else {
             currentImageId = -1;
             currentImageUri = null;
@@ -76,7 +75,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inMutable = true;
             bitmap = BitmapFactory.decodeFile(currentImageUri.getPath(), options);
-            Log.d("PAINT_ACTIVITY", "bitmap: " + bitmap);
+            //Log.d("PAINT_ACTIVITY", "bitmap: " + bitmap);
 
 
             if (bitmap != null) {
