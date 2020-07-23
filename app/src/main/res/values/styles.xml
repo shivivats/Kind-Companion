@@ -15,6 +15,7 @@
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="colorOnError">@color/colorOnError</item>
+        <item name="colorPrimaryDark">@color/colorPrimary_Dark</item>
     </style>
 
     <!-- Base application dark theme. -->
@@ -32,6 +33,7 @@
         <item name="colorOnBackground">@color/colorOnBackgroundDark</item>
         <item name="colorOnSurface">@color/colorOnSurfaceDark</item>
         <item name="colorOnError">@color/colorOnErrorDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Dark</item>
     </style>
 
 </resources>

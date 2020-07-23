@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener, DeleteNoteDialogFragment.DeleteNoteListener {
+public class NoteEditActivity extends AppCompatActivity implements NoteEditImagesClickListener, NoteEditAudioClickListener, DeleteNoteDialogFragment.DeleteNoteListener, NoteVoidDialogFragment.NoteVoidListener {
 
     public static final String EXTRA_REPLY = "com.shivivats.kindcompanion.";
 
@@ -459,7 +459,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
                 return true;
 
             case R.id.action_void_edit_note:
-                SendToVoidAnimation();
+                DialogFragment noteVoidDialogFragment = new NoteVoidDialogFragment();
+                noteVoidDialogFragment.show(getSupportFragmentManager(), "note void");
                 return true;
 
             case R.id.action_discard_edit_note:
@@ -556,43 +557,8 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         finish();
     }
 
-    private void SendToVoidAnimation() {
-        // we need to create a void animation here
-        // and then delete the note
-        // so we just
-
-        // we can also
-        //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
-        CoordinatorLayout parentLayout = findViewById(R.id.noteEditParentLayout);
-        parentLayout.animate().alpha(0.f).setDuration(3000).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                VoidNote();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-
-        /*LayoutTransition layoutTransition;
-        layoutTransition=new LayoutTransition();
-        Animator animator;
-        animator
-        layoutTransition.setAnimator(LayoutTransition.DISAPPEARING, animator);
-        parentLayout.setVisibility(View.INVISIBLE);*/
-
+    @Override
+    public void onDeleteNoteDialogNegativeClick(DialogFragment dialog) {
 
     }
 
@@ -630,7 +596,52 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     }
 
     @Override
-    public void onDeleteNoteDialogNegativeClick(DialogFragment dialog) {
+    public void onNoteVoidPositiveClick(DialogFragment dialog) {
+        SendToVoidAnimation();
+    }
+
+    private void SendToVoidAnimation() {
+        // we need to create a void animation here
+        // and then delete the note
+        // so we just
+
+        // we can also
+        //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+        CoordinatorLayout parentLayout = findViewById(R.id.noteEditParentLayout);
+        parentLayout.animate().alpha(0.f).setDuration(3000).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                parentLayout.setClickable(false);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                VoidNote();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        /*LayoutTransition layoutTransition;
+        layoutTransition=new LayoutTransition();
+        Animator animator;
+        animator
+        layoutTransition.setAnimator(LayoutTransition.DISAPPEARING, animator);
+        parentLayout.setVisibility(View.INVISIBLE);*/
+
+
+    }
+
+    @Override
+    public void onNoteVoidNegativeClick(DialogFragment dialog) {
 
     }
 }

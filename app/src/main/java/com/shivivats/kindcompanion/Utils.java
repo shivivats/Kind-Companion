@@ -3,7 +3,6 @@ package com.shivivats.kindcompanion;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
@@ -21,8 +20,8 @@ public class Utils {
      */
     public static void onActivityCreateSetTheme(Activity activity) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-        Boolean darkTheme = sharedPreferences.getBoolean("darkTheme", false);
-        Log.d("UTILS_TAG", "dark theme: " + darkTheme + " and current activity is: " + activity.getLocalClassName());
+        Boolean darkTheme = sharedPreferences.getBoolean("darkTheme", true);
+        //Log.d("UTILS_TAG", "dark theme: " + darkTheme + " and current activity is: " + activity.getLocalClassName());
         if (darkTheme) {
             activity.setTheme(R.style.AppTheme_Dark);
         } else {
