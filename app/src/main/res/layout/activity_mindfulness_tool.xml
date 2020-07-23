@@ -32,24 +32,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/mindfulnessToolHeaderOne"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:autoLink="web"
-                android:gravity="center"
-                android:text="@string/mindfulnessToolHeaderOne"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-
-            <TextView
                 android:id="@+id/mindfulnessToolTextOne"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mindfulnessToolHeaderOne"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -98,27 +80,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mindfulnessToolSubtextOne"
                 app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/mindfulnessToolCredits"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:layout_marginBottom="@dimen/big_margin"
-                android:autoLink="web"
-                android:gravity="end"
-                android:text="@string/mindfulnessToolCredits"
-                android:textAppearance="?attr/textAppearanceCaption"
-                android:textColor="?attr/colorOnSurface"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mindfulnessToolSubtextTwo"
-                app:layout_constraintVertical_bias="0.0" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

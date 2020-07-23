@@ -48,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
-
+<!--
             <TextView
                 android:id="@+id/relaxationToolTextTwo"
                 android:layout_width="0dp"
@@ -168,7 +168,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relaxationToolTextFive"
                 app:layout_constraintVertical_bias="0.0" />
-
+-->
             <TextView
                 android:id="@+id/relaxationToolHeaderThree"
                 android:layout_width="0dp"
@@ -184,7 +184,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relaxationToolSubtextFour"
+                app:layout_constraintTop_toBottomOf="@+id/relaxationToolTextOne"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -237,27 +237,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relaxationToolSubtextFive"
                 app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/relaxationToolCredits"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:layout_marginBottom="@dimen/big_margin"
-                android:autoLink="web"
-                android:gravity="end"
-                android:text="@string/relaxationToolCredits"
-                android:textAppearance="?attr/textAppearanceCaption"
-                android:textColor="?attr/colorOnSurface"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relaxationToolSubtextSix"
-                app:layout_constraintVertical_bias="0.0" />
-
+            <!--
+                        <TextView
+                            android:id="@+id/relaxationToolCredits"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/big_margin"
+                            android:layout_marginTop="@dimen/big_margin"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:layout_marginBottom="@dimen/big_margin"
+                            android:autoLink="web"
+                            android:gravity="end"
+                            android:text="@string/relaxationToolCredits"
+                            android:textAppearance="?attr/textAppearanceCaption"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/relaxationToolSubtextSix"
+                            app:layout_constraintVertical_bias="0.0" />
+            -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

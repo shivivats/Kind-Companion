@@ -58,7 +58,7 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:autoLink="web"
-                android:text="Developed by Shivi Vats with help from Dr. Wolfgang Hoi."
+                android:text="Developed by Shivi Vats. \nSpecial thanks to MMag. Wolfgang Hoi for his advice and guidance."
                 android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
