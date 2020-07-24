@@ -167,4 +167,5 @@
     <string name="offMyChestHeader">If you want to get something off your chest, the \"Send into the void\" option for the notes can help send your thoughts out for them to disappear forever. \nThe note can be accessed via the Reminder or Vault pages.</string>
     <string name="offMyChestReminderButton">Open Reminders</string>
     <string name="offMyChestVaultButton">Open Vault</string>
+    <string name="applicationInfoTextFour"><a href="https://medium.com/@shivivats7/kind-companion-privacy-policy-b9ad4d1a1d0f">Privacy Policy</a></string>
 </resources>

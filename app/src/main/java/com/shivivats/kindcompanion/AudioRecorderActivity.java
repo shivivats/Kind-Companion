@@ -25,6 +25,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.transition.TransitionManager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -34,7 +36,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AudioRecorderActivity extends AppCompatActivity implements View.OnClickListener {
+public class AudioRecorderActivity extends AppCompatActivity implements View.OnClickListener, RecordAudioDialogFragment.RecordAudioListener {
 
     private static final String LOG_TAG = "AudioRecorder";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -70,9 +72,14 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         isPlaying = false;
         isRecording = false;
 
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         initViews();
+        if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
+            DialogFragment newFragment = new RecordAudioDialogFragment();
+            newFragment.show(getSupportFragmentManager(), "record_audio_permission");
+        } else {
+
+        }
     }
 
     private void initViews() {
@@ -126,6 +133,8 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
                 break;
         }
         if (!permissionToRecordAccepted) {
+            //Snackbar.make(recordImage, "Permission not accepted.", Snackbar.LENGTH_SHORT).show();
+            setResult(-2);
             finish();
         }
 
@@ -141,30 +150,33 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if (fileName != null && !isRecording) {
+            SaveRecording();
+        } else {
+            finish();
+            //NavUtils.navigateUpTo(this, new Intent(this, NoteEditActivity.class));
+        }
+    }
+
+    private void SaveRecording() {
+        //Log.d("RECORDER_TAG", "not recording and not null file");
+        //Log.d("RECORDER_TAG", "filename is " + fileName);
+        Uri audioUri = Uri.fromFile(new File(fileName));
+
+        Intent intent = new Intent();
+        intent.putExtra("AUDIO_URI", audioUri.toString());
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save_record:
-                // save recording here
-                //Log.d("RECORDER_TAG", "save pressed");
-                if (fileName != null && !isRecording) {
-                    //Log.d("RECORDER_TAG", "not recording and not null file");
-                    //Log.d("RECORDER_TAG", "filename is " + fileName);
-                    Uri audioUri = Uri.fromFile(new File(fileName));
-
-                    Intent intent = new Intent();
-                    intent.putExtra("AUDIO_URI", audioUri.toString());
-                    setResult(RESULT_OK, intent);
-                    finish();
-                    return true;
-                } else if (isRecording) {
-                    Snackbar.make(linearLayoutRecorder, "Stop recording first!", Snackbar.LENGTH_SHORT)
-                            .show();
-                    return true;
-                } else {
-                    Snackbar.make(linearLayoutRecorder, "Nothing to save.", Snackbar.LENGTH_SHORT)
-                            .show();
-                    return true;
-                }
+                SaveAudio();
+                return true;
 
             case R.id.action_cancel_record:
                 ReturnToNoteEdit();
@@ -172,6 +184,22 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void SaveAudio() {
+        // save recording here
+        //Log.d("RECORDER_TAG", "save pressed");
+        if (fileName != null && !isRecording) {
+            SaveRecording();
+
+        } else if (isRecording) {
+            Snackbar.make(linearLayoutRecorder, "Stop recording first!", Snackbar.LENGTH_SHORT)
+                    .show();
+
+        } else {
+            Snackbar.make(linearLayoutRecorder, "Nothing to save.", Snackbar.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -377,4 +405,15 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         finish();
     }
 
+    @Override
+    public void onRecordAudioPositiveClick(DialogFragment dialog) {
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+    }
+
+    @Override
+    public void onRecordAudioNegativeClick(DialogFragment dialog) {
+        //Snackbar.make(recordImage, "Consent not given.", Snackbar.LENGTH_SHORT).show();
+        setResult(-2);
+        finish();
+    }
 }

@@ -1,6 +1,8 @@
 package com.shivivats.kindcompanion;
 
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,5 +29,8 @@ public class ApplicationAboutActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setTitle("About");
         }
+
+        TextView applicationInfoTextFour = findViewById(R.id.applicationInfoTextFour);
+        applicationInfoTextFour.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -34,8 +34,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+        if(!(PreferenceManager.getDefaultSharedPreferences(this ).getBoolean("biometrics", false) && biometricAvailable)&&!(PreferenceManager.getDefaultSharedPreferences(this ).getBoolean("useLoginPin", false))) {
+            LogIntoApp();
+        }
+         */
+
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_login);
+
 
         appLoginButton = findViewById(R.id.appLoginButton);
         appLoginPinEntry = findViewById(R.id.appLoginPinEntry);
@@ -112,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 appLoginPinMessageText.setVisibility(View.INVISIBLE);
                 appLoginPinButton.setVisibility(View.VISIBLE);
             } else {
+                Toast.makeText(getApplicationContext(), "Login without authentication. Check settings to set authentication method.", Toast.LENGTH_LONG).show();
                 LogIntoApp();
             }
         });

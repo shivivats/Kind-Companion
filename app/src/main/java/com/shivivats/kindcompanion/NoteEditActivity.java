@@ -223,8 +223,12 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
 
             } else if (result.getResultCode() == -3) {
                 //nothing happens bc we simply cancel the activity
+            } else if (result.getResultCode() == -2) {
+                Snackbar.make(noteBody, "Permission not given.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
             } else {
-                Snackbar.make(noteBody, "Audio could not be saved.", Snackbar.LENGTH_SHORT)
+                Snackbar.make(noteBody, "Something went wrong. Audio could not be saved.", Snackbar.LENGTH_SHORT)
                         .setAnchorView(noteEditBottomBar)
                         .show();
                 //Toast.makeText(getApplicationContext(), "Audio could not be saved.", Toast.LENGTH_SHORT).show();
