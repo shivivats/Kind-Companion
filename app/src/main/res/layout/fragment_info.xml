@@ -33,7 +33,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:textSize="20sp"
             app:icon="@drawable/baseline_info_24" />
-
+<!--
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
@@ -47,7 +47,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:textSize="20sp"
             app:icon="@drawable/baseline_info_24" />
-
+-->
     </LinearLayout>
 </ScrollView>
 

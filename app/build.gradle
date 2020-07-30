@@ -23,7 +23,7 @@ android {
         minSdkVersion 23
         // specifies the api level used to test the app
         targetSdkVersion 29
-        versionCode 2
+        versionCode 3
         versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

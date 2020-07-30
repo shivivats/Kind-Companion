@@ -34,7 +34,7 @@ public class InfoFragment extends Fragment {
         super.onResume();
         anxietyInfoButton = getActivity().findViewById(R.id.anxietyInfoButton);
         depressionInfoButton = getActivity().findViewById(R.id.depressionInfoButton);
-        suicideInfoButton = getActivity().findViewById(R.id.suicideInfoButton);
+        //suicideInfoButton = getActivity().findViewById(R.id.suicideInfoButton);
 
         anxietyInfoButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AnxietyInfoActivity.class);
@@ -45,11 +45,12 @@ public class InfoFragment extends Fragment {
             Intent intent = new Intent(getContext(), DepressionInfoActivity.class);
             startActivity(intent);
         });
-
+        /*
         suicideInfoButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SuicideInfoActivity.class);
             startActivity(intent);
         });
+         */
     }
 
     @Override
