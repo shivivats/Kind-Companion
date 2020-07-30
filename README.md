@@ -1,5 +1,5 @@
 # Kind-Companion
-An app focusing on mental well-being.
+An android app focusing on mental well-being.
 
 
 The app was made to help people deal with anxiety. It was developed over a course of 3 months as part of my internship for my Masters Game Studies and Engineering course.
