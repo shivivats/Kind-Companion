@@ -33,10 +33,6 @@ public class PaintView extends View {
     private Canvas mCanvas;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
-
-    private Bitmap baseBitmap;
-    private boolean isRelaxedEdit;
-
     public PaintView(Context context) {
         this(context, null);
     }
@@ -60,11 +56,9 @@ public class PaintView extends View {
 
         if (isEdit) {
             mBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
-            baseBitmap = mBitmap;
             mCanvas = new Canvas(mBitmap);
         } else {
             mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            baseBitmap = mBitmap;
             mCanvas = new Canvas(mBitmap);
         }
 
@@ -146,6 +140,10 @@ public class PaintView extends View {
             mX = x;
             mY = y;
         }
+    }
+
+    public void setEraser() {
+        currentColor = backgroundColor;
     }
 
     public void setColor(int color) {

@@ -187,7 +187,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
                 return true;
 
             case R.id.action_eraser:
-                //paintView.setErase(true);
+                paintView.setEraser();
                 return true;
 
             case R.id.action_clear:
