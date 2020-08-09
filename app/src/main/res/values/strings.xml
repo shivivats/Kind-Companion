@@ -169,4 +169,37 @@
     <string name="offMyChestVaultButton">Open Vault</string>
     <string name="applicationInfoTextFour"><a href="https://medium.com/@shivivats7/kind-companion-privacy-policy-b9ad4d1a1d0f">Privacy Policy</a></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="onBoardingFirstImageCaption">The front page of the app.</string>
+    <string name="onBoardingFourthImageCaption">Information, Tools and Resources in the app.</string>
+    <string name="onBoardingFourthImageCaptionTwo">Various ways to deal with anxiety.</string>
+    <string name="onBoardingSecondImageCaption">Reminder notes.</string>
+    <string name="onBoardingSecondImageCaptionTwo">Vault login.</string>
+    <string name="onBoardingThirdImageCaption">Top half of the Settings.</string>
+    <string name="calmDownQuicklyHeader">You have not set a preferred calming down method in settings yet, so here are all your options.\nKindly select one in settings to have quick access to it from the front page.</string>
+    <string name="calmDownQuicklyFiveThingsButton">Five Things Game</string>
+    <string name="calmDownQuicklyCrossItOffButton">Cross It Off</string>
+    <string name="calmDownQuicklyControlledBreathingButton">Controlled Breathing</string>
+    <string name="calmDownQuicklyRelaxingPaintingButton">Relaxing Painting</string>
+    <string name="calmDownQuicklyOffMyChestButton">Off My Chest</string>
+    <string name="fiveThingsHeaderTwo">This technique helps distract your brain from the anxiety and the panic.\n Even with just 3 simple steps, the technique can be effective. It is a very simple technique.</string>
+    <string name="fiveThingsProceedButton">Proceed to the game</string>
+    <string name="appLoginPinMessageText">Wrong Pin!</string>
+    <string name="appLoginPinButton">Login</string>
+    <string name="loginPinMessageText">Wrong Pin!</string>
+    <string name="onBoardingFirstHeader">Welcome to the app!</string>
+    <string name="onBoardingFirstTextOne">This tutorial will guide you through some core features of the app. You can end the tutorial at any time using the skip button above.</string>
+    <string name="onBoardingFirstTextTwo">This app was created mainly to help people deal with everyday anxiety. It has a notes feature, explanation of a few calming mechanisms and some information that might be useful to you.</string>
+    <string name="onBoardingFirstTextThree">You can either choose to put some notes as a reminder to yourself, or to store them away safely in the vault.</string>
+    <string name="onBoardingFourthHeader">Other Features</string>
+    <string name="onBoardingFourthTextOne">As mentioned before, the app has some information that might be useful to you. Along with that, there are links to a lot of resources that contain even more information that can be helpful.</string>
+    <string name="onBoardingFourthTextTwo">The app also has some methods that can help you deal with anxiety quickly! One of the methods can be set as your preferred calming down method via the Settings, as mentioned before.</string>
+    <string name="onBoardingFourthTextThree">With all that being said, feel free to go ahead and use the app!</string>
+    <string name="onBoardingSecondHeader">The Notes Feature</string>
+    <string name="onBoardingSecondTextOne">As mentioned before, the app has two ways you can store notes: as Reminders or in the Vault.\nNotes can have images, drawings and recordings attached to them, so you can personalise them as much as you want to!</string>
+    <string name="onBoardingSecondTextTwo">Notes made as Reminders can be accessed via a reminder notification, the time and date of which can be customised via Settings.\nNotes placed in the Vault are kept safe behind a pin that you are able to set via the Settings as well.</string>
+    <string name="onBoardingThirdHeader">The Settings</string>
+    <string name="onBoardingThirdTextOne">The Settings are pretty straightforward, however you can set your preferred calming down method that you can then access quickly from the front page.</string>
+    <string name="onBoardingThirdTextTwo">You can also access this screen again from the Settings by selecting the \"Tutorial\" option.</string>
+    <string name="action_skip_onboarding">Skip</string>
+    <string name="action_next_onboarding">Next</string>
 </resources>

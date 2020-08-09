@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/small_margin"
         android:layout_marginBottom="@dimen/small_margin"
-        android:text="Wrong Pin!"
+        android:text="@string/loginPinMessageText"
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:textColor="?attr/colorError"
         android:visibility="invisible" />

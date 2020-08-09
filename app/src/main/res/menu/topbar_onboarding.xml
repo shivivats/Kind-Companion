@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/action_skip_onboarding"
-        android:title="Skip"
-        app:showAsAction="always" />
+        android:title="@string/action_skip_onboarding"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_next_onboarding"
-        android:title="Next"
-        app:showAsAction="always" />
+        android:title="@string/action_next_onboarding"
+        app:showAsAction="ifRoom" />
 
 </menu>

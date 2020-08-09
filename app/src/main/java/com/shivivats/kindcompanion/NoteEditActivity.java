@@ -177,7 +177,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
         public void onActivityResult(Boolean result) {
             // do something with the result here
             // add the taken image to the database
-            if (result == true) {
+            if (result) {
                 //Log.d("randomtag", "non null camera activity result");
                 if (currentPhotoURI != null) {
                     ImageEntity newImage = new ImageEntity();

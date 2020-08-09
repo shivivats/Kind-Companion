@@ -56,9 +56,8 @@ public class NotifyService extends Service {
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
-            } else {
-                //Log.d("NOTIFICATIONS_TAG", "notification manager for channel null");
-            }
+            }  //Log.d("NOTIFICATIONS_TAG", "notification manager for channel null");
+
 
         }
 
@@ -67,9 +66,8 @@ public class NotifyService extends Service {
         if (notificationManager != null) {
             notificationManager.notify((int) System.currentTimeMillis(), builder.build());
 
-        } else {
-            //Log.d("NOTIFICATIONS_TAG", "notification manager null");
-        }
+        }  //Log.d("NOTIFICATIONS_TAG", "notification manager null");
+
 
         //Log.d("NOTIFICATIONS_TAG", "notification set");
     }

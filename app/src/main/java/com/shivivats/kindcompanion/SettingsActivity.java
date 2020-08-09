@@ -93,16 +93,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         SwitchPreferenceCompat reminderSwitch = settingsFragment.findPreference("reminderSwitch");
 
-        if (reminderSwitch == null) {
-            //Log.d("SETTINGS_TAG", "reminder switch is null");
-        }
+        //Log.d("SETTINGS_TAG", "reminder switch is null");
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         reminderSwitchValue = sharedPreferences.getBoolean("reminderSwitch", false);
 
         reminderSwitch.setOnPreferenceChangeListener((preference, newValue) -> {
 
-            if ((boolean) newValue == true) {
+            if ((boolean) newValue) {
                 currentCalendar = userCalendar;
                 createReminder(userCalendar.getTimeInMillis());
                 enableReceiver();

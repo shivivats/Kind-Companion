@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {NoteEntity.class, ImageEntity.class, AudioEntity.class}, version = 7, exportSchema = true)
+@Database(entities = {NoteEntity.class, ImageEntity.class, AudioEntity.class}, version = 7)
 @TypeConverters(Converters.class)
 public abstract class NoteDatabase extends RoomDatabase {
 

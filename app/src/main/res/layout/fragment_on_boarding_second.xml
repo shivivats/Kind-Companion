@@ -22,7 +22,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:autoLink="web"
             android:gravity="center"
-            android:text="The Notes Feature"
+            android:text="@string/onBoardingSecondHeader"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="As mentioned before, the app has two ways you can store notes: as Reminders or in the Vault.\nNotes can have images, drawings and recordings attached to them, so you can personalise them as much as you want to!"
+            android:text="@string/onBoardingSecondTextOne"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="Notes made as Reminders can be accessed via a reminder notification, the time and date of which can be customised via Settings.\nNotes placed in the Vault are kept safe behind a pin that you are able to set via the Settings as well."
+            android:text="@string/onBoardingSecondTextTwo"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondTextTwo"
+            android:contentDescription="@string/onBoardingSecondImageCaption"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -90,7 +91,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="Reminder notes."
+            android:text="@string/onBoardingSecondImageCaption"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -113,6 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondImageCaption"
+            android:contentDescription="@string/onBoardingSecondImageCaptionTwo"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -123,7 +125,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="Vault login."
+            android:text="@string/onBoardingSecondImageCaptionTwo"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"

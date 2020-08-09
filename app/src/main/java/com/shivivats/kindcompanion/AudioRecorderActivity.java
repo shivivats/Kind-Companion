@@ -77,8 +77,6 @@ public class AudioRecorderActivity extends AppCompatActivity implements View.OnC
         if (ContextCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED) {
             DialogFragment newFragment = new RecordAudioDialogFragment();
             newFragment.show(getSupportFragmentManager(), "record_audio_permission");
-        } else {
-
         }
     }
 

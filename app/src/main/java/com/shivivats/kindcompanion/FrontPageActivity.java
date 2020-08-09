@@ -43,6 +43,8 @@ public class FrontPageActivity extends AppCompatActivity {
              */
 
             frontPageHeader.setText(randomString);
+
+            phrases.recycle();
         }
     }
 

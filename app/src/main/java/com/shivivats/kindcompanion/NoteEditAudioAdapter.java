@@ -42,10 +42,9 @@ public class NoteEditAudioAdapter extends RecyclerView.Adapter<NoteEditAudioAdap
             // holder.imageView.setImageURI(current.imageUri);
             // SET THE AUDIO THING HERE
 
-        } else {
-            // holder.imageView.setImageBitmap(null);
-            // NULL case here
-        }
+        }  // holder.imageView.setImageBitmap(null);
+        // NULL case here
+
     }
 
     // getItemCount() is called many times, and when it is first called,

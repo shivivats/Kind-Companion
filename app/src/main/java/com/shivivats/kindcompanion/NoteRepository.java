@@ -40,7 +40,7 @@ public class NoteRepository {
 
         Future<Long> insertBlankNoteFuture = NoteDatabase.databaseWriteExecutor.submit(() -> {
             long currId = noteEntityDao.insertBlankNote(blank);
-            return (Long) currId;
+            return currId;
         });
 
         try {

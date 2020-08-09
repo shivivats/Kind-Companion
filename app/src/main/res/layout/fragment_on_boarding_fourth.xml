@@ -22,7 +22,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:autoLink="web"
             android:gravity="center"
-            android:text="Other Features"
+            android:text="@string/onBoardingFourthHeader"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="As mentioned before, the app has some information that might be useful to you. Along with that, there are links to a lot of resources that contain even more information that can be helpful."
+            android:text="@string/onBoardingFourthTextOne"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="The app also has some methods that can help you deal with anxiety quickly! One of the methods can be set as your preferred calming down method via the Settings, as mentioned before."
+            android:text="@string/onBoardingFourthTextTwo"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/onBoardingFourthTextTwo"
+            android:contentDescription="@string/onBoardingFourthImageCaption"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -90,7 +91,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="Information, Tools and Resources in the app."
+            android:text="@string/onBoardingFourthImageCaption"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -113,6 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/onBoardingFourthImageCaption"
+            android:contentDescription="@string/onBoardingFourthImageCaptionTwo"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -123,7 +125,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="Various ways to deal with anxiety."
+            android:text="@string/onBoardingFourthImageCaptionTwo"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -141,7 +143,7 @@
             android:layout_marginEnd="@dimen/big_margin"
             android:layout_marginBottom="@dimen/big_margin"
             android:autoLink="web"
-            android:text="With all that being said, feel free to go ahead and use the app!"
+            android:text="@string/onBoardingFourthTextThree"
             android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
