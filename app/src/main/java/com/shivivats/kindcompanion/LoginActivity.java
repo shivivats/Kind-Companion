@@ -1,6 +1,7 @@
 package com.shivivats.kindcompanion;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -35,11 +36,20 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        if(!(PreferenceManager.getDefaultSharedPreferences(this ).getBoolean("biometrics", false) && biometricAvailable)&&!(PreferenceManager.getDefaultSharedPreferences(this ).getBoolean("useLoginPin", false))) {
-            LogIntoApp();
+        // check if onboarding should be showed first
+
+        // Get the shared preferences
+        SharedPreferences preferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+        // Check if onboarding_complete is false
+        if (!preferences.getBoolean("onboarding_complete", false)) {
+            // Start the onboarding Activity
+            Intent onboarding = new Intent(this, OnBoardingActivity.class);
+            startActivity(onboarding);
+
+            // Close the login Activity
+            finish();
+            return;
         }
-         */
 
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_login);

@@ -27,6 +27,8 @@
     <color name="colorOnSurfaceDark">#FFFFFF</color>
     <color name="colorOnErrorDark">#000000</color>
     <color name="colorPrimaryDark_Dark">#98c4c2
-    </color> <!-- same as primary variant of the theme -->
+    </color>
+
+    <color name="black_overlay">#66000000</color> <!-- same as primary variant of the theme -->
 
 </resources>

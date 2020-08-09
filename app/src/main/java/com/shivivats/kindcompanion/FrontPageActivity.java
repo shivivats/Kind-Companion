@@ -33,6 +33,15 @@ public class FrontPageActivity extends AppCompatActivity {
             Random rand = new Random();
             int randomInt = rand.nextInt(phrases.length());
             String randomString = phrases.getString(randomInt);
+
+            /*
+            if(randomInt == 1)
+            {
+
+                randomString = randomString.concat(", " + username);
+            }
+             */
+
             frontPageHeader.setText(randomString);
         }
     }

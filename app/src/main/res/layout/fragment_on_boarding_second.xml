@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnBoardingFragmentSecond">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/onBoardingSecondHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:autoLink="web"
+            android:gravity="center"
+            android:text="The Notes Feature"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/onBoardingSecondTextOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:autoLink="web"
+            android:text="As mentioned before, the app has two ways you can store notes: as Reminders or in the Vault.\nNotes can have images, drawings and recordings attached to them, so you can personalise them as much as you want to!"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondHeader"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/onBoardingSecondTextTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:autoLink="web"
+            android:text="Notes made as Reminders can be accessed via a reminder notification, the time and date of which can be customised via Settings.\nNotes placed in the Vault are kept safe behind a pin that you are able to set via the Settings as well."
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondTextOne"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <ImageView
+            android:id="@+id/onBoardingSecondImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:scaleType="centerInside"
+            android:src="@drawable/ss_reminder_page"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondTextTwo"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/onBoardingSecondImageCaption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:autoLink="web"
+            android:text="Reminder notes."
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondImageView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/onBoardingSecondImageViewTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:scaleType="centerInside"
+            android:src="@drawable/ss_vault_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondImageCaption"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/onBoardingSecondImageCaptionTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:autoLink="web"
+            android:text="Vault login."
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/onBoardingSecondImageViewTwo"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

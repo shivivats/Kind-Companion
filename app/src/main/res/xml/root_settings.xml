@@ -92,6 +92,11 @@
     <PreferenceCategory app:title="Info">
 
         <Preference
+            android:title="Tutorial"
+            app:key="showOnBoarding"
+            app:summary="Show the tutorial again." />
+
+        <Preference
             android:title="Credits"
             app:key="creditsPreference"
             app:summary="Credits for the app." />

@@ -21,7 +21,7 @@ public class UsefulInformationActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 pager;
 
-    ViewPagerFragmentAdapter adapter;
+    UsefulInformationFragmentAdapter adapter;
 
     Toolbar toolbar;
 
@@ -49,7 +49,7 @@ public class UsefulInformationActivity extends AppCompatActivity {
             ab.setTitle("Useful Knowledge");
         }
 
-        adapter = new ViewPagerFragmentAdapter(this);
+        adapter = new UsefulInformationFragmentAdapter(this);
         pager.setAdapter(adapter);
         new TabLayoutMediator(tabLayout, pager, (tab, position) -> {
             // add the names here for more tabs
@@ -80,12 +80,12 @@ public class UsefulInformationActivity extends AppCompatActivity {
     }
 
 
-    private class ViewPagerFragmentAdapter extends FragmentStateAdapter {
+    private class UsefulInformationFragmentAdapter extends FragmentStateAdapter {
 
         //private Context myContext;
         int totalTabs = 3;
 
-        public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
+        public UsefulInformationFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
             super(fragmentActivity);
         }
 

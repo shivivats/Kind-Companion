@@ -294,9 +294,21 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        Preference creditsPreference, aboutPreference;
+        Preference showOnBoarding, creditsPreference, aboutPreference;
+
         creditsPreference = settingsFragment.findPreference("creditsPreference");
         aboutPreference = settingsFragment.findPreference("aboutPreference");
+        showOnBoarding = settingsFragment.findPreference("showOnBoarding");
+
+        showOnBoarding.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent onboarding = new Intent(thisActivity, OnBoardingActivity.class);
+                startActivity(onboarding);
+                return true;
+            }
+        });
+
         creditsPreference.setOnPreferenceClickListener(preference -> {
             Intent intent = new Intent(thisActivity, ApplicationCreditsActivity.class);
             startActivity(intent);
@@ -308,6 +320,8 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         });
+
+
     }
 
     @Override

@@ -23,9 +23,10 @@
         android:roundIcon="@mipmap/ic_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark">
+        <activity android:name=".OnBoardingActivity" />
         <activity
             android:name=".FiveThingsGameActivity"
-            android:parentActivityName=".FiveThingsActivity"></activity>
+            android:parentActivityName=".FiveThingsActivity" />
         <activity
             android:name=".CalmDownQuicklyActivity"
             android:parentActivityName=".FrontPageActivity" />

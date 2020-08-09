@@ -107,7 +107,7 @@
     <string name="problemSolvingToolCredits">Credits to ReachOut for the information</string>
     <string name="problemSolvingToolHeaderOne">Steps to Problem Solving</string>
     <string name="problemSolvingToolTextEight">6. Identify the best solutions. Now it’s time to make a decision. Look at your list of options, and pick out the ones that are most practical and helpful. There may be one obvious solution, or some might work in combination.</string>
-    <string name="problemSolvingToolTextEleven">If nothing works, try some of your other coping mechanisms. If you still feel bogged down, it is a good idea to seek professional help! \nLooking for support is never a bad thing!</string>
+    <string name="problemSolvingToolTextEleven">If nothing works, try some of your other coping mechanisms. If you still feel bogged down, it is a good idea to <a href="https://au.reachout.com/mental-health-issues/professional-help">seek professional help</a>! \nLooking for support is never a bad thing!</string>
     <string name="problemSolvingToolTextFive">3. Brainstorm possible solutions. Be creative and come up with as many solutions as you can think of. Some ideas may be way out there, but don’t worry about evaluating them yet. If you want to solve a conflict you’re having with your parents by escaping on a rainbow unicorn, write it down! Keep an open mind and list anything that comes to mind, plausible or not.</string>
     <string name="problemSolvingToolTextFour">2. Set some goals. Focus on the steps you can take to resolve things, rather than just thinking about what you’d like to happen. Maybe you wish you had more money. Make a list of all the ways you can save or earn more. It could mean walking to school rather than taking the bus, or applying for a part-time job.</string>
     <string name="problemSolvingToolTextNine">7. Put your solutions into practice. Have faith in yourself and make the commitment to try out one of your solutions.</string>
@@ -168,4 +168,5 @@
     <string name="offMyChestReminderButton">Open Reminders</string>
     <string name="offMyChestVaultButton">Open Vault</string>
     <string name="applicationInfoTextFour"><a href="https://medium.com/@shivivats7/kind-companion-privacy-policy-b9ad4d1a1d0f">Privacy Policy</a></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
