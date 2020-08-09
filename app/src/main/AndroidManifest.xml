@@ -24,6 +24,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Dark">
         <activity
+            android:name=".FiveThingsGameActivity"
+            android:parentActivityName=".FiveThingsActivity"></activity>
+        <activity
+            android:name=".CalmDownQuicklyActivity"
+            android:parentActivityName=".FrontPageActivity" />
+        <activity
             android:name=".ApplicationAboutActivity"
             android:parentActivityName=".SettingsActivity" />
         <activity
@@ -100,6 +106,7 @@
             android:noHistory="true"> <!-- Main Home Activity. Its the front page of the app for now -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

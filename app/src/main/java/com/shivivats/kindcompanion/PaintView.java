@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -32,6 +34,8 @@ public class PaintView extends View {
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+    private boolean erase = false;
+
 
     private Bitmap baseBitmap;
     private boolean isRelaxedEdit;
@@ -78,7 +82,7 @@ public class PaintView extends View {
         strokeWidth = BRUSH_SIZE;
 
         if (!isEdit && !isRelaxedPaint) {
-            mCanvas.drawColor(DEFAULT_BG_COLOR);
+            mCanvas.drawColor(DEFAULT_BG_COLOR, PorterDuff.Mode.CLEAR);
         }
 
 
@@ -86,7 +90,7 @@ public class PaintView extends View {
 
     public void clear() {
         //backgroundColor = DEFAULT_BG_COLOR;
-        mCanvas.drawColor(DEFAULT_BG_COLOR);
+        mCanvas.drawColor(DEFAULT_BG_COLOR, PorterDuff.Mode.CLEAR);
         paths.clear();
         invalidate();
     }
@@ -153,12 +157,22 @@ public class PaintView extends View {
         }
     }
 
+    public void setColor(int color) {
+        setErase(false);
+        currentColor = color;
+    }
+
     private void touchUp() {
         mPath.lineTo(mX, mY);
     }
 
-    public void SetColor(int color) {
-        currentColor = color;
+    public void setErase(boolean isErase) {
+        //set erase true or false
+        erase = isErase;
+        if (erase)
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        else
+            mPaint.setXfermode(null);
     }
 
     public void SetStrokeWidth(int strokeWidth) {

@@ -144,43 +144,43 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_color_black:
-                paintView.SetColor(Color.BLACK);
+                paintView.setColor(Color.BLACK);
                 return true;
 
             case R.id.action_color_blue:
-                paintView.SetColor(Color.BLUE);
+                paintView.setColor(Color.BLUE);
                 return true;
 
             case R.id.action_color_red:
-                paintView.SetColor(Color.RED);
+                paintView.setColor(Color.RED);
                 return true;
 
             case R.id.action_color_green:
-                paintView.SetColor(Color.rgb(0, 82, 33));
+                paintView.setColor(Color.rgb(0, 82, 33));
                 return true;
 
             case R.id.action_color_grey:
-                paintView.SetColor(Color.rgb(180, 180, 180));
+                paintView.setColor(Color.rgb(180, 180, 180));
                 return true;
 
             case R.id.action_color_lightblue:
-                paintView.SetColor(Color.rgb(126, 249, 255));
+                paintView.setColor(Color.rgb(126, 249, 255));
                 return true;
 
             case R.id.action_color_lightgreen:
-                paintView.SetColor(Color.GREEN);
+                paintView.setColor(Color.GREEN);
                 return true;
 
             case R.id.action_color_orange:
-                paintView.SetColor(Color.rgb(255, 103, 0));
+                paintView.setColor(Color.rgb(255, 103, 0));
                 return true;
 
             case R.id.action_color_purple:
-                paintView.SetColor(Color.rgb(148, 87, 235));
+                paintView.setColor(Color.rgb(148, 87, 235));
                 return true;
 
             case R.id.action_color_yellow:
-                paintView.SetColor(Color.YELLOW);
+                paintView.setColor(Color.YELLOW);
                 return true;
 
             case R.id.action_stroke_big:
@@ -196,7 +196,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                 return true;
 
             case R.id.action_eraser:
-                paintView.SetColor(Color.WHITE);
+                paintView.setErase(true);
                 return true;
 
             case R.id.action_clear:

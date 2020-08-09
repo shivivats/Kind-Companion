@@ -1,15 +1,12 @@
 package com.shivivats.kindcompanion;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
-public class FiveThingsActivity extends AppCompatActivity {
+public class FiveThingsGameActivity extends AppCompatActivity {
 
     Toolbar topBar;
 
@@ -17,9 +14,9 @@ public class FiveThingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_five_things);
+        setContentView(R.layout.activity_five_things_game);
 
-        topBar = findViewById(R.id.fiveThingsTopBar);
+        topBar = findViewById(R.id.fiveThingsGameTopBar);
         setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -27,10 +24,5 @@ public class FiveThingsActivity extends AppCompatActivity {
             ab.setTitle("Five Things Game");
         }
 
-    }
-
-    public void OnClickProceedButton(View view) {
-        Intent fiveThingsIntent = new Intent(this, FiveThingsGameActivity.class);
-        startActivity(fiveThingsIntent);
     }
 }

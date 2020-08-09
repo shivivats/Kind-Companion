@@ -1,5 +1,5 @@
 <resources>
-    <!-- Reply Preference -->
+    <!-- Reminder Frequency Preference -->
     <string-array name="reminder_entities">
         <item>Every 15 Minutes</item>
         <item>Every Half Hour</item>
@@ -14,6 +14,25 @@
         <item>hour</item>
         <item>half_day</item>
         <item>day</item>
+    </string-array>
+
+    <!-- Preferred Calming Down Method -->
+    <string-array name="calm_down_entities">
+        <item>Five Things Game</item>
+        <item>Cross It Off</item>
+        <item>Controlled Breathing</item>
+        <item>Relaxing Painting</item>
+        <item>Off my Chest</item>
+        <item>No Preference</item>
+    </string-array>
+
+    <string-array name="calm_down_values">
+        <item>five_things</item>
+        <item>cross_it_off</item>
+        <item>controlled_breathing</item>
+        <item>relaxing_painting</item>
+        <item>off_my_chest</item>
+        <item>no_preference</item>
     </string-array>
 
     <integer-array name="cb_images">
@@ -48,9 +67,13 @@
         <item>@drawable/cb_waterdeep_2477817</item>
         <item>@drawable/cb_mandala_1996754</item>
         <item>@drawable/cb_mermaid_2915541</item>
-        <item>@drawable/cb_owl_coloring_page_clipart</item>
         <item>@drawable/cb_poinsettia_2978519</item>
         <item>@drawable/cb_praying_boy_1929325</item>
         <item>@drawable/cb_school_enrollment_4447737</item>
     </integer-array>
+
+    <string-array name="welcome_phrases">
+        <item>Sometimes, a little guidance makes the difference.</item>
+        <item>Let me be your companion for a while!</item>
+    </string-array>
 </resources>

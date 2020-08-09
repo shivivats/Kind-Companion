@@ -1,5 +1,7 @@
 package com.shivivats.kindcompanion;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -102,10 +104,14 @@ public class ControlledBreathingActivity extends AppCompatActivity {
         //breathingStartStopButton.setOnClickListener(this::StopBreathing);
     }
 
+    private long fadeAnimationDuration = 500;
+
     public void StartBreathing(View view) {
-        breathingIndicatorTextView.setText(R.string.breathingGetReady);
-        breathingIndicatorTextView.setVisibility(View.VISIBLE);
-        breathingCounterTextView.setVisibility(View.VISIBLE);
+        FadeOutView(breathingInfoTextView);
+
+        FadeInView(breathingIndicatorTextView);
+        FadeInView(breathingCounterTextView);
+
         startingTimer.start();
         breathingStartStopButton.setText(R.string.breathingStop);
         breathingStartStopButton.setOnClickListener(this::StopBreathing);
@@ -117,7 +123,35 @@ public class ControlledBreathingActivity extends AppCompatActivity {
         startingTimer.cancel();
         breathingStartStopButton.setText(R.string.breathingStart);
         breathingStartStopButton.setOnClickListener(this::StartBreathing);
-        breathingIndicatorTextView.setVisibility(View.INVISIBLE);
-        breathingCounterTextView.setVisibility(View.INVISIBLE);
+
+        FadeOutView(breathingIndicatorTextView);
+        FadeOutView(breathingCounterTextView);
+
+        FadeInView(breathingInfoTextView);
+
+    }
+
+    private void FadeOutView(View view) {
+        view.setVisibility(View.VISIBLE);
+        view.setAlpha(1f);
+        view.animate()
+                .alpha(0f)
+                .setDuration(fadeAnimationDuration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                });
+    }
+
+    private void FadeInView(View view) {
+        view.setAlpha(0f);
+        view.setVisibility(View.VISIBLE);
+
+        view.animate()
+                .alpha(1f)
+                .setDuration(fadeAnimationDuration)
+                .setListener(null);
     }
 }

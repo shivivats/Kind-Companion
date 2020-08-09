@@ -38,7 +38,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SettingsActivity extends AppCompatActivity implements PendingIntent.OnFinished {
+public class SettingsActivity extends AppCompatActivity {
 
     Toolbar settingsTopBar;
     public static Calendar userCalendar;
@@ -107,8 +107,8 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
                 createReminder(userCalendar.getTimeInMillis());
                 enableReceiver();
                 reminderSwitchValue = true;
-                Snackbar.make(findViewById(R.id.settings), "Reminder set", Snackbar.LENGTH_SHORT)
-                        .show();
+                //Snackbar.make(findViewById(R.id.settings), "Reminder set.", Snackbar.LENGTH_SHORT)
+                //.show();
                 //Toast.makeText(getApplicationContext(), "Reminder set", Toast.LENGTH_SHORT).show();
                 //Log.d("SETTINGS_TAG", "reminder value is true");
             } else {
@@ -147,15 +147,33 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
                 newFragment.show(getSupportFragmentManager(), "timePicker");
                 return true;
             });
-
-            if (reminderDatePicker != null) {
-                reminderDatePicker.setOnPreferenceClickListener(preference -> {
-                    DialogFragment newFragment = new DatePickerFragment();
-                    newFragment.show(getSupportFragmentManager(), "datePicker");
-                    return true;
-                });
-            }
         }
+
+        reminderTimePicker.setSummaryProvider(new Preference.SummaryProvider() {
+            @Override
+            public CharSequence provideSummary(Preference preference) {
+
+                return "Currently set to: " + userCalendar.get(Calendar.HOUR_OF_DAY) + ":" + userCalendar.get(Calendar.MINUTE);
+            }
+        });
+
+
+        if (reminderDatePicker != null) {
+            reminderDatePicker.setOnPreferenceClickListener(preference -> {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+                return true;
+            });
+        }
+
+        reminderDatePicker.setSummaryProvider(new Preference.SummaryProvider() {
+            @Override
+            public CharSequence provideSummary(Preference preference) {
+
+                return "Currently set to: " + userCalendar.get(Calendar.DAY_OF_MONTH) + "-" + userCalendar.get(Calendar.MONTH) + "-" + userCalendar.get(Calendar.YEAR);
+            }
+        });
+
 
 /*
         switch (sharedPreferences.getString("reminderFrequencyPicker", "day")) {
@@ -203,8 +221,61 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             }
             return true;
         });
+
 */
 
+/*
+        switch (sharedPreferences.getString("calmDownMethod", "day")) {
+            case "five_things":
+
+                break;
+            case "cross_it_off":
+
+                break;
+            case "controlled_breathing":
+
+                break;
+            case "relaxing_painting":
+
+                break;
+            case "off_my_chest":
+
+                break;
+            case "no_preference":
+
+                break;
+            default:
+                break;
+        }
+
+        ListPreference calmDownMethod = settingsFragment.findPreference("calmDownMethod");
+        calmDownMethod.setOnPreferenceChangeListener((preference, newValue) -> {
+            String value = (String) newValue;
+            switch (value) {
+                case "five_things":
+
+                    break;
+                case "cross_it_off":
+
+                    break;
+                case "controlled_breathing":
+
+                    break;
+                case "relaxing_painting":
+
+                    break;
+                case "off_my_chest":
+
+                    break;
+                case "no_preference":
+
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        });
+*/
         vaultPinPreference = settingsFragment.findPreference("vaultPin");
         vaultPinPreference.setSummaryProvider(preference -> {
             EditTextPreference pref = (EditTextPreference) preference;
@@ -248,7 +319,10 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
         alarmIntent = new Intent(this, NotifyService.class);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmPendingIntent = PendingIntent.getService(this, 0, alarmIntent, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, alarmPendingIntent);
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, time, alarmPendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, reminderInterval, alarmPendingIntent);
+        Snackbar.make(findViewById(R.id.settings), "Reminder repeating interval: " + ((reminderInterval / 1000) / 60) + " minutes.", Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     public void enableReceiver() {
@@ -287,16 +361,6 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
                 PackageManager.DONT_KILL_APP);
     }
 
-    @Override
-    public void onSendFinished(PendingIntent pendingIntent, Intent intent, int resultCode, String resultData, Bundle resultExtras) {
-        if (pendingIntent == alarmPendingIntent && intent == alarmIntent && resultCode == RESULT_OK) {
-            currentCalendar = Calendar.getInstance();
-            currentCalendar.setTimeInMillis(System.currentTimeMillis() + reminderInterval);
-            createReminder(System.currentTimeMillis() + reminderInterval);
-            //Log.d("SETTINGS_TAG", "pending intent finished");
-        }
-    }
-
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -332,7 +396,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             userCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
             userCalendar.set(Calendar.MINUTE, minute);
 
-            Toast.makeText(getContext(), "Time set for " + hourOfDay + " " + minute + ", kindly set the reminder again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Time set for " + hourOfDay + ":" + minute + ", kindly set the reminder again.", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -357,7 +421,7 @@ public class SettingsActivity extends AppCompatActivity implements PendingIntent
             userCalendar.set(Calendar.YEAR, year);
             userCalendar.set(Calendar.MONTH, month);
             userCalendar.set(Calendar.DAY_OF_MONTH, day);
-            Toast.makeText(getContext(), "Day set for " + day + " " + month + " " + year + ", kindly set the reminder again.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Day set for " + day + "-" + month + "-" + year + ", kindly set the reminder again.", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -49,7 +49,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/fiveThingsSecondHeader"
+                android:id="@+id/fiveThingsHeaderTwo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/big_margin"
@@ -57,79 +57,108 @@
                 android:layout_marginEnd="@dimen/big_margin"
                 android:layout_marginBottom="@dimen/big_margin"
                 android:gravity="center"
-                android:text="@string/fiveThingsSecondHeader"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:text="This technique helps distract your brain from the anxiety and the panic.\n Even with just 3 simple steps, the technique can be effective. It is a very simple technique."
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fiveThingsHeader"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/fiveThingsTextOne"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/fiveThingsProceedButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:text="@string/fiveThingsTextOne"
-                android:textAppearance="?attr/textAppearanceBody1"
+                android:layout_margin="@dimen/big_margin"
+                android:onClick="OnClickProceedButton"
+                android:text="Proceed to the game"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fiveThingsSecondHeader"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/fiveThingsTextTwo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:text="@string/fiveThingsTextTwo"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextOne"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/fiveThingsTextThree"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_margin"
-                android:layout_marginTop="@dimen/big_margin"
-                android:layout_marginEnd="@dimen/big_margin"
-                android:text="@string/fiveThingsTextThree"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextTwo"
-                app:layout_constraintVertical_bias="0.0" />
-
+                app:layout_constraintTop_toBottomOf="@+id/fiveThingsHeaderTwo" />
             <!--
                         <TextView
-                            android:id="@+id/fiveThingsCredits"
+                            android:id="@+id/fiveThingsSecondHeader"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/big_margin"
                             android:layout_marginTop="@dimen/big_margin"
                             android:layout_marginEnd="@dimen/big_margin"
                             android:layout_marginBottom="@dimen/big_margin"
-                            android:gravity="end"
-                            android:text="@string/fiveThingsCredits"
-                            android:textAppearance="?attr/textAppearanceCaption"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textStyle="italic"
+                            android:gravity="center"
+                            android:text="@string/fiveThingsSecondHeader"
+                            android:textAppearance="?attr/textAppearanceHeadline5"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextThree"
+                            app:layout_constraintTop_toBottomOf="@+id/fiveThingsHeader"
                             app:layout_constraintVertical_bias="0.0" />
-                        -->
+
+                        <TextView
+                            android:id="@+id/fiveThingsTextOne"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/big_margin"
+                            android:layout_marginTop="@dimen/big_margin"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:text="@string/fiveThingsTextOne"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/fiveThingsSecondHeader"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/fiveThingsTextTwo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/big_margin"
+                            android:layout_marginTop="@dimen/big_margin"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:text="@string/fiveThingsTextTwo"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextOne"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/fiveThingsTextThree"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/big_margin"
+                            android:layout_marginTop="@dimen/big_margin"
+                            android:layout_marginEnd="@dimen/big_margin"
+                            android:text="@string/fiveThingsTextThree"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextTwo"
+                            app:layout_constraintVertical_bias="0.0" />
+
+
+                                    <TextView
+                                        android:id="@+id/fiveThingsCredits"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/big_margin"
+                                        android:layout_marginTop="@dimen/big_margin"
+                                        android:layout_marginEnd="@dimen/big_margin"
+                                        android:layout_marginBottom="@dimen/big_margin"
+                                        android:gravity="end"
+                                        android:text="@string/fiveThingsCredits"
+                                        android:textAppearance="?attr/textAppearanceCaption"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textStyle="italic"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/fiveThingsTextThree"
+                                        app:layout_constraintVertical_bias="0.0" />
+                                    -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

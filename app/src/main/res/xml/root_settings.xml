@@ -13,6 +13,18 @@
             app:key="darkTheme"
             app:title="Dark Theme" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Calm Down">
+
+        <ListPreference
+            android:title="Preferred Calming Down Method"
+            app:defaultValue="no_preference"
+            app:entries="@array/calm_down_entities"
+            app:entryValues="@array/calm_down_values"
+            app:key="calmDownMethod"
+            app:persistent="true"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 

@@ -2,14 +2,16 @@ package com.shivivats.kindcompanion;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+
+import java.util.Random;
 
 public class FrontPageActivity extends AppCompatActivity {
 
@@ -26,8 +28,12 @@ public class FrontPageActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = sharedPreferences.getString("username", "");
 
-        if (frontPageHeader != null && !TextUtils.equals(username, "")) {
-            frontPageHeader.setText("Welcome to Kind Companion, " + username + "!");
+        if (frontPageHeader != null) {
+            TypedArray phrases = getResources().obtainTypedArray(R.array.welcome_phrases);
+            Random rand = new Random();
+            int randomInt = rand.nextInt(phrases.length());
+            String randomString = phrases.getString(randomInt);
+            frontPageHeader.setText(randomString);
         }
     }
 
@@ -56,9 +62,35 @@ public class FrontPageActivity extends AppCompatActivity {
         startActivity(dealIntent);
     }
 
-    public void OnClickOffMyChest(View view) {
-        Intent dealIntent = new Intent(this, OffMyChestActivity.class);
-        startActivity(dealIntent);
+    public void OnClickCalmDownQuickly(View view) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String calmDownMethod = sharedPreferences.getString("calmDownMethod", "no_preference");
+        Intent calmDownIntent;
+        switch (calmDownMethod) {
+            case "five_things":
+                calmDownIntent = new Intent(this, FiveThingsActivity.class);
+                break;
+            case "cross_it_off":
+                calmDownIntent = new Intent(this, CrossItOffActivity.class);
+                break;
+            case "controlled_breathing":
+                calmDownIntent = new Intent(this, ControlledBreathingActivity.class);
+                break;
+            case "relaxing_painting":
+                calmDownIntent = new Intent(this, RelaxingPaintingFrontActivity.class);
+                break;
+            case "off_my_chest":
+                calmDownIntent = new Intent(this, OffMyChestActivity.class);
+                break;
+            case "no_preference":
+                calmDownIntent = new Intent(this, OffMyChestActivity.class);
+                break;
+            default:
+                calmDownIntent = new Intent(this, OffMyChestActivity.class);
+                break;
+        }
+        startActivity(calmDownIntent);
     }
 }
 
