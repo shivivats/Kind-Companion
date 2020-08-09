@@ -49,55 +49,7 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     private long currentNoteId;
     private NoteEditViewModel noteEditViewModel;
 
-    ActivityResultLauncher<Intent> openImageEditActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            // here, we do -2 for delete
-            // -3 for update
-            // -4 for something went wrong
-            // and else
-            if (result.getResultCode() == -2) {
-                // get the image id from the image here
-                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
-                ImageEntity imageEntity = new ImageEntity();
-                imageEntity.imageId = currentImageID;
-                noteEditViewModel.deleteImages(imageEntity);
-                Snackbar.make(noteBody, "Image deleted.", Snackbar.LENGTH_SHORT)
-                        .setAnchorView(noteEditBottomBar)
-                        .show();
-                //Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
-            } else if (result.getResultCode() == -3) {
-                // this is where we update the drawing
-
-                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
-                Uri uri = Uri.parse(result.getData().getStringExtra("IMAGE_URI"));
-                boolean isDrawing = result.getData().getBooleanExtra("IS_DRAWING", true);
-
-                ImageEntity imageEntity = new ImageEntity();
-                imageEntity.imageId = currentImageID;
-                imageEntity.imageUri = uri;
-                imageEntity.isDrawing = isDrawing;
-                imageEntity.imageNoteId = currentNoteId;
-                noteEditViewModel.updateImages(imageEntity);
-                Snackbar.make(noteBody, "Image updated.", Snackbar.LENGTH_SHORT)
-                        .setAnchorView(noteEditBottomBar)
-                        .show();
-                //Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
-            } else if (result.getResultCode() == -4) {
-                Snackbar.make(noteBody, "Something went wrong. Please try again.", Snackbar.LENGTH_SHORT)
-                        .setAnchorView(noteEditBottomBar)
-                        .show();
-                //Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
-            } else if (result.getResultCode() == -5) {
-                //nothing happens bc we simply cancel the activity
-            } else {
-                // something unpredicted happened so i guess not delete image, so just leave it as is?
-                // this is also used for back button i guess now
-                // in other words, do nothing
-
-            }
-        }
-    });
+    private int currentEditDrawingPosition;
     ActivityResultLauncher<Intent> openAudioActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -267,39 +219,59 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     private int currentNoteType;
     private NoteEditImagesAdapter noteEditImagesAdapter;
     private NoteEditAudioAdapter noteEditAudioAdapter;
+    ActivityResultLauncher<Intent> openImageEditActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            // here, we do -2 for delete
+            // -3 for update
+            // -4 for something went wrong
+            // and else
+            if (result.getResultCode() == -2) {
+                // get the image id from the image here
+                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.imageId = currentImageID;
+                noteEditViewModel.deleteImages(imageEntity);
+                Snackbar.make(noteBody, "Image deleted.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Image deleted.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -3) {
+                // this is where we update the drawing
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Utils.onActivityCreateSetTheme(this);
-        setContentView(R.layout.activity_note_edit);
+                long currentImageID = result.getData().getLongExtra("IMAGE_ID", -1);
+                Uri uri = Uri.parse(result.getData().getStringExtra("IMAGE_URI"));
+                boolean isDrawing = result.getData().getBooleanExtra("IS_DRAWING", true);
 
-        Intent intent = getIntent();
-        currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
-        if (currentNoteId == -1) {
-            setResult(RESULT_CANCELED);
-            finish();
+                ImageEntity imageEntity = new ImageEntity();
+                imageEntity.imageId = currentImageID;
+                imageEntity.imageUri = uri;
+                imageEntity.isDrawing = isDrawing;
+                imageEntity.imageNoteId = currentNoteId;
+                noteEditViewModel.updateImages(imageEntity);
+                if (currentEditDrawingPosition != -1) {
+                    noteEditImagesAdapter.notifyItemChanged(currentEditDrawingPosition);
+                    Snackbar.make(noteBody, "Image updated.", Snackbar.LENGTH_SHORT)
+                            .setAnchorView(noteEditBottomBar)
+                            .show();
+                }
+                currentEditDrawingPosition = -1;
+                //Toast.makeText(getApplicationContext(), "Image updated.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -4) {
+                Snackbar.make(noteBody, "Something went wrong. Please try again.", Snackbar.LENGTH_SHORT)
+                        .setAnchorView(noteEditBottomBar)
+                        .show();
+                //Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
+            } else if (result.getResultCode() == -5) {
+                //nothing happens bc we simply cancel the activity
+            } else {
+                // something unpredicted happened so i guess not delete image, so just leave it as is?
+                // this is also used for back button i guess now
+                // in other words, do nothing
+
+            }
         }
-        currentNoteType = intent.getIntExtra("CURRENT_NOTE_TYPE", -1);
-        if (currentNoteId == -1) {
-            setResult(RESULT_CANCELED);
-            finish();
-        }
-
-        noteEditViewModel = new NoteEditViewModel(getApplication(), currentNoteId);
-
-        // set the views
-        noteTitle = findViewById(R.id.noteEditTitleField);
-        noteBody = findViewById(R.id.noteEditBodyField);
-
-        noteTitle.setText(intent.getStringExtra("CURRENT_NOTE_TITLE"));
-        noteBody.setText(intent.getStringExtra("CURRENT_NOTE_BODY"));
-
-        // now we have the currentnoteid in the variable and we can use it for various insert operations
-        SetToolbars();
-
-        InitRecyclerView();
-    }
+    });
 
     @Override
     public void onBackPressed() {
@@ -373,8 +345,44 @@ public class NoteEditActivity extends AppCompatActivity implements NoteEditImage
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
+        setContentView(R.layout.activity_note_edit);
+
+        Intent intent = getIntent();
+        currentNoteId = intent.getLongExtra("CURRENT_NOTE_ID", -1);
+        if (currentNoteId == -1) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+        currentNoteType = intent.getIntExtra("CURRENT_NOTE_TYPE", -1);
+        if (currentNoteId == -1) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+
+        noteEditViewModel = new NoteEditViewModel(getApplication(), currentNoteId);
+
+        // set the views
+        noteTitle = findViewById(R.id.noteEditTitleField);
+        noteBody = findViewById(R.id.noteEditBodyField);
+
+        noteTitle.setText(intent.getStringExtra("CURRENT_NOTE_TITLE"));
+        noteBody.setText(intent.getStringExtra("CURRENT_NOTE_BODY"));
+
+        // now we have the currentnoteid in the variable and we can use it for various insert operations
+        SetToolbars();
+
+        InitRecyclerView();
+
+        currentEditDrawingPosition = -1;
+    }
+
+    @Override
     public void onNoteEditImagesClicked(View view, int position) {
         ImageEntity imageEntity = noteEditImagesAdapter.getImagesList().get(position);
+        currentEditDrawingPosition = position;
 
         // here we need to open whatever we wanna do with the image.
         // make a new activity to display the image and such?

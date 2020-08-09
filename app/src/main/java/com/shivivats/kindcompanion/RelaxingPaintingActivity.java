@@ -34,6 +34,8 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_relaxing_painting);
 
+        currentImage = null;
+
         topBar = findViewById(R.id.relaxingPaintingTopBar);
         setSupportActionBar(topBar);
         ActionBar ab = getSupportActionBar();
@@ -49,7 +51,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         getWindowManager().getDefaultDisplay().getMetrics(currentMetrics);
 
         // set the bitmap to a random image from the colouring book folder
-        LoadRandomImage();
+        //LoadRandomImage();
         InitPaintView();
 
         //this.invalidateOptionsMenu();
@@ -71,7 +73,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
     }
 
     private void InitPaintView() {
-        paintView.init(currentMetrics, false, currentImage, true);
+        paintView.init(currentMetrics, false, currentImage);
     }
 
     public Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
@@ -185,7 +187,7 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
                 return true;
 
             case R.id.action_eraser:
-                paintView.setErase(true);
+                //paintView.setErase(true);
                 return true;
 
             case R.id.action_clear:
@@ -245,7 +247,6 @@ public class RelaxingPaintingActivity extends AppCompatActivity implements NextI
         paintView.clear();
 
         // set the bitmap to a random image from the colouring book folder
-        LoadRandomImage();
         InitPaintView();
     }
 

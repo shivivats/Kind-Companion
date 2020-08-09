@@ -80,13 +80,13 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
 
             if (bitmap != null) {
                 // we can use the bitmap to pass to the paintview here
-                paintView.init(metrics, true, bitmap, false);
+                paintView.init(metrics, true, bitmap);
             } else {
                 setResult(-4);
                 finish();
             }
         } else {
-            paintView.init(metrics, false, null, false);
+            paintView.init(metrics, false, null);
         }
 
         Toolbar paintViewTopBar = findViewById(R.id.paintViewTopBar);
@@ -196,7 +196,7 @@ public class PaintActivity extends AppCompatActivity implements DeleteImageDialo
                 return true;
 
             case R.id.action_eraser:
-                paintView.setErase(true);
+                //paintView.setErase(true);
                 return true;
 
             case R.id.action_clear:
